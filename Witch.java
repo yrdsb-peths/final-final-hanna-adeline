@@ -8,7 +8,23 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Witch extends Actor
 {
-    GreenfootImage[] idle = new GreenfootImage[6];
+    GreenfootImage[] defaultIdle = new GreenfootImage[37];
+    
+    /**
+     * Constructor - the code that gets run one time when the object is created.
+     */
+    public Witch()
+    {
+        for(int i = 0; i < defaultIdle.length; i++)
+        {
+            defaultIdle[i] = new GreenfootImage("images/witchdefault_idle/default" + i + ".png");
+            defaultIdle[i].scale(85, 85);
+        }
+        
+        
+        // Initial witch image
+        setImage(defaultIdle[0]);
+    }
     
     public void act()
     {
