@@ -23,6 +23,7 @@ public class Witch extends Actor
             defaultIdle[i].scale(300, 300);
         }
         
+        defaultTimer.mark();
         
         // Initial witch image
         setImage(defaultIdle[0]);
@@ -38,5 +39,8 @@ public class Witch extends Actor
         {
             move(4);
         }
+        
+        // Animate the witch at default state
+        animateWitch();
     }
 }
