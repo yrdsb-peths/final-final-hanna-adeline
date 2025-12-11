@@ -10,6 +10,8 @@ public class Witch extends Actor
 {
     GreenfootImage[] defaultIdle = new GreenfootImage[37];
     
+    SimpleTimer defaultTimer = new SimpleTimer();
+    
     /**
      * Constructor - the code that gets run one time when the object is created.
      */
@@ -17,8 +19,8 @@ public class Witch extends Actor
     {
         for(int i = 0; i < defaultIdle.length; i++)
         {
-            defaultIdle[i] = new GreenfootImage("images/witchdefault_idle/default" + i + ".png");
-            defaultIdle[i].scale(85, 85);
+            defaultIdle[i] = new GreenfootImage("witch_default_idle/default" + i + ".png");
+            defaultIdle[i].scale(300, 300);
         }
         
         

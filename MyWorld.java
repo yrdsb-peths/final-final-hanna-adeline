@@ -5,12 +5,12 @@ public class MyWorld extends World {
         super(600, 400, 1);
         
         // Set background
-        GreenfootImage bg = new GreenfootImage("images/background/Battleground1.png");
+        GreenfootImage bg = new GreenfootImage("images/background/Battleground2.png");
         bg.scale(getWidth(), getHeight());
         setBackground(bg);
         
         // Create the witch object
         Witch witch = new Witch();
-        addObject(witch, 100, 300);
+        addObject(witch, 120, 195);
     }
 }
