@@ -8,5 +8,9 @@ public class MyWorld extends World {
         GreenfootImage bg = new GreenfootImage("images/background.gif");
         bg.scale(getWidth(), getHeight());
         setBackground(bg);
+        
+        // Create the witch object
+        Witch witch = new Witch();
+        addObject(witch, 100, 300);
     }
 }
