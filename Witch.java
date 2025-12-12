@@ -10,7 +10,7 @@ public class Witch extends Actor
 {
     // Image idles of witch
     GreenfootImage[] defaultIdle = new GreenfootImage[37];
-    GreenfootImage[] attack1 = new GreenfootImage[15];
+    GreenfootImage[] attack1 = new GreenfootImage[14];
     
     boolean isAttacking = false;
     
@@ -63,7 +63,7 @@ public class Witch extends Actor
     int attackIndex1 = 0;
     public void animateAttackOne()
     {
-        if(attackTimer1.millisElapsed() < 50)
+        if(attackTimer1.millisElapsed() < 65)
         {
             return;
         }
