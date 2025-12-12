@@ -1,24 +1,24 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Potion2 here.
+ * Write a description of class PotionFinal here.
  * 
  * @author Adeline
  * @version December 2025
  */
-public class Potion2 extends Actor
+public class PotionFinal extends Actor
 {
-    GreenfootImage[] potionImage = new GreenfootImage[14];
+    GreenfootImage[] potionImage = new GreenfootImage[24];
     SimpleTimer animationTimer = new SimpleTimer();
-    public Potion2()
+    public PotionFinal()
     {
         //Initial potion 1 image
         setImage(potionImage[0]);
         
         for(int i=0; i<potionImage.length; i++)
         {
-            potionImage[i] = new GreenfootImage("images/Potions/Potion2/potion2-" + i + ".png");
-            potionImage[i].scale(16, 51);
+            potionImage[i] = new GreenfootImage("images/Potions/PotionFinal/potionfinal-"+ i + ".png");
+            potionImage[i].scale(29, 50);
         }
         
         animationTimer.mark();
@@ -26,7 +26,7 @@ public class Potion2 extends Actor
     int imageIndex = 0;
     public void animatePotion()
     {
-        if(animationTimer.millisElapsed() < 100)
+        if(animationTimer.millisElapsed() < 50)
         {
             return;
         }
@@ -36,7 +36,7 @@ public class Potion2 extends Actor
         imageIndex = (imageIndex + 1) % potionImage.length;
     }
     /**
-     * Act - do whatever the Potion2 wants to do. This method is called whenever
+     * Act - do whatever the PotionFinal wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act()

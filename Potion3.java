@@ -18,7 +18,7 @@ public class Potion3 extends Actor
         for(int i=0; i<potionImage.length; i++)
         {
             potionImage[i] = new GreenfootImage("images/Potions/Potion3/potion3-" + i + ".png");
-            potionImage[i].scale(22, 37);
+            potionImage[i].scale(24, 39);
         }
         
         animationTimer.mark();
