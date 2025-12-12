@@ -11,12 +11,15 @@ public class Witch extends Actor
     // Image idles of witch
     GreenfootImage[] defaultIdle = new GreenfootImage[37];
     GreenfootImage[] attack1 = new GreenfootImage[13];
+    GreenfootImage[] attack2 = new GreenfootImage[26];
     
-    boolean isAttacking = false;
+    boolean isAttacking1 = false;
+    boolean isAttacking2 = false;
     
     // SimplerTimer variables
     SimpleTimer defaultTimer = new SimpleTimer();
     SimpleTimer attackTimer1 = new SimpleTimer();
+    SimpleTimer attackTimer2 = new SimpleTimer();
     
     /**
      * Constructor - the code that gets run one time when the object is created.
@@ -35,6 +38,11 @@ public class Witch extends Actor
             attack1[i].scale(300, 300);
         }
         
+        for(int i = 0; i < attack2.length; i++)
+        {
+            attack2[i] = new GreenfootImage("witch_attack2_idle/attack2_" + i + ".png");
+            attack2[i].scale(300, 300);
+        }
         defaultTimer.mark();
         
         // Initial witch image
@@ -63,7 +71,7 @@ public class Witch extends Actor
     int attackIndex1 = 0;
     public void animateAttackOne()
     {
-        if(attackTimer1.millisElapsed() < 75)
+        if(attackTimer1.millisElapsed() < 50)
         {
             return;
         }
@@ -73,6 +81,21 @@ public class Witch extends Actor
         attackIndex1 = attackIndex1 + 1;
     }
     
+    /**
+     * Animate the level 2 attack of witch
+     */   
+    int attackIndex2 = 0;
+    public void animateAttackTwo()
+    {
+        if(attackTimer2.millisElapsed() < 50)
+        {
+            return;
+        }
+        attackTimer2.mark();
+        
+        setImage(attack2[attackIndex2]);
+        attackIndex2 = attackIndex2 + 1;
+    }
     
     public void act()
     {
@@ -88,22 +111,39 @@ public class Witch extends Actor
         // Start attack 1
         if(Greenfoot.isKeyDown("shift"))
         {
-            isAttacking = true;
+            isAttacking1 = true;
             attackIndex1 = 0; // restart animation
             attackTimer1.mark();
+        }
+        
+        // Start attack 2
+        if(Greenfoot.isKeyDown("space"))
+        {
+            isAttacking2 = true;
+            attackIndex2 = 0; //restart animation
+            attackTimer2.mark();
         }
         
         /*
          * Animate the witch at default state
          * If currently attacking, play attack animation only
          */ 
-        if(isAttacking)
+        if(isAttacking1)
         {
             animateAttackOne();
             if(attackIndex1 >= attack1.length)
             {
-                isAttacking = false;
+                isAttacking1 = false;
                 attackIndex1 = 0;
+            }
+        }
+        else if(isAttacking2)
+        {
+            animateAttackTwo();
+            if(attackIndex2 >= attack2.length)
+            {
+                isAttacking2 = false;
+                attackIndex2 = 0;
             }
         }
         else
