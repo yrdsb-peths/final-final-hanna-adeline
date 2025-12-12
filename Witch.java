@@ -42,7 +42,7 @@ public class Witch extends Actor
     }
     
     /**
-     * Animate the witch
+     * Animate the witch at default state
      */
     int imageIndex = 0;
     public void animateWitch()
@@ -58,7 +58,7 @@ public class Witch extends Actor
     }
     
     /**
-     * Animate the attack 1 of witch
+     * Animate the level 1 attack of witch
      */
     int attackIndex1 = 0;
     public void animateAttackOne()
