@@ -35,6 +35,7 @@ public class Potion1 extends Actor
         setImage(potionImage[imageIndex]);
         imageIndex = (imageIndex + 1) % potionImage.length;
     }
+    
     /**
      * Act - do whatever the Potion1 wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
