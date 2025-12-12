@@ -26,7 +26,7 @@ public class Potion1 extends Actor
     int imageIndex = 0;
     public void animatePotion()
     {
-        if(animationTimer.millisElapsed() < 150)
+        if(animationTimer.millisElapsed() < 100)
         {
             return;
         }
