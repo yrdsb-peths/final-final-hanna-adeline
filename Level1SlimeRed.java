@@ -8,7 +8,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Level1SlimeRed extends Actor
 {
-    GreenfootImage[] potionImage = new GreenfootImage[8];
+    GreenfootImage[] walkRightImage = new GreenfootImage[8];
+    GreenfootImage[] attackRightImage = new GreenfootImage[8];
+    GreenfootImage[] walkLeftImage = new GreenfootImage[8];
+    GreenfootImage[] attackLeftImage = new GreenfootImage[8];
+    GreenfootImage[] deadLeftImage = new GreenfootImage[8];
+    GreenfootImage[] deadRightImage = new GreenfootImage[8];
+    
     SimpleTimer animationTimer = new SimpleTimer();
     public Level1SlimeRed()
     {
