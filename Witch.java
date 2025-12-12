@@ -49,11 +49,11 @@ public class Witch extends Actor
     {
         if(Greenfoot.isKeyDown("left"))
         {
-            move(-4);
+            move(-2);
         }
         else if(Greenfoot.isKeyDown("right"))
         {
-            move(4);
+            move(2);
         }
         
         // Animate the witch at default state
