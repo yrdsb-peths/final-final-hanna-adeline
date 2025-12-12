@@ -29,6 +29,22 @@ public class Witch extends Actor
         setImage(defaultIdle[0]);
     }
     
+    /**
+     * Animate the witch
+     */
+    int imageIndex = 0;
+    public void animateWitch()
+    {
+        if(defaultTimer.millisElapsed() < 50)
+        {
+            return;
+        }
+        defaultTimer.mark();
+        
+        setImage(defaultIdle[imageIndex]);
+        imageIndex = (imageIndex + 1) % defaultIdle.length;
+    }
+    
     public void act()
     {
         if(Greenfoot.isKeyDown("left"))
