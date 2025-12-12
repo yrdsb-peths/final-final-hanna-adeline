@@ -17,7 +17,7 @@ public class Potion1 extends Actor
         
         for(int i=0; i<potionImage.length; i++)
         {
-            potionImage[i] = new GreenfootImage("images/Potion1/potion1-" + i + ".png");
+            potionImage[i] = new GreenfootImage("images/Potions/Potion1/potion1-" + i + ".png");
             potionImage[i].scale(22, 37);
         }
         
@@ -26,7 +26,7 @@ public class Potion1 extends Actor
     int imageIndex = 0;
     public void animatePotion()
     {
-        if(animationTimer.millisElapsed() < 300)
+        if(animationTimer.millisElapsed() < 100)
         {
             return;
         }
