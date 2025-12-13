@@ -37,39 +37,39 @@ public class Witch extends Actor
         for(int i = 0; i < defaultIdleRight.length; i++)
         {
             defaultIdleRight[i] = new GreenfootImage("witch_default_idle/default" + i + ".png");
-            defaultIdleRight[i].scale(300, 300);
+            defaultIdleRight[i].scale(270, 270);
         }
         for(int i = 0; i < defaultIdleLeft.length; i++)
         {
             defaultIdleLeft[i] = new GreenfootImage("witch_default_idle/default" + i + ".png");
             defaultIdleLeft[i].mirrorHorizontally();
-            defaultIdleLeft[i].scale(300, 300);
+            defaultIdleLeft[i].scale(270, 270);
         }
         
         // Set idle image for attack 1 of witch
         for(int i = 0; i < attack1Right.length; i++)
         {
             attack1Right[i] = new GreenfootImage("witch_attack1_idle/attack1_" + i + ".png");
-            attack1Right[i].scale(300, 300);
+            attack1Right[i].scale(270, 270);
         }
         for(int i = 0; i < attack1Left.length; i++)
         {
             attack1Left[i] = new GreenfootImage("witch_attack1_idle/attack1_" + i + ".png");
             attack1Left[i].mirrorHorizontally();
-            attack1Left[i].scale(300, 300);
+            attack1Left[i].scale(270, 270);
         }
         
         // Set idle image for attack 2 of witch
         for(int i = 0; i < attack2Right.length; i++)
         {
             attack2Right[i] = new GreenfootImage("witch_attack2_idle/attack2_" + i + ".png");
-            attack2Right[i].scale(300, 300);
+            attack2Right[i].scale(270, 270);
         }
         for(int i = 0; i < attack2Left.length; i++)
         {
             attack2Left[i] = new GreenfootImage("witch_attack2_idle/attack2_" + i + ".png");
             attack2Left[i].mirrorHorizontally();
-            attack2Left[i].scale(300, 300);
+            attack2Left[i].scale(270, 270);
         }
         defaultTimer.mark();
         
