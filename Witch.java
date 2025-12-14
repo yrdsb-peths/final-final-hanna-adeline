@@ -8,6 +8,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Witch extends Actor
 {
+    // Declare hurtBox
+    HurtBox hurtBox;
+    
     // Image idles of witch
     GreenfootImage[] defaultIdleRight = new GreenfootImage[37];
     GreenfootImage[] defaultIdleLeft = new GreenfootImage[37];
