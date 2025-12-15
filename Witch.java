@@ -8,6 +8,20 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Witch extends Actor
 {
+    // Declare hurtBox
+    public HurtBox hurtBox;
+    public AttackBox attackBox1;
+    public AttackBox attackBox2;
+    
+    // hurtBox offsets
+    int hurtOffsetXRight = -25;
+    int hurtOffsetXLeft = 30;
+    // hitBox offsets
+    int hitOffsetXRight1 = 40;
+    int hitOffsetXLeft1 = -40;
+    int hitOffsetXRight2 = 40;
+    int hitOffsetXLeft2 = -40;
+    
     // Image idles of witch
     GreenfootImage[] defaultIdleRight = new GreenfootImage[37];
     GreenfootImage[] defaultIdleLeft = new GreenfootImage[37];
@@ -149,6 +163,14 @@ public class Witch extends Actor
         }
     }
     
+    // HurtBox addedToWorld method
+    public void addedToWorld(World w)
+    {
+        hurtBox = new HurtBox(70, 130);
+        w.addObject(hurtBox, getX(), getY());
+    }
+    
+    // Act method
     public void act()
     {
         if(Greenfoot.isKeyDown("left"))
@@ -203,6 +225,53 @@ public class Witch extends Actor
         else
         {
             animateWitch();
+        }
+        
+        // hurtBox setLocation
+        if(hurtBox != null)
+        {
+            int offSetX;
+            int hitBox1;
+            int hitBox2;
+            
+            if(facing.equals("right"))
+            {
+                offSetX = hurtOffsetXRight;
+                hitBox1 = hitOffsetXRight1;
+                hitBox2 = hitOffsetXRight2;
+            }
+            else
+            {
+                offSetX = hurtOffsetXLeft;
+                hitBox1 = hitOffsetXLeft1;
+                hitBox2 = hitOffsetXLeft2;
+            }
+            
+            hurtBox.setLocation(getX() + offSetX, getY() + 6);
+            
+            // Set attackBox1 add and remove
+            if(isAttacking1 && attackIndex1 == 3 && attackBox1 == null)
+            {
+                attackBox1 = new AttackBox(130, 130);
+                getWorld().addObject(attackBox1, getX() + hitBox1, getY() + 6);
+            }
+            if(!isAttacking1 && attackBox1 != null)
+            {
+                getWorld().removeObject(attackBox1);
+                attackBox1 = null;
+            }
+            
+            // Set attackbox2 add and remove
+            if(isAttacking2 && attackIndex2 == 3 && attackBox2 == null)
+            {
+                attackBox2 = new AttackBox(140, 130);
+                getWorld().addObject(attackBox2, getX() + hitBox2, getY() + 6);
+            }
+            if(!isAttacking2 && attackBox2 != null)
+            {
+                getWorld().removeObject(attackBox2);
+                attackBox2 = null;
+            }
         }
     }
 }
