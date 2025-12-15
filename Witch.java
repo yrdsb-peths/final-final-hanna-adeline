@@ -14,7 +14,7 @@ public class Witch extends Actor
     // hurtBox offsets
     int hurtOffsetXRight = -25;
     int hurtOffsetXLeft = 30;
-    int hurtOffsetY = 10;
+    
     
     // Image idles of witch
     GreenfootImage[] defaultIdleRight = new GreenfootImage[37];
@@ -235,7 +235,7 @@ public class Witch extends Actor
                 offSetX = hurtOffsetXLeft;
             }
             
-            hurtBox.setLocation(getX() + offSetX, getY() + hurtOffsetY);
+            hurtBox.setLocation(getX() + offSetX, getY() + 6);
         }
     }
 }
