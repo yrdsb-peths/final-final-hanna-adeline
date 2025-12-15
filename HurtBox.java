@@ -11,7 +11,9 @@ public class HurtBox extends Actor
     public HurtBox(int w, int h)
     {
         GreenfootImage img = new GreenfootImage(w, h);
-        img.setTransparency(0);
+        img.setColor(new Color(255, 0, 0, 120));
+        img.fillRect(0, 0, w, h);
+        
         setImage(img);
     }
     /**

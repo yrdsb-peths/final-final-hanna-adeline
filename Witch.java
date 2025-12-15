@@ -9,7 +9,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Witch extends Actor
 {
     // Declare hurtBox
-    HurtBox hurtBox;
+    private HurtBox hurtBox;
+    
+    // hurtBox offsets
+    int hurtOffsetXRight = -10;
+    int hurtOffsetXLeft = 20;
+    int hurtOffsetY = 10;
     
     // Image idles of witch
     GreenfootImage[] defaultIdleRight = new GreenfootImage[37];
@@ -152,6 +157,14 @@ public class Witch extends Actor
         }
     }
     
+    // hurtBox addedToWorld method
+    public void addedToWorld(World w)
+    {
+        hurtBox = new HurtBox(70, 130);
+        w.addObject(hurtBox, getX(), getY());
+    }
+    
+    // Act method
     public void act()
     {
         if(Greenfoot.isKeyDown("left"))
@@ -206,6 +219,23 @@ public class Witch extends Actor
         else
         {
             animateWitch();
+        }
+        
+        // hurtBox setLocation
+        if(hurtBox != null)
+        {
+            int offSetX;
+            
+            if(facing.equals("right"))
+            {
+                offSetX = hurtOffsetXRight;
+            }
+            else
+            {
+                offSetX = hurtOffsetXLeft;
+            }
+            
+            hurtBox.setLocation(getX() + offSetX, getY() + hurtOffsetY);
         }
     }
 }
