@@ -9,37 +9,54 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Level1SlimeRed extends Actor
 {
     GreenfootImage[] walkRightImage = new GreenfootImage[8];
-    GreenfootImage[] attackRightImage = new GreenfootImage[8];
+    GreenfootImage[] attackRightImage = new GreenfootImage[5];
     GreenfootImage[] walkLeftImage = new GreenfootImage[8];
-    GreenfootImage[] attackLeftImage = new GreenfootImage[8];
+    GreenfootImage[] attackLeftImage = new GreenfootImage[5];
     GreenfootImage[] deadLeftImage = new GreenfootImage[8];
     GreenfootImage[] deadRightImage = new GreenfootImage[8];
     
-    SimpleTimer animationTimer = new SimpleTimer();
-    public Level1SlimeRed()
+    SimpleTimer attackTimer = new SimpleTimer();
+    
+    /**public Level1SlimeRed()
     {
         //Initial potion 1 image
         setImage(potionImage[0]);
         
         for(int i=0; i<potionImage.length; i++)
         {
-            potionImage[i] = new GreenfootImage("images/Potions/Potion1/potion1-" + i + ".png");
+            potionImage[i] = new GreenfootImage
             potionImage[i].scale(22, 37);
         }
         
         animationTimer.mark();
     }
+    */
     int imageIndex = 0;
-    public void animatePotion()
+    
+    public void attackRight()
     {
-        if(animationTimer.millisElapsed() < 100)
+        setImage(attackRightImage[0]);
+        
+        for(int i=0; i<attackRightImage.length; i++)
+        {
+            attackRightImage[i] = new GreenfootImage("images/Monsters/Level1/Level1SlimeRed/attackRight/attackRight" + i + ".png");
+            attackRightImage[i].scale(50,50);
+        }
+        
+        attackTimer.mark();
+        
+    }
+    
+    public void animateLevel1RedSlime()
+    {
+        if(attackTimer.millsisElapsed() < 100)
         {
             return;
         }
-        animationTimer.mark();
+        attackTimer.mark();
         
-        setImage(potionImage[imageIndex]);
-        imageIndex = (imageIndex + 1) % potionImage.length;
+        setImage(attackRightImage[imageIndex]);
+        imageIndex = (imageIndex + 1) % attackRightImage.length;
     }
     /**
      * Act - do whatever the Level1SlimeRed wants to do. This method is called whenever
@@ -47,6 +64,6 @@ public class Level1SlimeRed extends Actor
      */
     public void act()
     {
-        animatePotion();
+      attackRight();  
     }
 }
