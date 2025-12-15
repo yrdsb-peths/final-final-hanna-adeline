@@ -12,8 +12,8 @@ public class Witch extends Actor
     private HurtBox hurtBox;
     
     // hurtBox offsets
-    int hurtOffsetXRight = -10;
-    int hurtOffsetXLeft = 20;
+    int hurtOffsetXRight = -20;
+    int hurtOffsetXLeft = 25;
     int hurtOffsetY = 10;
     
     // Image idles of witch
