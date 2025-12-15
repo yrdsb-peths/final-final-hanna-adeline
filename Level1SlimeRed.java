@@ -15,7 +15,8 @@ public class Level1SlimeRed extends Actor
     GreenfootImage[] deadLeftImage = new GreenfootImage[8];
     GreenfootImage[] deadRightImage = new GreenfootImage[8];
     
-    SimpleTimer animationTimer = new SimpleTimer();
+    SimpleTimer attackTimer = new SimpleTimer();
+    
     /**public Level1SlimeRed()
     {
         //Initial potion 1 image
@@ -42,24 +43,27 @@ public class Level1SlimeRed extends Actor
             attackRightImage[i].scale(50,50);
         }
         
-        animationTimer.mark();
+        attackTimer.mark();
         
-        if(animationTimer.millsisElapsed()<100)
+    }
+    
+    public void animateLevel1RedSlime()
+    {
+        if(attackTimer.millsisElapsed() < 100)
         {
             return;
         }
-        animationTimer.mark();
+        attackTimer.mark();
         
         setImage(attackRightImage[imageIndex]);
         imageIndex = (imageIndex + 1) % attackRightImage.length;
     }
-    
     /**
      * Act - do whatever the Level1SlimeRed wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act()
     {
-        
+      attackRight();  
     }
 }
