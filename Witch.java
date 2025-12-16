@@ -22,6 +22,10 @@ public class Witch extends Actor
     int hitOffsetXRight2 = 40;
     int hitOffsetXLeft2 = -40;
     
+    // Image idles of hPbar of witch
+    public GreenfootImage[] witchHP = new GreenfootImage[6];
+    public HPBar witchHPBar;
+    
     // Image idles of witch
     GreenfootImage[] defaultIdleRight = new GreenfootImage[37];
     GreenfootImage[] defaultIdleLeft = new GreenfootImage[37];
@@ -89,6 +93,13 @@ public class Witch extends Actor
         
         // Initial witch image
         setImage(defaultIdleRight[0]);
+        
+        // Set image for hp of witch
+        for(int i = 0; i < witchHP.length; i++)
+        {
+            witchHP[i] = new GreenfootImage("hp_bar/witch_hp/witch_hp_" + i + ".png");
+            witchHP[i].scale(70, 30);
+        }
     }
     
     /**
@@ -166,8 +177,13 @@ public class Witch extends Actor
     // HurtBox addedToWorld method
     public void addedToWorld(World w)
     {
+        // HurtBox
         hurtBox = new HurtBox(70, 130);
         w.addObject(hurtBox, getX(), getY());
+        
+        // HPBar
+        witchHPBar = new HPBar(5, witchHP);
+        w.addObject(witchHPBar, getX(), getY() - 100);
     }
     
     // Act method

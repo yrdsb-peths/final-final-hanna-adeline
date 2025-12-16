@@ -19,6 +19,23 @@ public class HPBar extends Actor
         this.maxHP = maxHP;
         this.currentHP = maxHP;
         this.hpImages = hpImages;
+        
+        // Inital witch hp image
+        setImage(hpImages[currentHP]);
+    }
+    
+    public void setHP(int hp)
+    {
+        if(hp < 0)
+        {
+            hp = 0;
+        }
+        if(hp > maxHP)
+        {
+            hp = maxHP;
+        }
+        currentHP = hp;
+        setImage(hpImages[hp]);
     }
     
     /**
