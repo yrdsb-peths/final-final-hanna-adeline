@@ -12,12 +12,11 @@ public class Level1SlimeRed extends Actor
     GreenfootImage[] attackRightImage = new GreenfootImage[5];
     GreenfootImage[] walkLeftImage = new GreenfootImage[8];
     GreenfootImage[] attackLeftImage = new GreenfootImage[5];
-    GreenfootImage[] deadLeftImage = new GreenfootImage[8];
-    GreenfootImage[] deadRightImage = new GreenfootImage[8];
+    GreenfootImage[] deadImage = new GreenfootImage[8];
     
     SimpleTimer attackTimer = new SimpleTimer();
     
-    /**public Level1SlimeRed()
+    public Level1SlimeRed()
     {
         //Initial potion 1 image
         setImage(potionImage[0]);
@@ -30,7 +29,7 @@ public class Level1SlimeRed extends Actor
         
         animationTimer.mark();
     }
-    */
+    
     int imageIndex = 0;
     
     public void attackRight()
