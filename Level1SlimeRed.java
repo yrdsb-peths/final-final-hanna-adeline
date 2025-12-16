@@ -130,7 +130,14 @@ public class Level1SlimeRed extends Actor
      */
     public void moveToWitch()
     {
-        //
+        Witch witch = new Witch();
+        int targetX = witch.getX();
+        int targetY = witch.getY();
+        // Move x
+        //int distanceX = SlimeRed.getX();
+        // Move y
+        
+        
     }
     
     /**
