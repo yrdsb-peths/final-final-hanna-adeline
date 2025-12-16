@@ -7,7 +7,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @version December 2025
  */
 public class Witch extends Actor
-{
+{   
     // Declare hurtBox
     public HurtBox hurtBox;
     public AttackBox attackBox1;
