@@ -179,11 +179,11 @@ public class Witch extends Actor
     {
         // HurtBox
         hurtBox = new HurtBox(70, 130);
-        w.addObject(hurtBox, getX(), getY());
+        w.addObject(hurtBox, getX() - 25, getY());
         
         // HPBar
         witchHPBar = new HPBar(5, witchHP);
-        w.addObject(witchHPBar, getX(), getY() - 100);
+        w.addObject(witchHPBar, getX() - 25, getY() - 80);
     }
     
     // Act method
@@ -287,6 +287,19 @@ public class Witch extends Actor
             {
                 getWorld().removeObject(attackBox2);
                 attackBox2 = null;
+            }
+        }
+        
+        // Move the HPBar with the witch
+        if(witchHP != null)
+        {
+            if(facing.equals("right"))
+            {
+                witchHPBar.setLocation(getX() - 25, getY() - 80);
+            }
+            else
+            {
+                witchHPBar.setLocation(getX() + 30, getY() - 80);
             }
         }
     }
