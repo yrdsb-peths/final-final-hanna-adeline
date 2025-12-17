@@ -25,6 +25,7 @@ public class Witch extends Actor
     // Image idles of hPbar of witch
     public GreenfootImage[] witchHP = new GreenfootImage[6];
     public HPBar witchHPBar;
+    public int witchCurrentHP;
     
     // Image idles of witch
     GreenfootImage[] defaultIdleRight = new GreenfootImage[37];
@@ -100,6 +101,7 @@ public class Witch extends Actor
             witchHP[i] = new GreenfootImage("hp_bar/witch_hp/witch_hp_" + i + ".png");
             witchHP[i].scale(70, 30);
         }
+        witchCurrentHP = 5;
     }
     
     /**
@@ -179,11 +181,21 @@ public class Witch extends Actor
     {
         // HurtBox
         hurtBox = new HurtBox(70, 130);
-        w.addObject(hurtBox, getX(), getY());
+        w.addObject(hurtBox, getX() - 25, getY());
         
         // HPBar
         witchHPBar = new HPBar(5, witchHP);
-        w.addObject(witchHPBar, getX(), getY() - 100);
+        w.addObject(witchHPBar, getX() - 25, getY() - 80);
+    }
+    
+    // Damage to change hp method
+    public void takeDamage(int damage)
+    {
+        witchCurrentHP -= damage;
+        if(witchHP != null)
+        {
+            witchHPBar.setHP(witchCurrentHP);
+        }
     }
     
     // Act method
@@ -287,6 +299,19 @@ public class Witch extends Actor
             {
                 getWorld().removeObject(attackBox2);
                 attackBox2 = null;
+            }
+        }
+        
+        // Move the HPBar with the witch
+        if(witchHP != null)
+        {
+            if(facing.equals("right"))
+            {
+                witchHPBar.setLocation(getX() - 25, getY() - 80);
+            }
+            else
+            {
+                witchHPBar.setLocation(getX() + 30, getY() - 80);
             }
         }
     }
