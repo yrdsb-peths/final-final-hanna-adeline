@@ -12,5 +12,8 @@ public class MyWorld extends World {
         // Create the witch object
         Witch witch = new Witch();
         addObject(witch, 120, 195);
+        
+        Level1SlimeRed slimered = new Level1SlimeRed();
+        addObject(slimered, 500,250);
     }
 }
