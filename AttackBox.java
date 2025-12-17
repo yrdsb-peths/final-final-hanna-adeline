@@ -11,7 +11,7 @@ public class AttackBox extends Actor
     public AttackBox(int w, int h)
     {
         GreenfootImage img = new GreenfootImage(w, h);
-        img.setColor(new Color(0, 255, 0, 120));
+        img.setColor(new Color(255, 0, 0, 0));
         img.fillRect(0, 0, w, h);
         
         setImage(img);
