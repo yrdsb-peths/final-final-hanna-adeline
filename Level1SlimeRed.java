@@ -130,15 +130,22 @@ public class Level1SlimeRed extends Actor
      */
     public void moveToWitch()
     {
-        Witch witch = new Witch();
+        Witch witch = (Witch) getWorld().getObjects(Witch.class).get(0);
         int targetX = witch.getX();
-        int targetY = witch.getY();
-        // Move x
-        //int distanceX = SlimeRed.getX();
-        // Move y
+        int distanceX = this.getX() - targetX;
+        if(distanceX<0)
+        {
+            move(1);
+            direction = "right";
+        }
+        else if(distanceX>0)
+        {
+            move(-1);
+            direction = "left";
+        }
         
-        
-    }
+        animateWalk();
+    } 
     
     /**
      * Act - do whatever the Level1SlimeRed wants to do. This method is called whenever
@@ -146,13 +153,10 @@ public class Level1SlimeRed extends Actor
      */
     public void act()
     {
-      while(isAlive == true)
-      {
           moveToWitch();
           if(hp<=0)
           {
               isAlive = false;
           }
       }
-    }
 }
