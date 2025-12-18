@@ -8,10 +8,14 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class HurtBox extends Actor
 {
+    // access the witch class instance
     private Witch owner;
+    private int hitCounter = 0;
     
+    // Constructor - method called once 
     public HurtBox(Witch owner, int w, int h)
     {
+        // Access the witch object
         this.owner = owner;
         
         GreenfootImage img = new GreenfootImage(w, h);
@@ -20,12 +24,14 @@ public class HurtBox extends Actor
         
         setImage(img);
     }
+    
     /**
      * Act - do whatever the HurtBox wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act()
     {
+        // Use the takeDamage method to decrease the HP points
         Level1SlimeRed m = (Level1SlimeRed)getOneIntersectingObject(Level1SlimeRed.class);
         if(m != null)
         {
