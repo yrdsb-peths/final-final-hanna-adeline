@@ -25,7 +25,9 @@ public class Witch extends Actor
     // Image idles of hPbar of witch
     public GreenfootImage[] witchHP = new GreenfootImage[6];
     public HPBar witchHPBar;
-    public int witchCurrentHP;
+    private int witchCurrentHP = 5;
+    private int witchMaxHP = 5;
+    private int invincibleTimer = 0;
     
     // Image idles of witch
     GreenfootImage[] defaultIdleRight = new GreenfootImage[37];
@@ -180,22 +182,28 @@ public class Witch extends Actor
     public void addedToWorld(World w)
     {
         // HurtBox
-        hurtBox = new HurtBox(70, 130);
+        hurtBox = new HurtBox(this, 70, 130);
         w.addObject(hurtBox, getX() - 25, getY());
         
         // HPBar
-        witchHPBar = new HPBar(5, witchHP);
+        witchHPBar = new HPBar(witchCurrentHP, witchHP);
         w.addObject(witchHPBar, getX() - 25, getY() - 80);
     }
     
     // Damage to change hp method
     public void takeDamage(int damage)
     {
-        witchCurrentHP -= damage;
-        if(witchHP != null)
+        if(invincibleTimer > 0)
         {
-            witchHPBar.setHP(witchCurrentHP);
+            return;
         }
+        witchCurrentHP -= damage;
+        if(witchCurrentHP < 0)
+        {
+            witchCurrentHP = 0;
+        }
+        witchHPBar.setHP(witchCurrentHP);
+        invincibleTimer = 30;
     }
     
     // Act method
@@ -313,6 +321,12 @@ public class Witch extends Actor
             {
                 witchHPBar.setLocation(getX() + 30, getY() - 80);
             }
+        }
+        
+        //invicibleTimer decrease
+        if(invincibleTimer > 0)
+        {
+            invincibleTimer--;
         }
     }
 }
