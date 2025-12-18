@@ -8,10 +8,14 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class HurtBox extends Actor
 {
-    public HurtBox(int w, int h)
+    private Witch owner;
+    
+    public HurtBox(Witch owner, int w, int h)
     {
+        this.owner = owner;
+        
         GreenfootImage img = new GreenfootImage(w, h);
-        img.setColor(new Color(255, 0, 0, 120));
+        img.setColor(new Color(255, 0, 0, 0));
         img.fillRect(0, 0, w, h);
         
         setImage(img);
@@ -22,6 +26,10 @@ public class HurtBox extends Actor
      */
     public void act()
     {
-        // Add your action code here.
+        Level1SlimeRed m = (Level1SlimeRed)getOneIntersectingObject(Level1SlimeRed.class);
+        if(m != null)
+        {
+            owner.takeDamage(1);
+        }
     }
 }

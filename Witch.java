@@ -7,7 +7,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @version December 2025
  */
 public class Witch extends Actor
-{
+{   
     // Declare hurtBox
     public HurtBox hurtBox;
     public AttackBox attackBox1;
@@ -21,6 +21,13 @@ public class Witch extends Actor
     int hitOffsetXLeft1 = -40;
     int hitOffsetXRight2 = 40;
     int hitOffsetXLeft2 = -40;
+    
+    // Image idles of hPbar of witch
+    public GreenfootImage[] witchHP = new GreenfootImage[6];
+    public HPBar witchHPBar;
+    private int witchCurrentHP = 5;
+    private int witchMaxHP = 5;
+    private int invincibleTimer = 0;
     
     // Image idles of witch
     GreenfootImage[] defaultIdleRight = new GreenfootImage[37];
@@ -89,6 +96,14 @@ public class Witch extends Actor
         
         // Initial witch image
         setImage(defaultIdleRight[0]);
+        
+        // Set image for hp of witch
+        for(int i = 0; i < witchHP.length; i++)
+        {
+            witchHP[i] = new GreenfootImage("hp_bar/witch_hp/witch_hp_" + i + ".png");
+            witchHP[i].scale(70, 30);
+        }
+        witchCurrentHP = 5;
     }
     
     /**
@@ -166,8 +181,29 @@ public class Witch extends Actor
     // HurtBox addedToWorld method
     public void addedToWorld(World w)
     {
-        hurtBox = new HurtBox(70, 130);
-        w.addObject(hurtBox, getX(), getY());
+        // HurtBox
+        hurtBox = new HurtBox(this, 70, 130);
+        w.addObject(hurtBox, getX() - 25, getY());
+        
+        // HPBar
+        witchHPBar = new HPBar(witchCurrentHP, witchHP);
+        w.addObject(witchHPBar, getX() - 25, getY() - 80);
+    }
+    
+    // Damage to change hp method
+    public void takeDamage(int damage)
+    {
+        if(invincibleTimer > 0)
+        {
+            return;
+        }
+        witchCurrentHP -= damage;
+        if(witchCurrentHP < 0)
+        {
+            witchCurrentHP = 0;
+        }
+        witchHPBar.setHP(witchCurrentHP);
+        invincibleTimer = 30;
     }
     
     // Act method
@@ -272,6 +308,25 @@ public class Witch extends Actor
                 getWorld().removeObject(attackBox2);
                 attackBox2 = null;
             }
+        }
+        
+        // Move the HPBar with the witch
+        if(witchHP != null)
+        {
+            if(facing.equals("right"))
+            {
+                witchHPBar.setLocation(getX() - 25, getY() - 80);
+            }
+            else
+            {
+                witchHPBar.setLocation(getX() + 30, getY() - 80);
+            }
+        }
+        
+        //invicibleTimer decrease
+        if(invincibleTimer > 0)
+        {
+            invincibleTimer--;
         }
     }
 }
