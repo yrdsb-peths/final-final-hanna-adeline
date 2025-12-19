@@ -10,7 +10,8 @@ public class HurtBox extends Actor
 {
     // access the witch class instance
     private Witch owner;
-    private int hitCounter = 0;
+    private int hitCount = 0;
+    private int invincibleTimer = 0;
     
     // Constructor - method called once 
     public HurtBox(Witch owner, int w, int h)
@@ -25,17 +26,35 @@ public class HurtBox extends Actor
         setImage(img);
     }
     
+    public void checkDamage()
+    {
+        if(isTouching(Level1SlimeRed.class))
+        {
+            if(invincibleTimer > 0)
+            {
+                return;
+            }
+            hitCount++;
+            if(hitCount >= 5)
+            {
+                owner.takeDamage(1);
+                hitCount = 0;
+            }
+            invincibleTimer = 20;
+        }
+    }
+    
     /**
      * Act - do whatever the HurtBox wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act()
     {
-        // Use the takeDamage method to decrease the HP points
-        Level1SlimeRed m = (Level1SlimeRed)getOneIntersectingObject(Level1SlimeRed.class);
-        if(m != null)
+        checkDamage();
+        
+        if(invincibleTimer > 0)
         {
-            owner.takeDamage(1);
+            invincibleTimer--;
         }
     }
 }
