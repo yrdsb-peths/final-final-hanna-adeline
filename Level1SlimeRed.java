@@ -33,7 +33,12 @@ public class Level1SlimeRed extends Actor
     SimpleTimer walkTimer = new SimpleTimer();
     SimpleTimer deadTimer = new SimpleTimer();
     
-    int hp = 25;
+    // Images for SlimeRed hp bar
+    public GreenfootImage[] slimeHP = new GreenfootImage[6];
+    public HPBar slimeRedHP;
+    private int slimeCurrentHP = 5;
+    private int slimeMaxHP = 5;
+    private int invincibleTimer = 0;
     
     public Level1SlimeRed()
     {
@@ -75,6 +80,14 @@ public class Level1SlimeRed extends Actor
         
         //Initial SlimeRed image
         setImage(walkLeftImage[0]);
+        
+        // Set image for hp of witch
+        for(int i = 0; i < slimeHP.length; i++)
+        {
+            slimeHP[i] = new GreenfootImage("hp_bar/monster1_hp/monster1_hp_" + i + ".png");
+            slimeHP[i].scale(70, 30);
+        }
+        slimeCurrentHP = 5;
     }
     
     int attackImageIndex = 0;
@@ -125,6 +138,7 @@ public class Level1SlimeRed extends Actor
             walkImageIndex = (walkImageIndex+1) % walkLeftImage.length;
         }
     }
+    
     /**
      * Moves to the witch's location
      */
@@ -147,16 +161,29 @@ public class Level1SlimeRed extends Actor
         animateWalk();
     } 
     
+    public void addedToWorld(World w)
+    {
+        // HPBar
+        slimeRedHP = new HPBar(slimeCurrentHP, slimeHP);
+        w.addObject(slimeRedHP, getX() + 5, getY() - 15);
+    }
+    
     /**
      * Act - do whatever the Level1SlimeRed wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act()
     {
-          moveToWitch();
-          if(hp<=0)
-          {
-              isAlive = false;
-          }
-      }
+        moveToWitch();
+        if(slimeCurrentHP <= 0)
+        {
+            isAlive = false;
+        }
+          
+        // Move the HPBar with the witch
+        if(slimeRedHP != null)
+        {
+            slimeRedHP.setLocation(getX() + 5, getY() - 15);
+        }
+    }
 }

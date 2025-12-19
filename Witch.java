@@ -178,7 +178,7 @@ public class Witch extends Actor
         }
     }
     
-    // HurtBox addedToWorld method
+    // HurtBox and HPBar addedToWorld method
     public void addedToWorld(World w)
     {
         // HurtBox
