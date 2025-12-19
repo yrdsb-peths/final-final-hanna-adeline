@@ -42,7 +42,7 @@ public class Level1SlimeRed extends Actor
         for(int i=0; i<walkRightImage.length; i++)
         {
             walkRightImage[i] = new GreenfootImage("images/Monsters/Level1/Level1SlimeRed/walkRight/walkRight"+ i + ".png");
-            walkRightImage[i].scale(128, 128);
+            walkRightImage[i].scale(58, 30);
         }
         
         for(int i=0; i<walkLeftImage.length; i++)
@@ -150,10 +150,11 @@ public class Level1SlimeRed extends Actor
         }
     } 
     
-    public void attack()
+    public int attack()
     {
         animateAttack();
         damage += 1;
+        return damage;
     }
     /**
      * Act - do whatever the Level1SlimeRed wants to do. This method is called whenever

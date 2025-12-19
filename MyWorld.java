@@ -14,6 +14,6 @@ public class MyWorld extends World {
         addObject(witch, 120, 250);
         
         Level1SlimeRed slimered = new Level1SlimeRed();
-        addObject(slimered, 500,250);
+        addObject(slimered, 500,300);
     }
 }
