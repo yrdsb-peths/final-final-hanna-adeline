@@ -182,7 +182,7 @@ public class Witch extends Actor
     public void addedToWorld(World w)
     {
         // HurtBox
-        hurtBox = new HurtBox(this, 70, 130);
+        hurtBox = new HurtBox(this, 50, 130);
         w.addObject(hurtBox, getX() - 25, getY());
         
         // HPBar

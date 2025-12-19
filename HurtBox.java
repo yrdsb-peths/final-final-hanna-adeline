@@ -9,38 +9,57 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class HurtBox extends Actor
 {
     // access the witch class instance
-    private Witch owner;
-    private int hitCount = 0;
+    private Actor owner;
+    private int hitCountWitch = 0;
+    private int hitCountSlimeRed = 0;
     private int invincibleTimer = 0;
     
     // Constructor - method called once 
-    public HurtBox(Witch owner, int w, int h)
+    public HurtBox(Actor owner, int w, int h)
     {
         // Access the witch object
         this.owner = owner;
         
         GreenfootImage img = new GreenfootImage(w, h);
-        img.setColor(new Color(255, 0, 0, 0));
+        img.setColor(new Color(255, 0, 0, 100));
         img.fillRect(0, 0, w, h);
         
         setImage(img);
     }
     
-    public void checkDamage()
+    public void checkDamageWitch()
     {
-        if(isTouching(Level1SlimeRed.class))
+        if(this.isTouching(Level1SlimeRed.class))
         {
             if(invincibleTimer > 0)
             {
                 return;
             }
-            hitCount++;
-            if(hitCount >= 5)
+            hitCountWitch++;
+            if(hitCountWitch >= 5)
             {
-                owner.takeDamage(1);
-                hitCount = 0;
+                ((Witch)owner).takeDamage(1);
+                hitCountWitch = 0;
             }
             invincibleTimer = 20;
+        }
+    }
+    
+    public void checkDamageSlimeRed()
+    {
+        Witch witch = getWorld().getObjects(Witch.class).get(0);
+        if(this.intersects(witch.attackBox1))
+        {
+            if(invincibleTimer > 0)
+            {
+                return;
+            }
+            hitCountSlimeRed = 0;
+            
+        }
+        else if(this.intersects(witch.attackBox1))
+        {
+            
         }
     }
     
@@ -50,7 +69,10 @@ public class HurtBox extends Actor
      */
     public void act()
     {
-        checkDamage();
+        if(owner instanceof Witch)
+        {
+            checkDamageWitch();
+        }
         
         if(invincibleTimer > 0)
         {
