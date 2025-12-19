@@ -156,28 +156,44 @@ public class Level1SlimeRed extends Actor
         damage += 1;
         return damage;
     }
+    
+    public int getHit(int hp)
+    {
+        if(isTouching(AttackBox.class))
+        {
+            if(witch.isAttacking1== true || witch.isAttacking2 == true)
+            {
+                hp-=1;
+                return hp;
+            }
+        }
+    }
     /**
      * Act - do whatever the Level1SlimeRed wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act()
     {
-          moveToWitch();
           if(hp<=0)
           {
               isAlive = false;
           }
-          if(isTouching(HurtBox.class))
+          if(isAlive)
           {
-              isAttacking = true;
-          }
-          else if(isTouching(HurtBox.class) == false)
-          {
-              isAttacking = false;
-          }
-          if(isAttacking)
-          {
-              attack();
+              moveToWitch();
+              getHit(hp);
+              if(isTouching(HurtBox.class))
+              {
+                  isAttacking = true;
+              }
+              else if(isTouching(HurtBox.class) == false)
+              {
+                  isAttacking = false;
+              }
+              if(isAttacking)
+              {
+                  attack();
+              }
           }
       }
 }
