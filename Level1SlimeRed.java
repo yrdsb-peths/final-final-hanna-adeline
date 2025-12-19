@@ -34,7 +34,7 @@ public class Level1SlimeRed extends Actor
     SimpleTimer deadTimer = new SimpleTimer();
     
     int hp = 25;
-    
+    int damage = 0;
     public Level1SlimeRed()
     {
         //Set idle image for walk of SlimeRed
@@ -48,20 +48,20 @@ public class Level1SlimeRed extends Actor
         for(int i=0; i<walkLeftImage.length; i++)
         {
             walkLeftImage[i] = new GreenfootImage("images/Monsters/Level1/Level1SlimeRed/walkLeft/walkLeft"+ i + ".png");
-            walkLeftImage[i].scale(128, 128);
+            walkLeftImage[i].scale(58, 30);
         }
         
         //Set idle image for attack of SlimeRed
         for(int i=0; i<attackRightImage.length; i++)
         {
             attackRightImage[i] = new GreenfootImage("images/Monsters/Level1/Level1SlimeRed/attackRight/attackRight"+ i + ".png");
-            attackRightImage[i].scale(128, 128);
+            attackRightImage[i].scale(59,45);
         }
         
         for(int i=0; i<attackLeftImage.length; i++)
         {
             attackLeftImage[i] = new GreenfootImage("images/Monsters/Level1/Level1SlimeRed/attackLeft/attackLeft"+ i + ".png");
-            attackLeftImage[i].scale(128, 128);
+            attackLeftImage[i].scale(59,45);
         }
         
         //Set idle image for death of SlimeRed
@@ -130,23 +130,31 @@ public class Level1SlimeRed extends Actor
      */
     public void moveToWitch()
     {
-        Witch witch = (Witch) getWorld().getObjects(Witch.class).get(0);
-        int targetX = witch.getX();
-        int distanceX = this.getX() - targetX;
-        if(distanceX<0)
+        if(!isAttacking)
         {
-            move(1);
-            direction = "right";
+            Witch witch = (Witch) getWorld().getObjects(Witch.class).get(0);
+            int targetX = witch.getX();
+            int distanceX = this.getX() - targetX;
+            if(distanceX<0)
+            {
+                move(1);
+                direction = "right";
+            }
+            else if(distanceX>0)
+            {
+                move(-1);
+                direction = "left";
+            }
+            
+            animateWalk();
         }
-        else if(distanceX>0)
-        {
-            move(-1);
-            direction = "left";
-        }
-        
-        animateWalk();
     } 
     
+    public void attack()
+    {
+        animateAttack();
+        damage += 1;
+    }
     /**
      * Act - do whatever the Level1SlimeRed wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -157,6 +165,18 @@ public class Level1SlimeRed extends Actor
           if(hp<=0)
           {
               isAlive = false;
+          }
+          if(isTouching(HurtBox.class))
+          {
+              isAttacking = true;
+          }
+          else if(isTouching(HurtBox.class) == false)
+          {
+              isAttacking = false;
+          }
+          if(isAttacking)
+          {
+              attack();
           }
       }
 }
