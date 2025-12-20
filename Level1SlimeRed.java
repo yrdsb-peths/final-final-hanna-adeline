@@ -179,6 +179,7 @@ public class Level1SlimeRed extends Actor
           {
               isAlive = false;
               getWorld().removeObject(this);
+              ((MyWorld)getWorld()).level1Complete = true;
               return;
           }
           if(isAlive)
