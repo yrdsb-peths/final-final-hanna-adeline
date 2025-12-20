@@ -35,6 +35,16 @@ public class Potion3 extends Actor
         setImage(potionImage[imageIndex]);
         imageIndex = (imageIndex + 1) % potionImage.length;
     }
+    
+    // Potion disappears after it's collected by the user
+    
+    public boolean potion3Collected()
+    {
+        getWorld().removeObject(this);
+        ((MyWorld)getWorld()).potion3Collected = true;
+        return ((MyWorld)getWorld()).potion3Collected;
+    }
+    
     /**
      * Act - do whatever the Potion3 wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
