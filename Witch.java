@@ -29,6 +29,9 @@ public class Witch extends Actor
     private int witchMaxHP = 5;
     private int invincibleTimer = 0;
     
+    // Boolean for whether witch is alive (game still running)
+    public static boolean witchAlive = true;
+    
     // Image idles of witch
     GreenfootImage[] defaultIdleRight = new GreenfootImage[37];
     GreenfootImage[] defaultIdleLeft = new GreenfootImage[37];
@@ -201,6 +204,7 @@ public class Witch extends Actor
         if(witchCurrentHP < 0)
         {
             witchCurrentHP = 0;
+            witchAlive = false;
         }
         witchHPBar.setHP(witchCurrentHP);
         invincibleTimer = 30;
@@ -327,6 +331,11 @@ public class Witch extends Actor
         if(invincibleTimer > 0)
         {
             invincibleTimer--;
+        }
+        
+        if(witchAlive==false)
+        {
+            ((MyWorld)getWorld()).gameOver();
         }
     }
 }

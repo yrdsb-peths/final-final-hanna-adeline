@@ -1,6 +1,7 @@
 import greenfoot.*;
 
 public class MyWorld extends World {
+    
     public MyWorld() {
         super(600, 400, 1);
         
@@ -15,5 +16,10 @@ public class MyWorld extends World {
         
         Level1SlimeRed slimered = new Level1SlimeRed();
         addObject(slimered, 500,300);
+    }
+    
+    //Removes all monsters, hp boxes and the witch when the game is over
+    public void gameOver(){
+        removeObjects(getObjects(null));
     }
 }

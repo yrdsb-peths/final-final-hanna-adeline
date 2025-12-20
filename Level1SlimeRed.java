@@ -33,8 +33,8 @@ public class Level1SlimeRed extends Actor
     SimpleTimer walkTimer = new SimpleTimer();
     SimpleTimer deadTimer = new SimpleTimer();
     
-    int hp = 25;
-    int damage = 0;
+    public static int level1SlimeRedHp = 25;
+    public static int level1SlimeRedDamage = 0;
     public Level1SlimeRed()
     {
         //Set idle image for walk of SlimeRed
@@ -153,20 +153,21 @@ public class Level1SlimeRed extends Actor
     public int attack()
     {
         animateAttack();
-        damage += 1;
-        return damage;
+        level1SlimeRedDamage += 1;
+        return level1SlimeRedDamage;
     }
     
     public int getHit(int hp)
     {
         if(isTouching(AttackBox.class))
         {
+            Witch witch = (Witch) getWorld().getObjects(Witch.class).get(0);
             if(witch.isAttacking1== true || witch.isAttacking2 == true)
             {
-                hp-=1;
-                return hp;
+                level1SlimeRedHp-=1;
             }
         }
+        return level1SlimeRedHp;
     }
     /**
      * Act - do whatever the Level1SlimeRed wants to do. This method is called whenever
@@ -174,14 +175,16 @@ public class Level1SlimeRed extends Actor
      */
     public void act()
     {
-          if(hp<=0)
+          if(level1SlimeRedHp<=0)
           {
               isAlive = false;
+              getWorld().removeObject(this);
+              return;
           }
           if(isAlive)
           {
               moveToWitch();
-              getHit(hp);
+              getHit(level1SlimeRedHp);
               if(isTouching(HurtBox.class))
               {
                   isAttacking = true;
@@ -195,5 +198,5 @@ public class Level1SlimeRed extends Actor
                   attack();
               }
           }
-      }
+    }
 }
