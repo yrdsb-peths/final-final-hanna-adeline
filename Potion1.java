@@ -1,24 +1,24 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Potion3 here.
+ * Write a description of class Potion1 here.
  * 
  * @author Adeline
  * @version December 2025
  */
-public class Potion3 extends Actor
+public class Potion1 extends Actor
 {
-    GreenfootImage[] potionImage = new GreenfootImage[12];
+    GreenfootImage[] potionImage = new GreenfootImage[8];
     SimpleTimer animationTimer = new SimpleTimer();
-    public Potion3()
+    public Potion1()
     {
         //Initial potion 1 image
         setImage(potionImage[0]);
         
         for(int i=0; i<potionImage.length; i++)
         {
-            potionImage[i] = new GreenfootImage("images/Potions/Potion3/potion3-" + i + ".png");
-            potionImage[i].scale(24, 39);
+            potionImage[i] = new GreenfootImage("images/Potions/Potion1/potion1-" + i + ".png");
+            potionImage[i].scale(22, 37);
         }
         
         animationTimer.mark();
@@ -26,31 +26,35 @@ public class Potion3 extends Actor
     int imageIndex = 0;
     public void animatePotion()
     {
-        if(animationTimer.millisElapsed() < 50)
+        if(animationTimer.millisElapsed() < 100)
         {
             return;
         }
         animationTimer.mark();
-        
+    
         setImage(potionImage[imageIndex]);
         imageIndex = (imageIndex + 1) % potionImage.length;
     }
     
     // Potion disappears after it's collected by the user
     
-    public boolean potion3Collected()
+    public boolean potion1Collected()
     {
         getWorld().removeObject(this);
-        ((MyWorld)getWorld()).potion3Collected = true;
-        return ((MyWorld)getWorld()).potion3Collected;
+        ((MyWorld)getWorld()).potion1Collected = true;
+        return ((MyWorld)getWorld()).potion1Collected;
     }
     
     /**
-     * Act - do whatever the Potion3 wants to do. This method is called whenever
+     * Act - do whatever the Potion1 wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act()
     {
         animatePotion();
+        if(isTouching(Witch.class))
+        {
+            potion1Collected();
+        }
     }
 }

@@ -33,8 +33,8 @@ public class Level1SlimeRed extends Actor
     SimpleTimer walkTimer = new SimpleTimer();
     SimpleTimer deadTimer = new SimpleTimer();
     
-    int hp = 25;
-    int damage = 0;
+    public static int level1SlimeRedHp = 25;
+    public static int level1SlimeRedDamage = 0;
     public Level1SlimeRed()
     {
         //Set idle image for walk of SlimeRed
@@ -42,7 +42,7 @@ public class Level1SlimeRed extends Actor
         for(int i=0; i<walkRightImage.length; i++)
         {
             walkRightImage[i] = new GreenfootImage("images/Monsters/Level1/Level1SlimeRed/walkRight/walkRight"+ i + ".png");
-            walkRightImage[i].scale(128, 128);
+            walkRightImage[i].scale(58, 30);
         }
         
         for(int i=0; i<walkLeftImage.length; i++)
@@ -150,10 +150,24 @@ public class Level1SlimeRed extends Actor
         }
     } 
     
-    public void attack()
+    public int attack()
     {
         animateAttack();
-        damage += 1;
+        level1SlimeRedDamage += 1;
+        return level1SlimeRedDamage;
+    }
+    
+    public int getHit(int hp)
+    {
+        if(isTouching(AttackBox.class))
+        {
+            Witch witch = (Witch) getWorld().getObjects(Witch.class).get(0);
+            if(witch.isAttacking1== true || witch.isAttacking2 == true)
+            {
+                level1SlimeRedHp-=1;
+            }
+        }
+        return level1SlimeRedHp;
     }
     /**
      * Act - do whatever the Level1SlimeRed wants to do. This method is called whenever
@@ -161,22 +175,29 @@ public class Level1SlimeRed extends Actor
      */
     public void act()
     {
-          moveToWitch();
-          if(hp<=0)
+          if(level1SlimeRedHp<=0)
           {
               isAlive = false;
+              getWorld().removeObject(this);
+              ((MyWorld)getWorld()).level1Complete = true;
+              return;
           }
-          if(isTouching(HurtBox.class))
+          if(isAlive)
           {
-              isAttacking = true;
+              moveToWitch();
+              getHit(level1SlimeRedHp);
+              if(isTouching(HurtBox.class))
+              {
+                  isAttacking = true;
+              }
+              else if(isTouching(HurtBox.class) == false)
+              {
+                  isAttacking = false;
+              }
+              if(isAttacking)
+              {
+                  attack();
+              }
           }
-          else if(isTouching(HurtBox.class) == false)
-          {
-              isAttacking = false;
-          }
-          if(isAttacking)
-          {
-              attack();
-          }
-      }
+    }
 }
