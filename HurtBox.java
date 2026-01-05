@@ -11,7 +11,6 @@ public class HurtBox extends Actor
     // access the witch class instance
     private Actor owner;
     private int hitCountWitch = 0;
-    private int hitCountSlimeRed = 0;
     private int invincibleTimer = 0;
     
     // Constructor - method called once 
@@ -21,7 +20,7 @@ public class HurtBox extends Actor
         this.owner = owner;
         
         GreenfootImage img = new GreenfootImage(w, h);
-        img.setColor(new Color(255, 0, 0, 100));
+        img.setColor(new Color(255, 0, 0, 0));
         img.fillRect(0, 0, w, h);
         
         setImage(img);
@@ -42,24 +41,6 @@ public class HurtBox extends Actor
                 hitCountWitch = 0;
             }
             invincibleTimer = 20;
-        }
-    }
-    
-    public void checkDamageSlimeRed()
-    {
-        Witch witch = getWorld().getObjects(Witch.class).get(0);
-        if(this.intersects(witch.attackBox1))
-        {
-            if(invincibleTimer > 0)
-            {
-                return;
-            }
-            hitCountSlimeRed = 0;
-            
-        }
-        else if(this.intersects(witch.attackBox1))
-        {
-            
         }
     }
     

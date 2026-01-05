@@ -33,8 +33,15 @@ public class Level1SlimeRed extends Actor
     SimpleTimer walkTimer = new SimpleTimer();
     SimpleTimer deadTimer = new SimpleTimer();
     
-    public static int level1SlimeRedHp = 25;
     public static int level1SlimeRedDamage = 0;
+    
+    // Image idles of hpbar of SlimeRed
+    public GreenfootImage[] level1SlimeHP = new GreenfootImage[6];
+    public HPBar slime1RedHPBar;
+    private int slime1CurrentHP = 5;
+    private int slime1MaxHP = 5;
+    private int invincibleTimer = 0;
+    
     public Level1SlimeRed()
     {
         //Set idle image for walk of SlimeRed
@@ -75,6 +82,14 @@ public class Level1SlimeRed extends Actor
         
         //Initial SlimeRed image
         setImage(walkLeftImage[0]);
+        
+        // Set image for hp of Slime1Red
+        for(int i = 0; i < level1SlimeHP.length; i++)
+        {
+            level1SlimeHP[i] = new GreenfootImage("hp_bar/monster2_hp/monster2_hp_" + i + ".png");
+            level1SlimeHP[i].scale(70, 30);
+        }
+        slime1CurrentHP = 5;
     }
     
     int attackImageIndex = 0;
@@ -125,6 +140,7 @@ public class Level1SlimeRed extends Actor
             walkImageIndex = (walkImageIndex+1) % walkLeftImage.length;
         }
     }
+    
     /**
      * Moves to the witch's location
      */
@@ -157,47 +173,74 @@ public class Level1SlimeRed extends Actor
         return level1SlimeRedDamage;
     }
     
-    public int getHit(int hp)
+    // Damage to change hp method
+    public void takeDamage(int damage)
     {
-        if(isTouching(AttackBox.class))
+        if(invincibleTimer > 0)
         {
-            Witch witch = (Witch) getWorld().getObjects(Witch.class).get(0);
-            if(witch.isAttacking1== true || witch.isAttacking2 == true)
-            {
-                level1SlimeRedHp-=1;
-            }
+            return;
         }
-        return level1SlimeRedHp;
+        slime1CurrentHP -= damage;
+        
+        if(slime1CurrentHP < 0)
+        {
+            slime1CurrentHP = 0;
+        }
+        
+        slime1RedHPBar.setHP(slime1CurrentHP);
+        invincibleTimer = 20;
     }
+    
+    // HPBar addedToWorld method
+    public void addedToWorld(World w)
+    {   
+        // HPBar
+        slime1RedHPBar = new HPBar(slime1CurrentHP, level1SlimeHP);
+        w.addObject(slime1RedHPBar, getX(), getY() - 45);
+    }
+    
     /**
      * Act - do whatever the Level1SlimeRed wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act()
     {
-          if(level1SlimeRedHp<=0)
+        if(slime1CurrentHP<=0)
+        {
+          isAlive = false;
+          getWorld().removeObject(this);
+          ((MyWorld)getWorld()).level1Complete = true;
+        }
+        
+        if(isAlive)
+        {
+          moveToWitch();
+
+          if(isTouching(HurtBox.class))
           {
-              isAlive = false;
-              getWorld().removeObject(this);
-              ((MyWorld)getWorld()).level1Complete = true;
-              return;
+              isAttacking = true;
           }
-          if(isAlive)
+          else if(isTouching(HurtBox.class) == false)
           {
-              moveToWitch();
-              getHit(level1SlimeRedHp);
-              if(isTouching(HurtBox.class))
-              {
-                  isAttacking = true;
-              }
-              else if(isTouching(HurtBox.class) == false)
-              {
-                  isAttacking = false;
-              }
-              if(isAttacking)
-              {
-                  attack();
-              }
+              isAttacking = false;
           }
+          
+          if(isAttacking)
+          {
+              attack();
+          }
+        }
+
+        // Move the HPBar with the witch
+        if(level1SlimeHP != null)
+        {
+          slime1RedHPBar.setLocation(getX(), getY() - 45);
+        }
+          
+        //invicibleTimer decrease
+        if(invincibleTimer > 0)
+        {
+            invincibleTimer--;
+        }
     }
 }

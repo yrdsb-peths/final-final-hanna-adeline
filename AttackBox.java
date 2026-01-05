@@ -23,6 +23,11 @@ public class AttackBox extends Actor
      */
     public void act()
     {
-        // Add your action code here.
+        Level1SlimeRed slime = (Level1SlimeRed) getOneIntersectingObject(Level1SlimeRed.class);
+        if(slime != null)
+        {
+            slime.takeDamage(1);
+            getWorld().removeObject(this);
+        }
     }
 }

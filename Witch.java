@@ -22,7 +22,7 @@ public class Witch extends Actor
     int hitOffsetXRight2 = 40;
     int hitOffsetXLeft2 = -40;
     
-    // Image idles of hPbar of witch
+    // Image idles of hpbar of witch
     public GreenfootImage[] witchHP = new GreenfootImage[6];
     public HPBar witchHPBar;
     private int witchCurrentHP = 5;
@@ -333,6 +333,7 @@ public class Witch extends Actor
             invincibleTimer--;
         }
         
+        //check if witch is alive
         if(witchAlive==false)
         {
             ((MyWorld)getWorld()).gameOver();
