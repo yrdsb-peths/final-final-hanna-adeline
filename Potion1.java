@@ -12,7 +12,6 @@ public class Potion1 extends Actor
     SimpleTimer animationTimer = new SimpleTimer();
     public Potion1()
     {
-   
         for(int i=0; i<potionImage.length; i++)
         {
             potionImage[i] = new GreenfootImage("images/Potions/Potion1/potion1-" + i + ".png");
@@ -38,7 +37,6 @@ public class Potion1 extends Actor
     }
     
     // Potion disappears after it's collected by the user
-    
     public boolean potion1Collected()
     {
         getWorld().removeObject(this);
@@ -53,7 +51,7 @@ public class Potion1 extends Actor
     public void act()
     {
         animatePotion();
-        if(isTouching(Witch.class))
+        if(isTouching(HurtBox.class))
         {
             potion1Collected();
         }
