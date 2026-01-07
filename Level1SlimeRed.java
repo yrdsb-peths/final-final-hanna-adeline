@@ -208,6 +208,7 @@ public class Level1SlimeRed extends Actor
         if(slime1CurrentHP<=0)
         {
           isAlive = false;
+          getWorld().removeObject(slime1RedHPBar);
           getWorld().removeObject(this);
           ((MyWorld)getWorld()).level1Complete = true;
         }
@@ -232,7 +233,7 @@ public class Level1SlimeRed extends Actor
         }
 
         // Move the HPBar with the witch
-        if(level1SlimeHP != null)
+        if(isAlive && level1SlimeHP != null)
         {
           slime1RedHPBar.setLocation(getX(), getY() - 45);
         }
