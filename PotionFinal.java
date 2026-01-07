@@ -11,15 +11,15 @@ public class PotionFinal extends Actor
     GreenfootImage[] potionImage = new GreenfootImage[24];
     SimpleTimer animationTimer = new SimpleTimer();
     public PotionFinal()
-    {
-        //Initial potion 1 image
-        setImage(potionImage[0]);
-        
+    {   
         for(int i=0; i<potionImage.length; i++)
         {
             potionImage[i] = new GreenfootImage("images/Potions/PotionFinal/potionfinal-"+ i + ".png");
             potionImage[i].scale(29, 50);
         }
+        
+        //Initial potion 1 image
+        setImage(potionImage[0]);
         
         animationTimer.mark();
     }

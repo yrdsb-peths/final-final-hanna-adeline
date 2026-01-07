@@ -12,14 +12,15 @@ public class Potion2 extends Actor
     SimpleTimer animationTimer = new SimpleTimer();
     public Potion2()
     {
-        //Initial potion 1 image
-        setImage(potionImage[0]);
         
         for(int i=0; i<potionImage.length; i++)
         {
             potionImage[i] = new GreenfootImage("images/Potions/Potion2/potion2-" + i + ".png");
             potionImage[i].scale(16, 51);
         }
+        
+        //Initial potion 2 image
+        setImage(potionImage[0]);
         
         animationTimer.mark();
     }
