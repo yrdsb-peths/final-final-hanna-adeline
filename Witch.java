@@ -292,7 +292,7 @@ public class Witch extends Actor
             // Set attackBox1 add and remove
             if(isAttacking1 && attackIndex1 == 3 && attackBox1 == null)
             {
-                attackBox1 = new AttackBox(130, 130);
+                attackBox1 = new AttackBox(130, 130, 1);
                 getWorld().addObject(attackBox1, getX() + hitBox1, getY() + 6);
             }
             if(!isAttacking1 && attackBox1 != null)
@@ -304,7 +304,7 @@ public class Witch extends Actor
             // Set attackbox2 add and remove
             if(isAttacking2 && attackIndex2 == 3 && attackBox2 == null)
             {
-                attackBox2 = new AttackBox(140, 130);
+                attackBox2 = new AttackBox(140, 130, 2);
                 getWorld().addObject(attackBox2, getX() + hitBox2, getY() + 6);
             }
             if(!isAttacking2 && attackBox2 != null)
