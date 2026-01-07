@@ -27,7 +27,6 @@ public class AttackBox extends Actor
         if(slime != null)
         {
             slime.takeDamage(1);
-            getWorld().removeObject(this);
         }
     }
 }
