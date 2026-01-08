@@ -17,6 +17,8 @@ public class Level1SlimeRed extends Actor
     
     //Sounds for SlimeRed
     GreenfootSound slimeAttackSound = new GreenfootSound("slimeAttackSound.mp3");
+    GreenfootSound slimeDeadSound = new GreenfootSound("slimeDeadSound.mp3");
+    
     //Direction SlimeRed is facing
     String direction = "left";
     
@@ -77,7 +79,7 @@ public class Level1SlimeRed extends Actor
         for(int i=0; i<deadImage.length; i++)
         {
             deadImage[i] = new GreenfootImage("images/Monsters/Level1/Level1SlimeRed/dead/dead"+ i + ".png");
-            deadImage[i].scale(128, 128);
+            deadImage[i].scale(59, 30);
         }
         
         walkTimer.mark();
@@ -107,6 +109,10 @@ public class Level1SlimeRed extends Actor
         }
         
         attackTimer.mark();
+        if(attackImageIndex == 1)
+        {
+            slimeAttackSound.play();
+        }
         
         if(direction.equals("right"))
         {
@@ -117,6 +123,27 @@ public class Level1SlimeRed extends Actor
         {
             setImage(attackLeftImage[attackImageIndex]);
             attackImageIndex = (attackImageIndex+1) % attackLeftImage.length;
+        }
+    }
+    
+    //Animate death of SlimeRed
+    int deadImageIndex = 0;
+    public void animateDeath()
+    {
+        if(deadTimer.millisElapsed() < 200)
+        {
+            return;
+        }
+        
+        deadTimer.mark();
+        
+        setImage(deadImage[deadImageIndex]);
+        deadImageIndex = (deadImageIndex+1);
+        slimeDeadSound.play();
+        if(deadImageIndex == 3)
+        {
+            getWorld().removeObject(slime1RedHPBar);
+            getWorld().removeObject(this);
         }
     }
     
@@ -210,8 +237,7 @@ public class Level1SlimeRed extends Actor
         if(slime1CurrentHP<=0)
         {
           isAlive = false;
-          getWorld().removeObject(slime1RedHPBar);
-          getWorld().removeObject(this);
+          animateDeath();
           ((MyWorld)getWorld()).level1Complete = true;
         }
         
@@ -230,7 +256,6 @@ public class Level1SlimeRed extends Actor
           
           if(isAttacking)
           {
-              slimeAttackSound.play();
               attack();
           }
         }
