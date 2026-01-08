@@ -8,6 +8,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class MyWorld2 extends World
 {
+    public static boolean level2Complete = false;
+    public static boolean potion2Collected = false;
+    
+    public static GreenfootSound potionSpawnedSound = new GreenfootSound("potionBubblingSound.mp3");
 
     /**
      * Constructor for objects of class MyWorld2.
@@ -17,5 +21,36 @@ public class MyWorld2 extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1); 
+        
+        //Set booleans
+        level2Complete = false;
+        potion2Collected = false;
+        
+        // Set background
+        GreenfootImage bg = new GreenfootImage("images/background/Battleground3.png");
+        bg.scale(getWidth(), getHeight());
+        setBackground(bg);
+        
+        // Create the witch object
+        Witch witch = new Witch();
+        addObject(witch, 120, 250);
+    }
+    
+        private void spawnPotion2() {
+        Potion2 potion2 = new Potion2();
+        addObject(potion2, 500, 300);
+        potionSpawnedSound.playLoop();
+    }
+    
+    //Removes all monsters, hp boxes and the witch when the game is over
+    public void gameOver() {
+        removeObjects(getObjects(null));
+    }
+    
+    public void act() {
+        if(level2Complete && !potion2Collected && getObjects(Potion2.class).isEmpty())
+        {
+            spawnPotion2();
+        }
     }
 }

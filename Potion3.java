@@ -10,9 +10,10 @@ public class Potion3 extends Actor
 {
     GreenfootImage[] potionImage = new GreenfootImage[12];
     SimpleTimer animationTimer = new SimpleTimer();
+    public static GreenfootSound potionCollectSound = new GreenfootSound("potionCollectSound.mp3");
+
     public Potion3()
     {
-    
         for(int i=0; i<potionImage.length; i++)
         {
             potionImage[i] = new GreenfootImage("images/Potions/Potion3/potion3-" + i + ".png");
@@ -44,8 +45,8 @@ public class Potion3 extends Actor
         getWorld().removeObject(this);
         MyWorld.potionSpawnedSound.stop();
         Potion1.potionCollectSound.play();
-        ((MyWorld)getWorld()).potion3Collected = true;
-        return ((MyWorld)getWorld()).potion3Collected;
+        ((MyWorld3)getWorld()).potion3Collected = true;
+        return ((MyWorld3)getWorld()).potion3Collected;
     }
     
     /**
