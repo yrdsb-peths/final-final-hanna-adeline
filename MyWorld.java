@@ -50,13 +50,5 @@ public class MyWorld extends World {
         {
             spawnPotion1();
         }
-        if(level2Complete && !potion2Collected)
-        {
-            spawnPotion2();
-        }
-        if(level3Complete && !potion3Collected)
-        {
-            spawnPotion3();
-        }
     }
 }

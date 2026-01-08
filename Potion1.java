@@ -57,6 +57,7 @@ public class Potion1 extends Actor
         if(isTouching(HurtBox.class))
         {
             potion1Collected();
+            Greenfoot.setWorld(new MyWorld2());
         }
     }
 }
