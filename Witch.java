@@ -150,7 +150,10 @@ public class Witch extends Actor
             return;
         }
         attackTimer1.mark();
-        witchAttack1Sound.play();
+        if(attackIndex1 == 0)
+        {
+            witchAttack1Sound.play();
+        }
         if(facing.equals("right"))
         {
             setImage(attack1Right[attackIndex1]);
@@ -165,7 +168,7 @@ public class Witch extends Actor
     
     /**
      * Animate the level 2 attack of witch
-     */   
+     */    
     int attackIndex2 = 0;
     public void animateAttackTwo()
     {
@@ -173,9 +176,11 @@ public class Witch extends Actor
         {
             return;
         }
-        witchAttack2Sound.play();
         attackTimer2.mark();
-        
+        if(attackIndex2 == 0)
+        {
+            witchAttack2Sound.play();
+        }
         if(facing.equals("right"))
         {
             setImage(attack2Right[attackIndex2]);
