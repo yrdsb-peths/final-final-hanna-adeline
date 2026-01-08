@@ -15,6 +15,8 @@ public class Level1SlimeRed extends Actor
     GreenfootImage[] attackLeftImage = new GreenfootImage[5];
     GreenfootImage[] deadImage = new GreenfootImage[3];
     
+    //Sounds for SlimeRed
+    GreenfootSound slimeAttackSound = new GreenfootSound("slimeAttackSound.mp3");
     //Direction SlimeRed is facing
     String direction = "left";
     
@@ -228,6 +230,7 @@ public class Level1SlimeRed extends Actor
           
           if(isAttacking)
           {
+              slimeAttackSound.play();
               attack();
           }
         }

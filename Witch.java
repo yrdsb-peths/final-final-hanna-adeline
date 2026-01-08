@@ -52,11 +52,18 @@ public class Witch extends Actor
     SimpleTimer attackTimer1 = new SimpleTimer();
     SimpleTimer attackTimer2 = new SimpleTimer();
     
+    //Set sounds for witch
+    GreenfootSound witchAttack1Sound = new GreenfootSound("attack1Sound.mp3");
+    GreenfootSound witchAttack2Sound = new GreenfootSound("c6aa3b4b.mp3");
+    GreenfootSound witchDeadSound = new GreenfootSound("witchDeadSound.mp3");
+
+    
     /**
      * Constructor - the code that gets run one time when the object is created.
      */
     public Witch()
     {
+        
         // Set idle image for default witch
         for(int i = 0; i < defaultIdleRight.length; i++)
         {
@@ -246,6 +253,7 @@ public class Witch extends Actor
          */ 
         if(isAttacking1)
         {
+            witchAttack1Sound.play();
             animateAttackOne();
             if(attackIndex1 >= attack1Right.length)
             {
@@ -255,6 +263,7 @@ public class Witch extends Actor
         }
         else if(isAttacking2)
         {
+            witchAttack2Sound.play();
             animateAttackTwo();
             if(attackIndex2 >= attack2Right.length)
             {
@@ -336,6 +345,7 @@ public class Witch extends Actor
         //check if witch is alive
         if(witchAlive==false)
         {
+            witchDeadSound.play();
             ((MyWorld)getWorld()).gameOver();
         }
     }
