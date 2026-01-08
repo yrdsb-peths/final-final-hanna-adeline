@@ -26,7 +26,7 @@ public class HPBar extends Actor
     
     public void setHP(int hp)
     {
-        if(hp < 0)
+        if(hp <= 0)
         {
             hp = 0;
         }

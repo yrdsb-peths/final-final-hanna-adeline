@@ -44,6 +44,7 @@ public class MyWorld extends World {
     public void gameOver() {
         removeObjects(getObjects(null));
     }
+    
     public void act() {
         if(level1Complete && !potion1Collected)
         {

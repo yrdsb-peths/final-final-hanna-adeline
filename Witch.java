@@ -343,7 +343,7 @@ public class Witch extends Actor
         }
         
         //check if witch is alive
-        if(witchAlive==false)
+        if(witchAlive == false)
         {
             witchDeadSound.play();
             ((MyWorld)getWorld()).gameOver();

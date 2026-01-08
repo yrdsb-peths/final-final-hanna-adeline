@@ -23,6 +23,7 @@ public class Potion1 extends Actor
         
         animationTimer.mark();
     }
+    
     int imageIndex = 0;
     public void animatePotion()
     {
