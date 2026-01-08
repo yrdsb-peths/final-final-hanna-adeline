@@ -233,7 +233,7 @@ public class Witch extends Actor
         }
         
         // Start attack 1
-        if(Greenfoot.isKeyDown("shift"))
+        if(Greenfoot.isKeyDown("shift") && !isAttacking1)
         {
             isAttacking1 = true;
             attackIndex1 = 0; // restart animation
@@ -241,7 +241,7 @@ public class Witch extends Actor
         }
         
         // Start attack 2
-        if(Greenfoot.isKeyDown("space"))
+        if(Greenfoot.isKeyDown("space") && !isAttacking2)
         {
             isAttacking2 = true;
             attackIndex2 = 0; //restart animation
