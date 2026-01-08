@@ -63,7 +63,6 @@ public class Witch extends Actor
      */
     public Witch()
     {
-        
         // Set idle image for default witch
         for(int i = 0; i < defaultIdleRight.length; i++)
         {
