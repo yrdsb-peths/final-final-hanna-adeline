@@ -15,6 +15,9 @@ public class MyWorld extends World {
     public static boolean level2Start = false;
     public static boolean level3Start = false;
     
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     public MyWorld() {
         super(600, 400, 1);
