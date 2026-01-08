@@ -151,7 +151,7 @@ public class Witch extends Actor
             return;
         }
         attackTimer1.mark();
-        
+        witchAttack1Sound.play();
         if(facing.equals("right"))
         {
             setImage(attack1Right[attackIndex1]);
@@ -174,6 +174,7 @@ public class Witch extends Actor
         {
             return;
         }
+        witchAttack2Sound.play();
         attackTimer2.mark();
         
         if(facing.equals("right"))
@@ -253,7 +254,6 @@ public class Witch extends Actor
          */ 
         if(isAttacking1)
         {
-            witchAttack1Sound.play();
             animateAttackOne();
             if(attackIndex1 >= attack1Right.length)
             {
@@ -263,7 +263,6 @@ public class Witch extends Actor
         }
         else if(isAttacking2)
         {
-            witchAttack2Sound.play();
             animateAttackTwo();
             if(attackIndex2 >= attack2Right.length)
             {
