@@ -98,7 +98,6 @@ public class Level1SlimeRed extends Actor
     /**
      * Animate attack of the SlimeRed
      */
-    
     public void animateAttack()
     {
         if(attackTimer.millisElapsed() < 100)
