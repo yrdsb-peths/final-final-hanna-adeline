@@ -174,8 +174,8 @@ public class Witch extends Actor
         {
             return;
         }
-        witchAttack2Sound.play();
         attackTimer2.mark();
+        witchAttack2Sound.play();
         
         if(facing.equals("right"))
         {
