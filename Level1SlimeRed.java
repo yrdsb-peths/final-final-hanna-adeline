@@ -130,7 +130,7 @@ public class Level1SlimeRed extends Actor
     int deadImageIndex = 0;
     public void animateDeath()
     {
-        if(deadTimer.millisElapsed() < 200)
+        if(deadTimer.millisElapsed() < 425)
         {
             return;
         }
