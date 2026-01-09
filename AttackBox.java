@@ -8,8 +8,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class AttackBox extends Actor
 {
-    public AttackBox(int w, int h)
+    private int damage;
+    
+    public AttackBox(int w, int h, int damage)
     {
+        this.damage = damage;
+        
         GreenfootImage img = new GreenfootImage(w, h);
         img.setColor(new Color(255, 0, 0, 0));
         img.fillRect(0, 0, w, h);
@@ -23,6 +27,10 @@ public class AttackBox extends Actor
      */
     public void act()
     {
-        // Add your action code here.
+        Level1SlimeRed slime = (Level1SlimeRed) getOneIntersectingObject(Level1SlimeRed.class);
+        if(slime != null)
+        {
+            slime.takeDamage(damage);
+        }
     }
 }
