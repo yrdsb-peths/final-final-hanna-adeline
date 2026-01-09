@@ -163,11 +163,11 @@ public class Witch extends Actor
         for(int i = 0; i < 5; i++)
         {
             // Image idle for attack1
-            attack1CooldownImg[i] = new GreenfootImage("Attack_Cool/coolbar_red/red_coolbar" + i + ".png");
+            attack1CooldownImg[i] = new GreenfootImage("cool_bar/coolbar_red/red_coolbar" + i + ".png");
             attack1CooldownImg[i].scale(125, 20);
             
             // Image idle for attack2
-            attack2CooldownImg[i] = new GreenfootImage("Attack_Cool/coolbar_green/green_coolbar" + i + ".png");
+            attack2CooldownImg[i] = new GreenfootImage("cool_bar/coolbar_green/green_coolbar" + i + ".png");
             attack2CooldownImg[i].scale(125, 20);
         }
         
@@ -175,7 +175,7 @@ public class Witch extends Actor
         for(int i = 0; i < 5; i++)
         {
             // Image idle for flying Cooldown bar
-            flyingCooldownImg[i] = new GreenfootImage("Attack_Cool/coolbar_green/green_coolbar" + i + ".png");
+            flyingCooldownImg[i] = new GreenfootImage("cool_bar/flycoolbar_blue/blue_coolbar" + i + ".png");
             flyingCooldownImg[i].scale(60, 10);
         }
     }
