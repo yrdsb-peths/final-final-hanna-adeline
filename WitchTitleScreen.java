@@ -20,7 +20,7 @@ public class WitchTitleScreen extends Actor
         for(int i = 0; i < defaultIdleRight.length; i++)
         {
             defaultIdleRight[i] = new GreenfootImage("witch_default_idle/default" + i + ".png");
-            defaultIdleRight[i].scale(400, 400);
+            defaultIdleRight[i].scale(320, 320);
         }
         
         // Initial witch image

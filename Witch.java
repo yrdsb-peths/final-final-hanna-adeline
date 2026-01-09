@@ -525,7 +525,20 @@ public class Witch extends Actor
         if(witchAlive == false)
         {
             witchDeadSound.play();
-            ((MyWorld)getWorld()).gameOver();
+            World w = getWorld();
+
+            if(w instanceof MyWorld)
+            {
+                ((MyWorld)w).gameOver();
+            }
+            else if(w instanceof MyWorld2)
+            {
+                ((MyWorld2)w).gameOver();
+            }
+            else if(w instanceof MyWorld3)
+            {
+                ((MyWorld3)w).gameOver();
+            }
         }
     }
 }

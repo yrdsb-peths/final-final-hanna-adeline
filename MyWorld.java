@@ -14,7 +14,7 @@ public class MyWorld extends World {
         potion1Collected = false;
         
         // Set background
-        GreenfootImage bg = new GreenfootImage("images/background/Battleground2.png");
+        GreenfootImage bg = new GreenfootImage("images/background/Battleground1.png");
         bg.scale(getWidth(), getHeight());
         setBackground(bg);
         

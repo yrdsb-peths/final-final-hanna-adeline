@@ -19,9 +19,14 @@ public class TitleScreen extends World
         super(600, 400, 1); 
         prepare();
         
+        // Set background
+        GreenfootImage bg = new GreenfootImage("images/background/Battleground2.png");
+        bg.scale(getWidth(), getHeight());
+        setBackground(bg);
+        
         // Create the witch object
         WitchTitleScreen witch = new WitchTitleScreen();
-        addObject(witch, 170, 220);
+        addObject(witch, 130, 230);
     }
 
     /**
@@ -43,7 +48,6 @@ public class TitleScreen extends World
      */
     private void prepare()
     {
-        Label label = new Label("Press Space to Start", 40);
-        addObject(label, 290,195);
+        
     }
 }
