@@ -45,6 +45,7 @@ public class MyWorld2 extends World
     //Removes all monsters, hp boxes and the witch when the game is over
     public void gameOver() {
         removeObjects(getObjects(null));
+        Greenfoot.setWorld(new GameOver());
     }
     
     public void act() {
