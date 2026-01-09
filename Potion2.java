@@ -39,7 +39,6 @@ public class Potion2 extends Actor
     }
     
     // Potion disappears after it's collected by the user
-    
     public boolean potion2Collected()
     {
         getWorld().removeObject(this);
@@ -56,7 +55,6 @@ public class Potion2 extends Actor
     public void act()
     {
         animatePotion();
-        
         if(isTouching(HurtBox.class))
         {
             potion2Collected();
