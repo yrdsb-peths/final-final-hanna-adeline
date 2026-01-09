@@ -31,13 +31,14 @@ public class MyWorld extends World {
         addObject(level1Label, 300, 35);
     }
     
+    // Method to spawn the potion when the monster is dead
     private void spawnPotion1() {
         Potion1 potion1 = new Potion1();
         addObject(potion1, 500, 300);
         potionSpawnedSound.playLoop();
     }
     
-    //Removes all monsters, hp boxes and the witch when the game is over
+    // Removes all monsters, hp boxes and the witch when the game is over
     public void gameOver() {
         removeObjects(getObjects(null));
         Greenfoot.setWorld(new GameOver());
@@ -50,7 +51,18 @@ public class MyWorld extends World {
         potion1Collected = false;
     }
     
+    // Method to check if the level is complete
+    public void checkLevelComplete()
+    {
+        if(getObjects(Level1SlimeRed.class).isEmpty())
+        {
+            level1Complete = true;
+        }
+    }
+    
     public void act() {
+        checkLevelComplete();
+        
         if(level1Complete && !potion1Collected && getObjects(Potion1.class).isEmpty())
         {
             spawnPotion1();

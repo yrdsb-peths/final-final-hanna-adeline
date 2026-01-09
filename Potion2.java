@@ -56,5 +56,11 @@ public class Potion2 extends Actor
     public void act()
     {
         animatePotion();
+        
+        if(isTouching(HurtBox.class))
+        {
+            potion2Collected();
+            Greenfoot.setWorld(new MyWorld3());
+        }
     }
 }

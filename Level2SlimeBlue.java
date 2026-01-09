@@ -79,7 +79,7 @@ public class Level2SlimeBlue extends Actor
         for(int i=0; i<deadImage.length; i++)
         {
             deadImage[i] = new GreenfootImage("images/Monsters/Level1/Level1SlimeRed/dead/dead"+ i + ".png");
-            deadImage[i].scale(128, 128);
+            deadImage[i].scale(59, 30);
         }
         
         walkTimer.mark();
@@ -90,7 +90,7 @@ public class Level2SlimeBlue extends Actor
         // Set image for hp of Slime1Red
         for(int i = 0; i < level2SlimeHP.length; i++)
         {
-            level2SlimeHP[i] = new GreenfootImage("hp_bar/monster2_hp/monster1_hp_" + i + ".png");
+            level2SlimeHP[i] = new GreenfootImage("hp_bar/monster1_hp/monster1_hp_" + i + ".png");
             level2SlimeHP[i].scale(70, 30);
         }
         slime2CurrentHP = 5;
@@ -119,6 +119,27 @@ public class Level2SlimeBlue extends Actor
         {
             setImage(attackLeftImage[attackImageIndex]);
             attackImageIndex = (attackImageIndex+1) % attackLeftImage.length;
+        }
+    }
+    
+    //Animate death of SlimeRed
+    int deadImageIndex = 0;
+    public void animateDeath()
+    {
+        if(deadTimer.millisElapsed() < 425)
+        {
+            return;
+        }
+        
+        deadTimer.mark();
+        
+        setImage(deadImage[deadImageIndex]);
+        deadImageIndex = (deadImageIndex+1);
+        slimeDeadSound.play();
+        if(deadImageIndex == 3)
+        {
+            getWorld().removeObject(slime2BlueHPBar);
+            getWorld().removeObject(this);
         }
     }
     
@@ -192,7 +213,7 @@ public class Level2SlimeBlue extends Actor
         }
         
         slime2BlueHPBar.setHP(slime2CurrentHP);
-        invincibleTimer = 50;
+        invincibleTimer = 70;
     }
     
     // HPBar addedToWorld method
@@ -212,10 +233,7 @@ public class Level2SlimeBlue extends Actor
         if(slime2CurrentHP<=0)
         {
           isAlive = false;
-          slimeDeadSound.play();
-          getWorld().removeObject(slime2BlueHPBar);
-          getWorld().removeObject(this);
-          ((MyWorld)getWorld()).level1Complete = true;
+          animateDeath();
         }
         
         if(isAlive)

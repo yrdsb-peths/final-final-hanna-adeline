@@ -330,7 +330,7 @@ public class Witch extends Actor
             {
                 setLocation(getX(), getY() - flySpeed);
             }
-            else if(Greenfoot.isKeyDown("down"))
+            else if(Greenfoot.isKeyDown("down") && getY() < groundY)
             {
                 setLocation(getX(), getY() + flySpeed);
             }
