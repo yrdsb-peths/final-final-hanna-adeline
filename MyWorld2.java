@@ -34,6 +34,18 @@ public class MyWorld2 extends World
         // Create the witch object
         Witch witch = new Witch();
         addObject(witch, 120, 250);
+        
+        // Create the slime object
+        Level1SlimeRed slimered = new Level1SlimeRed();
+        addObject(slimered, 500, 300);
+        
+        // Create the slime object
+        Level2SlimeBlue slimered2 = new Level2SlimeBlue();
+        addObject(slimered2, 500, 300);
+        
+        // Create the label of stage 1
+        Label level2Label = new Label("Level 2", 40);
+        addObject(level2Label, 300, 35);
     }
     
         private void spawnPotion2() {

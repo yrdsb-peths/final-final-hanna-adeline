@@ -24,7 +24,7 @@ public class MyWorld extends World {
         
         // Create the slime object
         Level1SlimeRed slimered = new Level1SlimeRed();
-        addObject(slimered, 500,300);
+        addObject(slimered, 500, 300);
         
         // Create the label of stage 1
         Label level1Label = new Label("Level 1", 40);
