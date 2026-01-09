@@ -17,6 +17,8 @@ public class Level2SlimeBlue extends Actor
     
     //Sounds for SlimeRed
     GreenfootSound slimeAttackSound = new GreenfootSound("slimeAttackSound.mp3");
+    GreenfootSound slimeDeadSound = new GreenfootSound("slimeDeadSound.mp3");
+    
     //Direction SlimeRed is facing
     String direction = "left";
     
@@ -210,6 +212,7 @@ public class Level2SlimeBlue extends Actor
         if(slime1CurrentHP<=0)
         {
           isAlive = false;
+          slimeDeadSound.play();
           getWorld().removeObject(slime1RedHPBar);
           getWorld().removeObject(this);
           ((MyWorld)getWorld()).level1Complete = true;
