@@ -29,4 +29,16 @@ public class GameOver extends World
         replayLabel = new Label("Press Space to Replay", 40);
         addObject(replayLabel, 300, 240);
     }
+    
+    public void act()
+    {
+        //Start the game if the user presses the space bar
+        if(Greenfoot.isKeyDown("space"))
+        {
+            MyWorld.resetGame();
+            MyWorld2.resetGame();
+            MyWorld3.resetGame();
+            Greenfoot.setWorld(new MyWorld());
+        }
+    }
 }

@@ -30,7 +30,7 @@ public class Witch extends Actor
     private int invincibleTimer = 0;
     
     // Boolean for whether witch is alive (game still running)
-    public static boolean witchAlive = true;
+    public static boolean witchAlive;
     
     // Image idles of witch
     GreenfootImage[] defaultIdleRight = new GreenfootImage[37];
@@ -102,6 +102,9 @@ public class Witch extends Actor
             attack2Left[i].scale(270, 270);
         }
         defaultTimer.mark();
+        
+        // Set witchAlive for every new game
+        witchAlive = true;
         
         // Initial witch image
         setImage(defaultIdleRight[0]);

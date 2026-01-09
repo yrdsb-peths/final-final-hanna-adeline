@@ -44,6 +44,13 @@ public class MyWorld3 extends World
         Greenfoot.setWorld(new GameOver());
     }
     
+    // Reset the variable when starting a new game
+    public static void resetGame()
+    {
+        level3Complete = false;
+        potion3Collected = false;
+    }
+    
     public void act() {
         if(level3Complete && !potion3Collected && getObjects(Potion3.class).isEmpty())
         {
