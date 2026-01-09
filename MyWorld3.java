@@ -30,6 +30,11 @@ public class MyWorld3 extends World
         GreenfootImage bg = new GreenfootImage("images/background/Battleground4.png");
         bg.scale(getWidth(), getHeight());
         setBackground(bg);
+        
+        // Create the witch object
+        Witch witch = new Witch();
+        addObject(witch, 120, 250);
+        
     }
 
     private void spawnPotion3() {
