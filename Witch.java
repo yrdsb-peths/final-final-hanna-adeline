@@ -140,7 +140,7 @@ public class Witch extends Actor
         for(int i = 0; i < 5; i++)
         {
             // Image idle for attack1
-            attack1CooldownImg[i] = new GreenfootImage("Attack_Cool/coolbar_blue/blue_coolbar" + i + ".png");
+            attack1CooldownImg[i] = new GreenfootImage("Attack_Cool/coolbar_red/red_coolbar" + i + ".png");
             attack1CooldownImg[i].scale(125, 20);
             
             // Image idle for attack2
