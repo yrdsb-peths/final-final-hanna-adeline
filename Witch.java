@@ -52,11 +52,30 @@ public class Witch extends Actor
     SimpleTimer attackTimer1 = new SimpleTimer();
     SimpleTimer attackTimer2 = new SimpleTimer();
     
-    //Set sounds for witch
+    // Set sounds for witch
     GreenfootSound witchAttack1Sound = new GreenfootSound("attack1Sound.mp3");
     GreenfootSound witchAttack2Sound = new GreenfootSound("c6aa3b4b.mp3");
     GreenfootSound witchDeadSound = new GreenfootSound("witchDeadSound.mp3");
 
+    // Image idles for attack cooldown bar
+    GreenfootImage[] attack1CooldownImg = new GreenfootImage[5];
+    GreenfootImage[] attack2CooldownImg = new GreenfootImage[5];
+    
+    // Current level of cooldown bar
+    private int attack1CooldownLevel = 0;
+    private int attack2CooldownLevel = 0;
+
+    // Timer for cooling down
+    private int attack1CooldownTimer = 0;
+    private int attack2CooldownTimer = 0;
+    
+    // The time it takes to cool one block
+    private int attack1CooldownSpeed = 15;
+    private int attack2CooldownSpeed = 70;
+    
+    // Icon for the cooldown Actor
+    private Actor attack1CooldownIcon;
+    private Actor attack2CooldownIcon;
     
     /**
      * Constructor - the code that gets run one time when the object is created.
@@ -116,6 +135,18 @@ public class Witch extends Actor
             witchHP[i].scale(70, 30);
         }
         witchCurrentHP = 5;
+        
+        // Set image for the cooldown bar
+        for(int i = 0; i < 5; i++)
+        {
+            // Image idle for attack1
+            attack1CooldownImg[i] = new GreenfootImage("Attack_Cool/coolbar_blue/blue_coolbar" + i + ".png");
+            attack1CooldownImg[i].scale(125, 20);
+            
+            // Image idle for attack2
+            attack2CooldownImg[i] = new GreenfootImage("Attack_Cool/coolbar_green/green_coolbar" + i + ".png");
+            attack2CooldownImg[i].scale(125, 20);
+        }
     }
     
     /**
@@ -206,6 +237,16 @@ public class Witch extends Actor
         // HPBar
         witchHPBar = new HPBar(witchCurrentHP, witchHP);
         w.addObject(witchHPBar, getX() - 25, getY() - 80);
+        
+        // Cooldown Bar for Attack1
+        attack1CooldownIcon = new Actor(){};
+        attack1CooldownIcon.setImage(attack1CooldownImg[attack1CooldownLevel]);
+        w.addObject(attack1CooldownIcon, 70, 30);
+        
+        // Cooldown Bar for Attack2
+        attack2CooldownIcon = new Actor(){};
+        attack2CooldownIcon.setImage(attack2CooldownImg[attack2CooldownLevel]);
+        w.addObject(attack2CooldownIcon, 70, 60);
     }
     
     // Damage to change hp method
@@ -240,7 +281,7 @@ public class Witch extends Actor
         }
         
         // Start attack 1
-        if(Greenfoot.isKeyDown("shift") && !isAttacking1)
+        if(Greenfoot.isKeyDown("shift") && !isAttacking1 && attack1CooldownLevel == 4)
         {
             isAttacking1 = true;
             attackIndex1 = 0; // restart animation
@@ -248,7 +289,7 @@ public class Witch extends Actor
         }
         
         // Start attack 2
-        if(Greenfoot.isKeyDown("space") && !isAttacking2)
+        if(Greenfoot.isKeyDown("space") && !isAttacking2 && attack2CooldownLevel == 4)
         {
             isAttacking2 = true;
             attackIndex2 = 0; //restart animation
@@ -266,6 +307,11 @@ public class Witch extends Actor
             {
                 isAttacking1 = false;
                 attackIndex1 = 0;
+                
+                // Set attack cool down to initial
+                attack1CooldownLevel = 0;
+                attack1CooldownTimer = 0;
+                attack1CooldownIcon.setImage(attack1CooldownImg[attack1CooldownLevel]);
             }
         }
         else if(isAttacking2)
@@ -275,6 +321,11 @@ public class Witch extends Actor
             {
                 isAttacking2 = false;
                 attackIndex2 = 0;
+                
+                // Set attack cool down to initial
+                attack2CooldownLevel = 0;
+                attack2CooldownTimer = 0;
+                attack2CooldownIcon.setImage(attack2CooldownImg[attack2CooldownLevel]);
             }
         }
         else
@@ -339,6 +390,32 @@ public class Witch extends Actor
             else
             {
                 witchHPBar.setLocation(getX() + 30, getY() - 80);
+            }
+        }
+        
+        // Attack 1 cooldown recovery
+        if (attack1CooldownLevel < 4)
+        {
+            attack1CooldownTimer++;
+            if (attack1CooldownTimer >= attack1CooldownSpeed)
+            {
+                attack1CooldownLevel++;
+                attack1CooldownTimer = 0;
+                // Set image for cool down
+                attack1CooldownIcon.setImage(attack1CooldownImg[attack1CooldownLevel]);
+            }
+        }
+        
+        // Attack 2 cooldown recovery
+        if (attack2CooldownLevel < 4)
+        {
+            attack2CooldownTimer++;
+            if (attack2CooldownTimer >= attack2CooldownSpeed)
+            {
+                attack2CooldownLevel++;
+                attack2CooldownTimer = 0;
+                // Set image for cool down
+                attack2CooldownIcon.setImage(attack2CooldownImg[attack2CooldownLevel]);
             }
         }
         
