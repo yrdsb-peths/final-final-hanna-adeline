@@ -8,10 +8,15 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class HurtBox extends Actor
 {
-    private Witch owner;
+    // access the witch class instance
+    private Actor owner;
+    private int hitCountWitch = 0;
+    private int invincibleTimer = 0;
     
-    public HurtBox(Witch owner, int w, int h)
+    // Constructor - method called once 
+    public HurtBox(Actor owner, int w, int h)
     {
+        // Access the witch object
         this.owner = owner;
         
         GreenfootImage img = new GreenfootImage(w, h);
@@ -20,16 +25,39 @@ public class HurtBox extends Actor
         
         setImage(img);
     }
+    
+    public void checkDamageWitch()
+    {
+        if(this.isTouching(Level1SlimeRed.class))
+        {
+            if(invincibleTimer > 0)
+            {
+                return;
+            }
+            hitCountWitch++;
+            if(hitCountWitch >= 5)
+            {
+                ((Witch)owner).takeDamage(1);
+                hitCountWitch = 0;
+            }
+            invincibleTimer = 20;
+        }
+    }
+    
     /**
      * Act - do whatever the HurtBox wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act()
     {
-        Level1SlimeRed m = (Level1SlimeRed)getOneIntersectingObject(Level1SlimeRed.class);
-        if(m != null)
+        if(owner instanceof Witch)
         {
-            owner.takeDamage(1);
+            checkDamageWitch();
+        }
+        
+        if(invincibleTimer > 0)
+        {
+            invincibleTimer--;
         }
     }
 }

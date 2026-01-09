@@ -10,7 +10,6 @@ public class HPBar extends Actor
 {
     private int maxHP;
     private int currentHP;
-    private int invicibleTimer = 0;
     
     // Store images for different hp levels
     public GreenfootImage[] hpImages;
@@ -27,7 +26,7 @@ public class HPBar extends Actor
     
     public void setHP(int hp)
     {
-        if(hp < 0)
+        if(hp <= 0)
         {
             hp = 0;
         }
@@ -37,19 +36,6 @@ public class HPBar extends Actor
         }
         currentHP = hp;
         setImage(hpImages[hp]);
-    }
-    
-    public void takeDamage(int dmg)
-    {
-        if(currentHP != 0)
-        {
-            currentHP--;
-            setImage(hpImages[currentHP]);
-        }
-        else
-        {
-            return;
-        }
     }
     
     /**
