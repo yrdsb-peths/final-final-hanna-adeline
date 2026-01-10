@@ -99,7 +99,11 @@ public class Witch extends Actor
     private int groundY;
     private int gravitySpeed = 2;
     private int flySpeed = 2;   
-        
+    
+    // Time for Game Over at 0 hp
+    private boolean isDying = false;
+    private int deathTimer = 0;
+    
     /**
      * Constructor - the code that gets run one time when the object is created.
      */
@@ -291,15 +295,17 @@ public class Witch extends Actor
     // Damage to change hp method
     public void takeDamage(int damage)
     {
-        if(invincibleTimer > 0)
+        if(invincibleTimer > 0 || isDying)
         {
             return;
         }
         witchCurrentHP -= damage;
-        if(witchCurrentHP < 0)
+        if(witchCurrentHP <= 0)
         {
             witchCurrentHP = 0;
-            witchAlive = false;
+            isDying = true;
+            deathTimer = 0;
+            // witchAlive = false;
         }
         witchHPBar.setHP(witchCurrentHP);
         invincibleTimer = 30;
@@ -373,7 +379,7 @@ public class Witch extends Actor
         }
         
         // Start attack 1
-        if(Greenfoot.isKeyDown("shift") && !isAttacking1 && attack1CooldownLevel == 4)
+        if(Greenfoot.isKeyDown("shift") && !isAttacking1 && !isAttacking2 && attack1CooldownLevel == 4)
         {
             isAttacking1 = true;
             attackIndex1 = 0; // restart animation
@@ -381,7 +387,7 @@ public class Witch extends Actor
         }
         
         // Start attack 2
-        if(Greenfoot.isKeyDown("space") && !isAttacking2 && attack2CooldownLevel == 4)
+        if(Greenfoot.isKeyDown("space") && !isAttacking2 && !isAttacking1 && attack2CooldownLevel == 4)
         {
             isAttacking2 = true;
             attackIndex2 = 0; //restart animation
@@ -522,22 +528,27 @@ public class Witch extends Actor
         }
         
         //check if witch is alive
-        if(witchAlive == false)
+        if(isDying)
         {
-            witchDeadSound.play();
-            World w = getWorld();
-
-            if(w instanceof MyWorld)
+            deathTimer++;
+            
+            if(deathTimer >= 60)
             {
-                ((MyWorld)w).gameOver();
-            }
-            else if(w instanceof MyWorld2)
-            {
-                ((MyWorld2)w).gameOver();
-            }
-            else if(w instanceof MyWorld3)
-            {
-                ((MyWorld3)w).gameOver();
+                witchDeadSound.play();
+                World w = getWorld();
+    
+                if(w instanceof MyWorld)
+                {
+                    ((MyWorld)w).gameOver();
+                }
+                else if(w instanceof MyWorld2)
+                {
+                    ((MyWorld2)w).gameOver();
+                }
+                else if(w instanceof MyWorld3)
+                {
+                    ((MyWorld3)w).gameOver();
+                }
             }
         }
     }
