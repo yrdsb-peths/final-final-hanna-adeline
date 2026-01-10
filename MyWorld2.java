@@ -34,6 +34,14 @@ public class MyWorld2 extends World
         // Create the witch object
         Witch witch = new Witch();
         addObject(witch, 120, 250);
+        
+        // Create the label of stage 2
+        Label level2Label = new Label("Level 2", 40);
+        addObject(level2Label, 300, 35);
+                
+        // Create the slime 2 object
+        Level2SlimeBlue slimered1 = new Level2SlimeBlue();
+        addObject(slimered1, 500, 300);
     }
     
         private void spawnPotion2() {
@@ -55,7 +63,18 @@ public class MyWorld2 extends World
         potion2Collected = false;
     }
     
+    // Method to check if the level is complete
+    public void checkLevelComplete()
+    {
+        if(getObjects(Level1SlimeRed.class).isEmpty() && getObjects(Level2SlimeBlue.class).isEmpty())
+        {
+            level2Complete = true;
+        }
+    }
+    
     public void act() {
+        checkLevelComplete();
+        
         if(level2Complete && !potion2Collected && getObjects(Potion2.class).isEmpty())
         {
             spawnPotion2();

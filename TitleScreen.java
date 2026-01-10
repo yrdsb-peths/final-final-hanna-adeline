@@ -18,6 +18,18 @@ public class TitleScreen extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1); 
         prepare();
+        
+        // Set background
+        GreenfootImage bg = new GreenfootImage("images/background/Battleground2.png");
+        bg.scale(getWidth(), getHeight());
+        setBackground(bg);
+        
+        // Create the witch object
+        WitchTitleScreen witch = new WitchTitleScreen();
+        addObject(witch, 130, 230);
+        
+        // Add image for the title
+        addObject(new TitleImage(), 300, 125);
     }
 
     /**
@@ -39,7 +51,6 @@ public class TitleScreen extends World
      */
     private void prepare()
     {
-        Label label = new Label("Press Space to Start", 40);
-        addObject(label, 290,195);
+        
     }
 }

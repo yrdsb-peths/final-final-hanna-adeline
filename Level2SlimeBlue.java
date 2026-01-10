@@ -40,10 +40,10 @@ public class Level2SlimeBlue extends Actor
     public static int level1SlimeRedDamage = 0;
     
     // Image idles of hpbar of SlimeRed
-    public GreenfootImage[] level1SlimeHP = new GreenfootImage[6];
-    public HPBar slime1RedHPBar;
-    private int slime1CurrentHP = 5;
-    private int slime1MaxHP = 5;
+    public GreenfootImage[] level2SlimeHP = new GreenfootImage[6];
+    public HPBar slime2BlueHPBar;
+    private int slime2CurrentHP = 5;
+    private int slime2MaxHP = 5;
     private int invincibleTimer = 0;
     
     public Level2SlimeBlue()
@@ -79,7 +79,7 @@ public class Level2SlimeBlue extends Actor
         for(int i=0; i<deadImage.length; i++)
         {
             deadImage[i] = new GreenfootImage("images/Monsters/Level1/Level1SlimeRed/dead/dead"+ i + ".png");
-            deadImage[i].scale(128, 128);
+            deadImage[i].scale(59, 30);
         }
         
         walkTimer.mark();
@@ -88,12 +88,12 @@ public class Level2SlimeBlue extends Actor
         setImage(walkLeftImage[0]);
         
         // Set image for hp of Slime1Red
-        for(int i = 0; i < level1SlimeHP.length; i++)
+        for(int i = 0; i < level2SlimeHP.length; i++)
         {
-            level1SlimeHP[i] = new GreenfootImage("hp_bar/monster2_hp/monster2_hp_" + i + ".png");
-            level1SlimeHP[i].scale(70, 30);
+            level2SlimeHP[i] = new GreenfootImage("hp_bar/monster1_hp/monster1_hp_" + i + ".png");
+            level2SlimeHP[i].scale(70, 30);
         }
-        slime1CurrentHP = 5;
+        slime2CurrentHP = 5;
     }
     
     int attackImageIndex = 0;
@@ -119,6 +119,27 @@ public class Level2SlimeBlue extends Actor
         {
             setImage(attackLeftImage[attackImageIndex]);
             attackImageIndex = (attackImageIndex+1) % attackLeftImage.length;
+        }
+    }
+    
+    //Animate death of SlimeRed
+    int deadImageIndex = 0;
+    public void animateDeath()
+    {
+        if(deadTimer.millisElapsed() < 425)
+        {
+            return;
+        }
+        
+        deadTimer.mark();
+        
+        setImage(deadImage[deadImageIndex]);
+        deadImageIndex = (deadImageIndex+1);
+        slimeDeadSound.play();
+        if(deadImageIndex == 3)
+        {
+            getWorld().removeObject(slime2BlueHPBar);
+            getWorld().removeObject(this);
         }
     }
     
@@ -184,23 +205,23 @@ public class Level2SlimeBlue extends Actor
         {
             return;
         }
-        slime1CurrentHP -= damage;
+        slime2CurrentHP -= damage;
         
-        if(slime1CurrentHP < 0)
+        if(slime2CurrentHP < 0)
         {
-            slime1CurrentHP = 0;
+            slime2CurrentHP = 0;
         }
         
-        slime1RedHPBar.setHP(slime1CurrentHP);
-        invincibleTimer = 50;
+        slime2BlueHPBar.setHP(slime2CurrentHP);
+        invincibleTimer = 70;
     }
     
     // HPBar addedToWorld method
     public void addedToWorld(World w)
     {   
         // HPBar
-        slime1RedHPBar = new HPBar(slime1CurrentHP, level1SlimeHP);
-        w.addObject(slime1RedHPBar, getX(), getY() - 45);
+        slime2BlueHPBar = new HPBar(slime2CurrentHP, level2SlimeHP);
+        w.addObject(slime2BlueHPBar, getX(), getY() - 45);
     }
     
     /**
@@ -209,13 +230,10 @@ public class Level2SlimeBlue extends Actor
      */
     public void act()
     {
-        if(slime1CurrentHP<=0)
+        if(slime2CurrentHP<=0)
         {
           isAlive = false;
-          slimeDeadSound.play();
-          getWorld().removeObject(slime1RedHPBar);
-          getWorld().removeObject(this);
-          ((MyWorld)getWorld()).level1Complete = true;
+          animateDeath();
         }
         
         if(isAlive)
@@ -239,9 +257,9 @@ public class Level2SlimeBlue extends Actor
         }
 
         // Move the HPBar with the witch
-        if(isAlive && level1SlimeHP != null)
+        if(isAlive && level2SlimeHP != null)
         {
-          slime1RedHPBar.setLocation(getX(), getY() - 45);
+          slime2BlueHPBar.setLocation(getX(), getY() - 45);
         }
           
         //invicibleTimer decrease

@@ -21,6 +21,9 @@ public class Witch extends Actor
     int hitOffsetXLeft1 = -40;
     int hitOffsetXRight2 = 40;
     int hitOffsetXLeft2 = -40;
+    // Flying coolDown bar offsets
+    int flyingCoolOffsetXRight = -25;
+    int flyingCoolOffsetXLeft = 30;
     
     // Image idles of hpbar of witch
     public GreenfootImage[] witchHP = new GreenfootImage[6];
@@ -77,6 +80,26 @@ public class Witch extends Actor
     private Actor attack1CooldownIcon;
     private Actor attack2CooldownIcon;
     
+    // -- Flying System --
+    private boolean isFlying = false;
+    
+    // Flying cooldown icon sprite images
+    GreenfootImage[] flyingCooldownImg = new GreenfootImage[5];
+    
+    // Fly cooldown bar state
+    private int flyCooldownLevel = 4;
+    private int flyCooldownTimer = 0;
+    private int flyCooldownSpeed = 40;
+    private int flyBarCooldownSpeed = 70;
+
+    // Fly cooldown icon
+    private Actor flyCooldownIcon;
+
+    // Gravity
+    private int groundY;
+    private int gravitySpeed = 2;
+    private int flySpeed = 2;   
+        
     /**
      * Constructor - the code that gets run one time when the object is created.
      */
@@ -136,16 +159,24 @@ public class Witch extends Actor
         }
         witchCurrentHP = 5;
         
-        // Set image for the cooldown bar
+        // Set image for the attack cooldown bar
         for(int i = 0; i < 5; i++)
         {
             // Image idle for attack1
-            attack1CooldownImg[i] = new GreenfootImage("Attack_Cool/coolbar_red/red_coolbar" + i + ".png");
+            attack1CooldownImg[i] = new GreenfootImage("cool_bar/coolbar_red/red_coolbar" + i + ".png");
             attack1CooldownImg[i].scale(125, 20);
             
             // Image idle for attack2
-            attack2CooldownImg[i] = new GreenfootImage("Attack_Cool/coolbar_green/green_coolbar" + i + ".png");
+            attack2CooldownImg[i] = new GreenfootImage("cool_bar/coolbar_green/green_coolbar" + i + ".png");
             attack2CooldownImg[i].scale(125, 20);
+        }
+        
+        // Set image for the flying cooldown bar
+        for(int i = 0; i < 5; i++)
+        {
+            // Image idle for flying Cooldown bar
+            flyingCooldownImg[i] = new GreenfootImage("cool_bar/flycoolbar_blue/blue_coolbar" + i + ".png");
+            flyingCooldownImg[i].scale(60, 10);
         }
     }
     
@@ -247,6 +278,14 @@ public class Witch extends Actor
         attack2CooldownIcon = new Actor(){};
         attack2CooldownIcon.setImage(attack2CooldownImg[attack2CooldownLevel]);
         w.addObject(attack2CooldownIcon, 70, 60);
+        
+        // Save ground position
+        groundY = getY();
+        
+        // Fly cooldown bar
+        flyCooldownIcon = new Actor(){};
+        flyCooldownIcon.setImage(flyingCooldownImg[flyCooldownLevel]);
+        w.addObject(flyCooldownIcon, getX() - 25, getY() - 60);
     }
     
     // Damage to change hp method
@@ -278,6 +317,59 @@ public class Witch extends Actor
         {
             move(2);
             facing = "right";
+        }
+        
+        if(Greenfoot.isKeyDown("up") && flyCooldownLevel == 4 && !isFlying)
+        {
+            isFlying = true;
+        }
+        
+        if(isFlying)
+        {
+            if(Greenfoot.isKeyDown("up"))
+            {
+                setLocation(getX(), getY() - flySpeed);
+            }
+            else if(Greenfoot.isKeyDown("down") && getY() < groundY)
+            {
+                setLocation(getX(), getY() + flySpeed);
+            }
+        }
+        
+        if(isFlying)
+        {
+            flyCooldownTimer++;
+        
+            if(flyCooldownTimer >= flyCooldownSpeed)
+            {
+                flyCooldownLevel--;
+                flyCooldownTimer = 0;
+                flyCooldownIcon.setImage(flyingCooldownImg[flyCooldownLevel]);
+                if(flyCooldownLevel <= 0)
+                {
+                    flyCooldownLevel = 0;
+                    isFlying = false;
+                }
+            }
+        }
+        
+        // Gravity pulls witch back down
+        if(!isFlying && getY() < groundY)
+        {
+            setLocation(getX(), getY() + gravitySpeed);
+        }
+        
+        // Recharge flybar
+        if(!isFlying && getY() >= groundY && flyCooldownLevel < 4)
+        {
+            flyCooldownTimer++;
+        
+            if(flyCooldownTimer >= flyBarCooldownSpeed)
+            {
+                flyCooldownLevel++;
+                flyCooldownTimer = 0;
+                flyCooldownIcon.setImage(flyingCooldownImg[flyCooldownLevel]);
+            }
         }
         
         // Start attack 1
@@ -337,23 +429,27 @@ public class Witch extends Actor
         if(hurtBox != null)
         {
             int offSetX;
+            int flyingSetX;
             int hitBox1;
             int hitBox2;
             
             if(facing.equals("right"))
             {
                 offSetX = hurtOffsetXRight;
+                flyingSetX = flyingCoolOffsetXRight;
                 hitBox1 = hitOffsetXRight1;
                 hitBox2 = hitOffsetXRight2;
             }
             else
             {
                 offSetX = hurtOffsetXLeft;
+                flyingSetX = flyingCoolOffsetXLeft;
                 hitBox1 = hitOffsetXLeft1;
                 hitBox2 = hitOffsetXLeft2;
             }
             
             hurtBox.setLocation(getX() + offSetX, getY() + 6);
+            flyCooldownIcon.setLocation(getX() + flyingSetX, getY() - 60);
             
             // Set attackBox1 add and remove
             if(isAttacking1 && attackIndex1 == 3 && attackBox1 == null)
@@ -429,7 +525,20 @@ public class Witch extends Actor
         if(witchAlive == false)
         {
             witchDeadSound.play();
-            ((MyWorld)getWorld()).gameOver();
+            World w = getWorld();
+
+            if(w instanceof MyWorld)
+            {
+                ((MyWorld)w).gameOver();
+            }
+            else if(w instanceof MyWorld2)
+            {
+                ((MyWorld2)w).gameOver();
+            }
+            else if(w instanceof MyWorld3)
+            {
+                ((MyWorld3)w).gameOver();
+            }
         }
     }
 }

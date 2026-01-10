@@ -27,10 +27,16 @@ public class AttackBox extends Actor
      */
     public void act()
     {
-        Level1SlimeRed slime = (Level1SlimeRed) getOneIntersectingObject(Level1SlimeRed.class);
-        if(slime != null)
+        Level1SlimeRed redSlime = (Level1SlimeRed) getOneIntersectingObject(Level1SlimeRed.class);
+        if(redSlime != null)
         {
-            slime.takeDamage(damage);
+            redSlime.takeDamage(damage);
+        }
+        
+        Level2SlimeBlue blueSlime = (Level2SlimeBlue) getOneIntersectingObject(Level2SlimeBlue.class);
+        if(blueSlime != null)
+        {
+            blueSlime.takeDamage(damage);
         }
     }
 }

@@ -216,7 +216,7 @@ public class Level1SlimeRed extends Actor
         }
         
         slime1RedHPBar.setHP(slime1CurrentHP);
-        invincibleTimer = 50;
+        invincibleTimer = 70;
     }
     
     // HPBar addedToWorld method
@@ -237,7 +237,6 @@ public class Level1SlimeRed extends Actor
         {
           isAlive = false;
           animateDeath();
-          ((MyWorld)getWorld()).level1Complete = true;
         }
         
         if(isAlive)
