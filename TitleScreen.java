@@ -27,6 +27,9 @@ public class TitleScreen extends World
         // Create the witch object
         WitchTitleScreen witch = new WitchTitleScreen();
         addObject(witch, 130, 230);
+        
+        // Add image for the title
+        addObject(new TitleImage(), 300, 125);
     }
 
     /**
