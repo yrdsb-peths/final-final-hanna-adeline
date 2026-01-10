@@ -35,12 +35,10 @@ public class MyWorld2 extends World
         Witch witch = new Witch();
         addObject(witch, 120, 250);
         
-        // Create the label of stage 1
+        // Create the label of stage 2
         Label level2Label = new Label("Level 2", 40);
         addObject(level2Label, 300, 35);
-        
-
-        
+                
         // Create the slime 2 object
         Level2SlimeBlue slimered1 = new Level2SlimeBlue();
         addObject(slimered1, 500, 300);

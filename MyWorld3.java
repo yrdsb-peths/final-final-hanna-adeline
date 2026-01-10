@@ -35,6 +35,9 @@ public class MyWorld3 extends World
         Witch witch = new Witch();
         addObject(witch, 120, 250);
         
+        // Create the label of stage 3
+        Label level3Label = new Label("Level 3", 40);
+        addObject(level3Label, 300, 35);
     }
 
     private void spawnPotion3() {
