@@ -21,13 +21,15 @@ public class GameOver extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1); 
         
-        // Create the gameOverLabel
-        gameOverLabel = new Label("Game Over", 70);
-        addObject(gameOverLabel, 300, 150);
+        // Set background
+        GreenfootImage bg = new GreenfootImage("images/background/GameOver.png");
+        bg.scale(getWidth(), getHeight());
+        setBackground(bg);
         
-        // Create the replay label
-        replayLabel = new Label("Press Space to Replay", 40);
-        addObject(replayLabel, 300, 240);
+        // Add image for the title
+        GreenfootImage img = new GreenfootImage("images/Fonts/GameOverTitle.png");
+        TitleImage gameOver = new TitleImage(img, 450, 35);
+        addObject(gameOver, 300, 330);
     }
     
     public void act()

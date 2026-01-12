@@ -59,11 +59,11 @@ public class TutorialWorld extends World
         }
         else if (step == 2)
         {
-            bubble.show("RED bar = Attack 1\nPress SHIFT to \nattack the monster.");
+            bubble.show("RED bar = Attack 1\nPress SHIFT to \nattack me.");
         }
         else if (step == 3)
         {
-            bubble.show("GREEN bar = Attack 2\nPress SPACE to \nattack the monster.");
+            bubble.show("GREEN bar = Attack 2\nPress SPACE to \nattack me.");
         }
         else if (step == 4)
         {

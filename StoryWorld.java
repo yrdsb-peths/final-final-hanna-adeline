@@ -26,24 +26,24 @@ public class StoryWorld extends World
         
         // Create the witch object
         WitchTitleScreen witch = new WitchTitleScreen();
-        addObject(witch, 130, 230);
+        addObject(witch, 170, 230);
         
         // Add image for the slime
         GreenfootImage slimeImg = new GreenfootImage("images/Monsters/Level1/Level1SlimeRed/attackLeft/attackLeft1.png");
         TitleImage slime = new TitleImage(slimeImg, 59, 45);
-        addObject(slime, 500, 300);
+        addObject(slime, 500, 280);
         
         // Create speech bubbles
         leftBubble = new SpeechBubble("images/speechbubble/speech_bubble_left.png");
         rightBubble = new SpeechBubble("images/speechbubble/speech_bubble_right.png");
         
         // Resize the images of speech bubble
-        leftBubble.resize(150, 100);
-        rightBubble.resize(150, 100);
+        leftBubble.resize(180, 100);
+        rightBubble.resize(180, 100);
         
         // Add the object into the world
-        addObject(leftBubble, 220, 200);
-        addObject(rightBubble, 400, 200);
+        addObject(leftBubble, 210, 130);
+        addObject(rightBubble, 420, 130);
         
         // Hide the bubbles first
         leftBubble.hide();
