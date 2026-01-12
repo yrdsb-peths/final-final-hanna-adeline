@@ -38,5 +38,11 @@ public class AttackBox extends Actor
         {
             blueSlime.takeDamage(damage);
         }
+        
+        TutorialTarget tutorialSlime = (TutorialTarget) getOneIntersectingObject(TutorialTarget.class);
+        if(tutorialSlime != null)
+        {
+            tutorialSlime.takeDamage(damage);
+        }
     }
 }

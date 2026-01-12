@@ -8,10 +8,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class TitleImage extends Actor
 {
-    public TitleImage()
+    GreenfootImage img;
+    
+    public TitleImage(GreenfootImage img, int x, int y)
     {
-        GreenfootImage img = new GreenfootImage("images/background/Startgame_Title.png");
-        img.scale(470, 70);
+        img.scale(x, y);
         setImage(img);
     }
     

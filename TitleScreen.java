@@ -29,7 +29,9 @@ public class TitleScreen extends World
         addObject(witch, 130, 230);
         
         // Add image for the title
-        addObject(new TitleImage(), 300, 125);
+        GreenfootImage img = new GreenfootImage("images/background/Startgame_Title.png");
+        TitleImage title = new TitleImage(img, 470, 45);
+        addObject(title, 300, 125);
     }
 
     /**
