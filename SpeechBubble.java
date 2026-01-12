@@ -8,37 +8,35 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class SpeechBubble extends Actor
 {
-    private String text = "";
-    private boolean visible = false;
+    private GreenfootImage baseImage;
     
+    public SpeechBubble(String imagePath)
+    {
+        baseImage = new GreenfootImage(imagePath);
+        setImage(new GreenfootImage(1, 1)); // hidden at start
+    }
+
     public void show(String text)
     {
-        this.text = text;
-        visible = true;
-        redraw();
-    }
-    
-    public void hide()
-    {
-        visible = false;
-        setImage(new GreenfootImage(1, 1));
-    }
-    
-    private void redraw()
-    {
-        if(!visible) 
-        {
-            return;
-        }
-        GreenfootImage img = new GreenfootImage(150, 70);
-        img.setColor(new Color(255, 255, 255, 220));
-        img.fillRect(0, 0, 260, 100);
-
+        GreenfootImage img = new GreenfootImage(baseImage);
+        img.setFont(new Font("Courier New", 16));
         img.setColor(Color.BLACK);
-        img.setFont(new Font("Courier New", 13));
-        img.drawString(text, 10, 25);
+
+        String[] lines = text.split("\n");
+
+        int y = 40;
+        for (String line : lines)
+        {
+            img.drawString(line, 20, y);
+            y += 22;
+        }
 
         setImage(img);
+    }
+
+    public void hide()
+    {
+        setImage(new GreenfootImage(1, 1));
     }
     
     /**

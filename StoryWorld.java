@@ -29,8 +29,8 @@ public class StoryWorld extends World
         addObject(witch, 130, 230);
         
         // Create speech bubbles
-        leftBubble = new SpeechBubble();
-        rightBubble = new SpeechBubble();
+        leftBubble = new SpeechBubble("images/speechbubble/speech_bubble_left.png");
+        rightBubble = new SpeechBubble("images/speechbubble/speech_bubble_right.png");
         
         addObject(leftBubble, 220, 250);
         addObject(rightBubble, 400, 250);
