@@ -11,6 +11,7 @@ public class TutorialWorld extends World
     private Witch witch;
     private SpeechBubble bubble;
     private int step = 0;
+    private boolean spaceReleased = false;
     /**
      * Constructor for objects of class TutorialWorld.
      * 
@@ -35,14 +36,14 @@ public class TutorialWorld extends World
         
         // Tutorial bubble
         bubble = new SpeechBubble("images/speechbubble/speech_bubble_right.png");
-        bubble.resize(220, 90);
+        bubble.resize(220, 100);
         addObject(bubble, 450, 150);
     
         showStep();
 
         // Add image for the title
         GreenfootImage img = new GreenfootImage("images/Fonts/Tutorial.png");
-        TitleImage tip = new TitleImage(img, 500, 24);
+        TitleImage tip = new TitleImage(img, 365, 22);
         addObject(tip, 300, 380);
     }
     
@@ -58,11 +59,15 @@ public class TutorialWorld extends World
         }
         else if (step == 2)
         {
-            bubble.show("RED bar = Attack 1\nPress SHIFT to attack.");
+            bubble.show("RED bar = Attack 1\nPress SHIFT to \nattack the monster.");
         }
         else if (step == 3)
         {
-            bubble.show("GREEN bar = Attack 2\nPress SPACE to attack.");
+            bubble.show("GREEN bar = Attack 2\nPress SPACE to \nattack the monster.");
+        }
+        else if (step == 4)
+        {
+            bubble.show("Press E to end\nthe tutorial ");
         }
         else
         {
@@ -80,33 +85,41 @@ public class TutorialWorld extends World
             Greenfoot.setWorld(gameWorld);
         }
         
-        if (step == 0)
+        if(step == 0)
         {
-            if (Greenfoot.isKeyDown("left") || Greenfoot.isKeyDown("right"))
+            if(Greenfoot.isKeyDown("left") || Greenfoot.isKeyDown("right"))
             {
                 step++;
                 showStep();
             }
         }
-        else if (step == 1)
+        else if(step == 1)
         {
-            if (Greenfoot.isKeyDown("up"))
+            if(Greenfoot.isKeyDown("up"))
             {
                 step++;
                 showStep();
             }
         }
-        else if (step == 2)
+        else if(step == 2)
         {
-            if (Greenfoot.isKeyDown("shift"))
+            if(Greenfoot.isKeyDown("shift"))
             {
                 step++;
                 showStep();
             }
         }
-        else if (step == 3)
+        else if(step == 3)
         {
             if (Greenfoot.isKeyDown("space"))
+            {
+                step++;
+                showStep();
+            }
+        }
+        else if(step == 4)
+        {
+            if(Greenfoot.isKeyDown("E"))
             {
                 step++;
                 showStep();
