@@ -52,33 +52,33 @@ public class Level2SlimeBlue extends Actor
         
         for(int i=0; i<walkRightImage.length; i++)
         {
-            walkRightImage[i] = new GreenfootImage("images/Monsters/Level1/Level1SlimeRed/walkRight/walkRight"+ i + ".png");
+            walkRightImage[i] = new GreenfootImage("images/Monsters/Level2/Level2SlimeBlue/walkRight/walkRight"+ i + ".png");
             walkRightImage[i].scale(58, 30);
         }
         
         for(int i=0; i<walkLeftImage.length; i++)
         {
-            walkLeftImage[i] = new GreenfootImage("images/Monsters/Level1/Level1SlimeRed/walkLeft/walkLeft"+ i + ".png");
+            walkLeftImage[i] = new GreenfootImage("images/Monsters/Level2/Level2SlimeBlue/walkLeft/walkLeft"+ i + ".png");
             walkLeftImage[i].scale(58, 30);
         }
         
         //Set idle image for attack of SlimeRed
         for(int i=0; i<attackRightImage.length; i++)
         {
-            attackRightImage[i] = new GreenfootImage("images/Monsters/Level1/Level1SlimeRed/attackRight/attackRight"+ i + ".png");
+            attackRightImage[i] = new GreenfootImage("images/Monsters/Level2/Level2SlimeBlue/attackRight/attackRight"+ i + ".png");
             attackRightImage[i].scale(59,45);
         }
         
         for(int i=0; i<attackLeftImage.length; i++)
         {
-            attackLeftImage[i] = new GreenfootImage("images/Monsters/Level1/Level1SlimeRed/attackLeft/attackLeft"+ i + ".png");
+            attackLeftImage[i] = new GreenfootImage("images/Monsters/Level2/Level2SlimeBlue/attackLeft/attackLeft"+ i + ".png");
             attackLeftImage[i].scale(59,45);
         }
         
         //Set idle image for death of SlimeRed
         for(int i=0; i<deadImage.length; i++)
         {
-            deadImage[i] = new GreenfootImage("images/Monsters/Level1/Level1SlimeRed/dead/dead"+ i + ".png");
+            deadImage[i] = new GreenfootImage("images/Monsters/Level2/Level2SlimeBlue/dead/dead"+ i + ".png");
             deadImage[i].scale(128, 128);
         }
         

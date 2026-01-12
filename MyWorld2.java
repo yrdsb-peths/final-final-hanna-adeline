@@ -34,6 +34,10 @@ public class MyWorld2 extends World
         // Create the witch object
         Witch witch = new Witch();
         addObject(witch, 120, 250);
+        
+        // Create the new slime
+        Level2SlimeBlue slimeblue = new Level2SlimeBlue();
+        addObject(slimeblue, 500,300);
     }
     
         private void spawnPotion2() {
@@ -48,6 +52,7 @@ public class MyWorld2 extends World
     }
     
     public void act() {
+        
         if(level2Complete && !potion2Collected && getObjects(Potion2.class).isEmpty())
         {
             spawnPotion2();
