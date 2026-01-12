@@ -28,6 +28,11 @@ public class StoryWorld extends World
         WitchTitleScreen witch = new WitchTitleScreen();
         addObject(witch, 130, 230);
         
+        // Add image for the slime
+        GreenfootImage slimeImg = new GreenfootImage("images/Monsters/Level1/Level1SlimeRed/attackLeft/attackLeft1.png");
+        TitleImage slime = new TitleImage(slimeImg, 59, 45);
+        addObject(slime, 500, 300);
+        
         // Create speech bubbles
         leftBubble = new SpeechBubble("images/speechbubble/speech_bubble_left.png");
         rightBubble = new SpeechBubble("images/speechbubble/speech_bubble_right.png");

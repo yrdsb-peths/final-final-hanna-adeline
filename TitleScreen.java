@@ -26,7 +26,7 @@ public class TitleScreen extends World
         
         // Create the witch object
         WitchTitleScreen witch = new WitchTitleScreen();
-        addObject(witch, 130, 230);
+        addObject(witch, 330, 230);
         
         // Add image for the title
         GreenfootImage img = new GreenfootImage("images/background/Startgame_Title.png");
