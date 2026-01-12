@@ -47,6 +47,11 @@ public class StoryWorld extends World
         // Create dialogue manager and pass the bubbles
         DialogueManager dm = new DialogueManager(leftBubble, rightBubble);
         addObject(dm, 300, 250);
+        
+        // Add image for the title
+        GreenfootImage img = new GreenfootImage("images/Fonts/Story.png");
+        TitleImage tip = new TitleImage(img, 500, 27);
+        addObject(tip, 300, 380);
     }
     
     public void act()
