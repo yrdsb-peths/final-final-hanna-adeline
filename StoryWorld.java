@@ -32,8 +32,13 @@ public class StoryWorld extends World
         leftBubble = new SpeechBubble("images/speechbubble/speech_bubble_left.png");
         rightBubble = new SpeechBubble("images/speechbubble/speech_bubble_right.png");
         
-        addObject(leftBubble, 220, 250);
-        addObject(rightBubble, 400, 250);
+        // Resize the images of speech bubble
+        leftBubble.resize(180, 100);
+        rightBubble.resize(180, 100);
+        
+        // Add the object into the world
+        addObject(leftBubble, 220, 200);
+        addObject(rightBubble, 400, 200);
         
         // Hide the bubbles first
         leftBubble.hide();
