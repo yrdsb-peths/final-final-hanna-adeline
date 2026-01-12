@@ -68,7 +68,7 @@ public class DialogueManager extends Actor
             index++;
             if(index >= dialogue.length)
             {
-                Greenfoot.setWorld(new MyWorld());
+                Greenfoot.setWorld(new TutorialWorld());
                 return;
             }
             showLine();
@@ -77,7 +77,7 @@ public class DialogueManager extends Actor
         // Enter to skip story
         if(enter && !enterLast)
         {
-            Greenfoot.setWorld(new MyWorld());
+            Greenfoot.setWorld(new TutorialWorld());
             return;
         }
         
