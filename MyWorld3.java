@@ -79,6 +79,10 @@ public class MyWorld3 extends World
         level3Complete = false;
         potion3Collected = false;
         reaperSpawned = false;
+        if(potionSpawnedSound.isPlaying())
+        {
+            potionSpawnedSound.stop();
+        }
     }
     
     // Method to check if the level is complete
@@ -99,6 +103,10 @@ public class MyWorld3 extends World
         if(getObjects(Level3Skeleton.class).isEmpty() && !reaperSpawned)
         {
             spawnReaper();
+        }
+        if(potion3Collected && potionSpawnedSound.isPlaying())
+        {
+            potionSpawnedSound.stop();
         }
     }
 }

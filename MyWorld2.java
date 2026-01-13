@@ -81,6 +81,10 @@ public class MyWorld2 extends World
         level2Complete = false;
         potion2Collected = false;
         golemSpawned = false;
+        if(potionSpawnedSound.isPlaying())
+        {
+        potionSpawnedSound.stop();
+        }
     }
     
     // Method to check if the level is complete
@@ -103,5 +107,10 @@ public class MyWorld2 extends World
         {
             spawnGolem();
         }
+        if(potion2Collected && potionSpawnedSound.isPlaying()) 
+        {
+            potionSpawnedSound.stop();
+        }
+
     }
 }

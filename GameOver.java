@@ -42,5 +42,17 @@ public class GameOver extends World
             MyWorld3.resetGame();
             Greenfoot.setWorld(new MyWorld());
         }
+        if(MyWorld.potionSpawnedSound.isPlaying())
+        {
+            MyWorld.potionSpawnedSound.stop();
+        }
+        if(MyWorld2.potionSpawnedSound.isPlaying())
+        { 
+            MyWorld2.potionSpawnedSound.stop();
+        }
+        if(MyWorld3.potionSpawnedSound.isPlaying())
+        {
+            MyWorld3.potionSpawnedSound.stop();
+        }
     }
 }

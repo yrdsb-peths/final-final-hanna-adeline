@@ -50,6 +50,9 @@ public class MyWorld extends World {
     public void gameOver() {
         removeObjects(getObjects(null));
         Greenfoot.setWorld(new GameOver());
+        if(potionSpawnedSound.isPlaying()) {
+            potionSpawnedSound.stop();
+        }
     }
     
     // Reset the variable when starting a new game
@@ -75,6 +78,10 @@ public class MyWorld extends World {
         if(level1Complete && !potion1Collected && getObjects(Potion1.class).isEmpty())
         {
             spawnPotion1();
+        }
+        if(potion1Collected && potionSpawnedSound.isPlaying()) 
+        {
+            potionSpawnedSound.stop();
         }
     }
 }
