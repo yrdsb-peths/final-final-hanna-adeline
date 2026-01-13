@@ -9,15 +9,15 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class HurtBox extends Actor
 {
     // access the witch class instance
-    private Actor owner;
+    private Witch witch;
     private int hitCountWitch = 0;
     private int invincibleTimer = 0;
     
     // Constructor - method called once 
-    public HurtBox(Actor owner, int w, int h)
+    public HurtBox(Witch witch, int w, int h)
     {
         // Access the witch object
-        this.owner = owner;
+        this.witch = witch;
         
         GreenfootImage img = new GreenfootImage(w, h);
         img.setColor(new Color(255, 0, 0, 0));
@@ -26,6 +26,12 @@ public class HurtBox extends Actor
         setImage(img);
     }
     
+    // Getter method for HealingPotion class
+    public Witch getWitch()
+    {
+        return witch;
+    }
+
     public void checkDamageWitch()
     {
         if(invincibleTimer > 0) 
@@ -58,9 +64,9 @@ public class HurtBox extends Actor
     private void dealDamage()
     {
         hitCountWitch++;
-        if(hitCountWitch >= 7)
+        if(hitCountWitch >= 6)
         {
-            ((Witch) owner).takeDamage(1);
+            witch.takeDamage(1);
             hitCountWitch = 0;
         }
         invincibleTimer = 20;
@@ -72,7 +78,7 @@ public class HurtBox extends Actor
      */
     public void act()
     {
-        if(owner instanceof Witch)
+        if(witch instanceof Witch)
         {
             checkDamageWitch();
         }

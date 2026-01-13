@@ -311,6 +311,29 @@ public class Witch extends Actor
         invincibleTimer = 30;
     }
     
+    // Healing hp method
+    public void heal(int amount)
+    {
+        if (witchCurrentHP <= 0) 
+        {
+           return; // can't heal the witch if dead
+        } 
+    
+        witchCurrentHP += amount;
+        if (witchCurrentHP > witchMaxHP)
+        {
+            witchCurrentHP = witchMaxHP;
+        }
+    
+        witchHPBar.setHP(witchCurrentHP);
+    }
+    
+    // Getter method for hp for healing potion spawn
+    public int getHP()
+    {
+        return witchCurrentHP;
+    }
+    
     // Act method
     public void act()
     {

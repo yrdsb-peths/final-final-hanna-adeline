@@ -27,7 +27,8 @@ public class MyWorld2 extends World
      * Sound played when the potion spawns.
      */
     public static GreenfootSound potionSpawnedSound = new GreenfootSound("potionBubblingSound.mp3");
-
+    
+    public static boolean healingPotionSpawned = false;
     /**
      * Constructor for objects of class MyWorld2.
      * 
@@ -60,6 +61,8 @@ public class MyWorld2 extends World
         Level2SlimeBlue slimered1 = new Level2SlimeBlue();
         addObject(slimered1, 500, 300);
         
+        // Restart the healing potion spawn at start of the level
+        healingPotionSpawned = false;
     }
     
     /**
@@ -69,18 +72,16 @@ public class MyWorld2 extends World
      */
     private void spawnPotion2() {
         Potion2 potion2 = new Potion2();
-        addObject(potion2, 500, 300);
+        addObject(potion2, 500, 290);
         potionSpawnedSound.playLoop();
     }
-    
     
     private void spawnHealingPotion()
     {
         HealingPotion healingPotion = new HealingPotion();
-        HealingPotion.healingPotionCollected = false;
-        //addObject(healingPotion);
+        addObject(healingPotion, 280, 90); 
         potionSpawnedSound.play();
-        
+        healingPotionSpawned = true;
     }
     
     /**
@@ -113,6 +114,7 @@ public class MyWorld2 extends World
     {
         level2Complete = false;
         potion2Collected = false;
+        healingPotionSpawned = false;
     }
     
     /**
@@ -133,16 +135,28 @@ public class MyWorld2 extends World
      * 
      * Checks level completion and spawns the potion when appropriate.
      */
-    public void act() {
+    public void act() 
+    {
         checkLevelComplete();
         
         if(level2Complete && !potion2Collected && getObjects(Potion2.class).isEmpty())
         {
             spawnPotion2();
         }
+        
         if(getObjects(Level2SlimeBlue.class).isEmpty() && !golemSpawned)
         {
             spawnGolem();
+        }
+        
+        // Spawn healing potion if Witch HP is low
+        if(!healingPotionSpawned) 
+        {
+            Witch witch = getObjects(Witch.class).get(0);
+            if(witch.getHP() <= 2 && getObjects(HealingPotion.class).isEmpty()) 
+            {
+                spawnHealingPotion();
+            }
         }
     }
 }
