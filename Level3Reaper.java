@@ -19,7 +19,8 @@ public class Level3Reaper extends Actor
     GreenfootImage[] deadLeftImage = new GreenfootImage[15];
     
     //Sounds for Reaper
-    GreenfootSound reaperAttackSound = new GreenfootSound("slimeAttackSound.mp3");
+    GreenfootSound reaperSlashAttackSound = new GreenfootSound("slimeAttackSound.mp3");
+    GreenfootSound reaperKickAttackSound = new GreenfootSound("slimeAttackSound.mp3");
     GreenfootSound reaperDeadSound = new GreenfootSound("slimeDeadSound.mp3");
     
     //Direction Reaper is facing
@@ -31,6 +32,7 @@ public class Level3Reaper extends Actor
     
     //Variable for attacks
     boolean isAttacking = false;
+    private String attackType = "";
     
     //Boolean for whether Reaper is alive
     boolean isAlive = true;
@@ -49,6 +51,7 @@ public class Level3Reaper extends Actor
     private int reaper3CurrentHP = 5;
     private int reaper3MaxHP = 5;
     private int invincibleTimer = 0;
+    
     
     public Level3Reaper()
     {
@@ -240,8 +243,16 @@ public class Level3Reaper extends Actor
     
     public int attack()
     {
-        
-        animateSlashAttack();
+        if(Greenfoot.getRandomNumber(2) == 0)
+        {
+            attackType = "slash";
+            animateSlashAttack();
+        }
+        else
+        {
+            attackType = "kick";
+            animateKickAttack();
+        }
         level3ReaperDamage += 1;
         return level3ReaperDamage;
     }
@@ -299,7 +310,14 @@ public class Level3Reaper extends Actor
           
           if(isAttacking)
           {
-              reaperAttackSound.play();
+              if(attackType == "slash")
+              {
+                  reaperSlashAttackSound.play();
+              }
+              else
+              {
+                  reaperKickAttackSound.play();
+              }
               attack();
           }
         }
