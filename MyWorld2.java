@@ -10,6 +10,7 @@ public class MyWorld2 extends World
 {
     public static boolean level2Complete = false;
     public static boolean potion2Collected = false;
+    private boolean golemSpawned = false;
     
     public static GreenfootSound potionSpawnedSound = new GreenfootSound("potionBubblingSound.mp3");
 
@@ -43,15 +44,20 @@ public class MyWorld2 extends World
         Level2SlimeBlue slimered1 = new Level2SlimeBlue();
         addObject(slimered1, 500, 300);
         
-        // Create the golem object
-        Level2Golem golem2 = new Level2Golem();
-        addObject(golem2, 440, 240);
     }
     
-        private void spawnPotion2() {
+    private void spawnPotion2() {
         Potion2 potion2 = new Potion2();
         addObject(potion2, 500, 300);
         potionSpawnedSound.playLoop();
+    }
+    
+    //Spawn Golem after SlimeBlue is defeated
+    private void spawnGolem()
+    {
+        Level2Golem golem2 = new Level2Golem();
+        addObject(golem2, 500, 300);
+        golemSpawned = true;
     }
     
     //Removes all monsters, hp boxes and the witch when the game is over
@@ -70,7 +76,7 @@ public class MyWorld2 extends World
     // Method to check if the level is complete
     public void checkLevelComplete()
     {
-        if(getObjects(Level1SlimeRed.class).isEmpty() && getObjects(Level2SlimeBlue.class).isEmpty() && getObjects(Level2Golem.class).isEmpty())
+        if(getObjects(Level1SlimeRed.class).isEmpty() && getObjects(Level2SlimeBlue.class).isEmpty() && getObjects(Level2Golem.class).isEmpty() && golemSpawned)
         {
             level2Complete = true;
         }
@@ -82,6 +88,10 @@ public class MyWorld2 extends World
         if(level2Complete && !potion2Collected && getObjects(Potion2.class).isEmpty())
         {
             spawnPotion2();
+        }
+        if(getObjects(Level2SlimeBlue.class).isEmpty() && !golemSpawned)
+        {
+            spawnGolem();
         }
     }
 }
