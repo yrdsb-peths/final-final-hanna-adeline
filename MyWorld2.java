@@ -52,6 +52,15 @@ public class MyWorld2 extends World
         potionSpawnedSound.playLoop();
     }
     
+    private void spawnHealingPotion()
+    {
+        HealingPotion healingPotion = new HealingPotion();
+        HealingPotion.healingPotionCollected = false;
+        //addObject(healingPotion);
+        potionSpawnedSound.play();
+        
+    }
+    
     //Spawn Golem after SlimeBlue is defeated
     private void spawnGolem()
     {

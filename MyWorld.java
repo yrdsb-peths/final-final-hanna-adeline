@@ -38,6 +38,14 @@ public class MyWorld extends World {
         potionSpawnedSound.playLoop();
     }
     
+    private void spawnHealingPotion()
+    {
+        HealingPotion healingPotion = new HealingPotion();
+        HealingPotion.healingPotionCollected = false;
+        //addObject(healingPotion);
+        potionSpawnedSound.play();
+        
+    }
     // Removes all monsters, hp boxes and the witch when the game is over
     public void gameOver() {
         removeObjects(getObjects(null));
@@ -49,6 +57,7 @@ public class MyWorld extends World {
     {
         level1Complete = false;
         potion1Collected = false;
+        HealingPotion.healingPotionCollected = false;
     }
     
     // Method to check if the level is complete

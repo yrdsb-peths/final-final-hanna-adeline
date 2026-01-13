@@ -40,6 +40,15 @@ public class MyWorld3 extends World
         addObject(level3Label, 300, 35);
     }
 
+    private void spawnHealingPotion()
+    {
+        HealingPotion healingPotion = new HealingPotion();
+        HealingPotion.healingPotionCollected = false;
+        //addObject(healingPotion);
+        potionSpawnedSound.play();
+        
+    }
+    
     private void spawnPotion3() {
         Potion3 potion3 = new Potion3();
         addObject(potion3, 500, 300);
