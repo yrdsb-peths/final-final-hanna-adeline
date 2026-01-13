@@ -42,6 +42,10 @@ public class MyWorld2 extends World
         // Create the slime 2 object
         Level2SlimeBlue slimered1 = new Level2SlimeBlue();
         addObject(slimered1, 500, 300);
+        
+        // Create the golem object
+        Level2Golem golem2 = new Level2Golem();
+        addObject(golem2, 440, 240);
     }
     
         private void spawnPotion2() {
@@ -66,7 +70,7 @@ public class MyWorld2 extends World
     // Method to check if the level is complete
     public void checkLevelComplete()
     {
-        if(getObjects(Level1SlimeRed.class).isEmpty() && getObjects(Level2SlimeBlue.class).isEmpty())
+        if(getObjects(Level1SlimeRed.class).isEmpty() && getObjects(Level2SlimeBlue.class).isEmpty() && getObjects(Level2Golem.class).isEmpty())
         {
             level2Complete = true;
         }

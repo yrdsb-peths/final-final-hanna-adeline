@@ -38,5 +38,17 @@ public class AttackBox extends Actor
         {
             blueSlime.takeDamage(damage);
         }
+        
+        Level2Golem golem = (Level2Golem) getOneIntersectingObject(Level2Golem.class);
+        if(golem != null)
+        {
+            golem.takeDamage(damage);
+        }
+        
+        Level3Monster monster = (Level3Monster) getOneIntersectingObject(Level3Monster.class);
+        if(monster != null)
+        {
+            monster.takeDamage(damage);
+        }
     }
 }
