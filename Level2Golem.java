@@ -17,8 +17,8 @@ public class Level2Golem extends Actor
     GreenfootImage[] deadLeftImage = new GreenfootImage[15];
     
     //Sounds for SlimeRed
-    //GreenfootSound golemAttackSound = new GreenfootSound("slimeAttackSound.mp3");
-    //GreenfootSound golemDeadSound = new GreenfootSound("slimeDeadSound.mp3");
+    GreenfootSound golemAttackSound = new GreenfootSound("slimeAttackSound.mp3");
+    GreenfootSound golemDeadSound = new GreenfootSound("slimeDeadSound.mp3");
     
     //Direction SlimeRed is facing
     String direction = "left";
