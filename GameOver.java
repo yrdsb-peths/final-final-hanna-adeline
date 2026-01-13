@@ -1,20 +1,28 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class GameOver here.
+ * The GameOver World displays the GameOver screen when the 
+ * player-controlled character dies.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Hanna & Adeline
+ * @version January 2025
  */
 public class GameOver extends World
 {
-    // Instances of labels
+    /** 
+     * Label displaying the "Game Over" title. 
+     */
     Label gameOverLabel;
+    /** 
+     * Label prompting the player to replay the game. 
+     */
     Label replayLabel;
     
     /**
-     * Constructor for objects of class GameOver.
+     * Constructs the Game Over world.
      * 
+     * Initializes the background and displays the
+     * Game Over title image.
      */
     public GameOver()
     {    
@@ -32,6 +40,12 @@ public class GameOver extends World
         addObject(gameOver, 300, 330);
     }
     
+    /**
+     * Executes the main loop of the Game Over world.
+     * 
+     * Restarts the game and resets all level data
+     * when the player presses the space bar.
+     */
     public void act()
     {
         //Start the game if the user presses the space bar

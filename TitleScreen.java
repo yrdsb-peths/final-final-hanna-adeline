@@ -1,23 +1,26 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class TitleScreen here.
+ * The TitleScreen class represents the starting site of the game.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * This world displays the game title and main character
+ * and waits for player input to begin the story.
+ * 
+ * @author Hanna & Adeline
+ * @version January 2025
  */
 public class TitleScreen extends World
 {
-
     /**
      * Constructor for objects of class TitleScreen.
      * 
+     * Initializes the background, title image, and
+     * title-screen character.
      */
     public TitleScreen()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1); 
-        prepare();
         
         // Set background
         GreenfootImage bg = new GreenfootImage("images/background/Battleground2.png");
@@ -35,7 +38,10 @@ public class TitleScreen extends World
     }
 
     /**
-     * The main world act loop
+     * Executes the main loop of the TitleScreen.
+     * 
+     * Transition to the StoryWorld when the player
+     * presses the space bar.
      */
     public void act()
     {
@@ -45,14 +51,5 @@ public class TitleScreen extends World
             StoryWorld storyWorld = new StoryWorld();
             Greenfoot.setWorld(storyWorld);
         }
-    }
-
-    /**
-     * Prepare the world for the start of the program.
-     * That is: create the initial objects and add them to the world.
-     */
-    private void prepare()
-    {
-        
     }
 }
