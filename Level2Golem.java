@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Level2Golem extends Actor
 {
-    //Idle images of SlimeRed
+    //Idle images of Golem
     GreenfootImage[] walkRightImage = new GreenfootImage[12];
     GreenfootImage[] attackRightImage = new GreenfootImage[12];
     GreenfootImage[] walkLeftImage = new GreenfootImage[12];
@@ -16,21 +16,21 @@ public class Level2Golem extends Actor
     GreenfootImage[] deadRightImage = new GreenfootImage[15];
     GreenfootImage[] deadLeftImage = new GreenfootImage[15];
     
-    //Sounds for SlimeRed
+    //Sounds for Golem
     GreenfootSound golemAttackSound = new GreenfootSound("slimeAttackSound.mp3");
     GreenfootSound golemDeadSound = new GreenfootSound("slimeDeadSound.mp3");
     
-    //Direction SlimeRed is facing
+    //Direction Golem is facing
     String direction = "left";
     
-    //Direction SlimeRed needs to travel
+    //Direction Golem needs to travel
     Boolean moveRight = false;
     Boolean moveLeft = false;
     
     //Variable for attacks
     boolean isAttacking = false;
     
-    //Boolean for whether SlimeRed is alive
+    //Boolean for whether Golem is alive
     boolean isAlive = true;
     
     //SimpleTimer variables
@@ -38,13 +38,13 @@ public class Level2Golem extends Actor
     SimpleTimer walkTimer = new SimpleTimer();
     SimpleTimer deadTimer = new SimpleTimer();
     
-    public static int level1SlimeRedDamage = 0;
+    public static int level2GolemDamage = 0;
     
-    // Image idles of hpbar of SlimeRed
-    public GreenfootImage[] level2SlimeHP = new GreenfootImage[6];
-    public HPBar slime2BlueHPBar;
-    private int slime2CurrentHP = 5;
-    private int slime2MaxHP = 5;
+    // Image idles of hpbar of Golem
+    public GreenfootImage[] level2GolemHP = new GreenfootImage[6];
+    public HPBar golem2HPBar;
+    private int golem2CurrentHP = 5;
+    private int golem2MaxHP = 5;
     private int invincibleTimer = 0;
     
     public Level2Golem()
@@ -54,47 +54,54 @@ public class Level2Golem extends Actor
         for(int i=0; i<walkRightImage.length; i++)
         {
             walkRightImage[i] = new GreenfootImage("images/Monsters/Level2/Level2Golem/walkRight/walkRight"+ i + ".png");
-            walkRightImage[i].scale(58, 30);
+            walkRightImage[i].scale(150, 150);
         }
         
         for(int i=0; i<walkLeftImage.length; i++)
         {
             walkLeftImage[i] = new GreenfootImage("images/Monsters/Level2/Level2Golem/walkLeft/walkLeft"+ i + ".png");
-            walkLeftImage[i].scale(58, 30);
+            walkLeftImage[i].scale(150, 150);
         }
         
-        //Set idle image for attack of SlimeRed
+        //Set idle image for attack of Golem
         for(int i=0; i<attackRightImage.length; i++)
         {
             attackRightImage[i] = new GreenfootImage("images/Monsters/Level2/Level2Golem/attackRight/attackRight"+ i + ".png");
-            attackRightImage[i].scale(59,45);
+            attackRightImage[i].scale(150,150);
         }
         
         for(int i=0; i<attackLeftImage.length; i++)
         {
             attackLeftImage[i] = new GreenfootImage("images/Monsters/Level2/Level2Golem/attackLeft/attackLeft"+ i + ".png");
-            attackLeftImage[i].scale(59,45);
+            attackLeftImage[i].scale(150,150);
         }
         
-        //Set idle image for death of SlimeRed
-        for(int i=0; i<deadImage.length; i++)
+        //Set idle image for death of Golem
+        for(int i=0; i<deadLeftImage.length; i++)
         {
-            deadImage[i] = new GreenfootImage("images/Monsters/Level2/Level2Golem/dead/dead"+ i + ".png");
-            deadImage[i].scale(59, 30);
+            deadLeftImage[i] = new GreenfootImage("images/Monsters/Level2/Level2Golem/deadLeft/deadLeft"+ i + ".png");
+            deadLeftImage[i].scale(150, 150);
+        }
+        
+        //Set idle image for death of Golem
+        for(int i=0; i<deadRightImage.length; i++)
+        {
+            deadRightImage[i] = new GreenfootImage("images/Monsters/Level2/Level2Golem/deadRight/deadRight"+ i + ".png");
+            deadRightImage[i].scale(150, 150);
         }
         
         walkTimer.mark();
         
-        //Initial SlimeRed image
+        //Initial Golem image
         setImage(walkLeftImage[0]);
         
-        // Set image for hp of Slime1Red
-        for(int i = 0; i < level2SlimeHP.length; i++)
+        // Set image for hp of Golem
+        for(int i = 0; i < level2GolemHP.length; i++)
         {
-            level2SlimeHP[i] = new GreenfootImage("hp_bar/monster1_hp/monster1_hp_" + i + ".png");
-            level2SlimeHP[i].scale(70, 30);
+            level2GolemHP[i] = new GreenfootImage("hp_bar/monster1_hp/monster1_hp_" + i + ".png");
+            level2GolemHP[i].scale(70, 30);
         }
-        slime2CurrentHP = 5;
+        golem2CurrentHP = 5;
     }
     
     int attackImageIndex = 0;
@@ -123,28 +130,37 @@ public class Level2Golem extends Actor
         }
     }
     
-    //Animate death of SlimeRed
+    //Animate death of Golem
     int deadImageIndex = 0;
     public void animateDeath()
     {
-        if(deadTimer.millisElapsed() < 425)
+        if(deadTimer.millisElapsed() < 100)
         {
             return;
         }
         
         deadTimer.mark();
-        
-        setImage(deadImage[deadImageIndex]);
-        deadImageIndex = (deadImageIndex+1);
-        slimeDeadSound.play();
-        if(deadImageIndex == 3)
+        if(direction.equals("right"))
         {
-            getWorld().removeObject(slime2BlueHPBar);
+          setImage(deadLeftImage[deadImageIndex]);
+            deadImageIndex = (deadImageIndex+1);
+            golemDeadSound.play();  
+        }
+        else
+        {
+          setImage(deadRightImage[deadImageIndex]);
+            deadImageIndex = (deadImageIndex+1);
+            golemDeadSound.play();  
+        }
+        
+        if(deadImageIndex == 14)
+        {
+            getWorld().removeObject(golem2HPBar);
             getWorld().removeObject(this);
         }
     }
     
-    //Animate walk of SlimeRed
+    //Animate walk of Golem
     int walkImageIndex = 0;
     public void animateWalk()
     {
@@ -195,8 +211,8 @@ public class Level2Golem extends Actor
     public int attack()
     {
         animateAttack();
-        level1SlimeRedDamage += 1;
-        return level1SlimeRedDamage;
+        level2GolemDamage += 1;
+        return level2GolemDamage;
     }
     
     // Damage to change hp method
@@ -206,14 +222,14 @@ public class Level2Golem extends Actor
         {
             return;
         }
-        slime2CurrentHP -= damage;
+        golem2CurrentHP -= damage;
         
-        if(slime2CurrentHP < 0)
+        if(golem2CurrentHP < 0)
         {
-            slime2CurrentHP = 0;
+            golem2CurrentHP = 0;
         }
         
-        slime2BlueHPBar.setHP(slime2CurrentHP);
+        golem2HPBar.setHP(golem2CurrentHP);
         invincibleTimer = 70;
     }
     
@@ -221,8 +237,8 @@ public class Level2Golem extends Actor
     public void addedToWorld(World w)
     {   
         // HPBar
-        slime2BlueHPBar = new HPBar(slime2CurrentHP, level2SlimeHP);
-        w.addObject(slime2BlueHPBar, getX(), getY() - 45);
+        golem2HPBar = new HPBar(golem2CurrentHP, level2GolemHP);
+        w.addObject(golem2HPBar, getX(), getY() - 45);
     }
     
     /**
@@ -231,7 +247,7 @@ public class Level2Golem extends Actor
      */
     public void act()
     {
-        if(slime2CurrentHP<=0)
+        if(golem2CurrentHP<=0)
         {
           isAlive = false;
           animateDeath();
@@ -252,15 +268,15 @@ public class Level2Golem extends Actor
           
           if(isAttacking)
           {
-              slimeAttackSound.play();
+              golemAttackSound.play();
               attack();
           }
         }
 
         // Move the HPBar with the witch
-        if(isAlive && level2SlimeHP != null)
+        if(isAlive && level2GolemHP != null)
         {
-          slime2BlueHPBar.setLocation(getX(), getY() - 45);
+          golem2HPBar.setLocation(getX(), getY() - 45);
         }
           
         //invicibleTimer decrease

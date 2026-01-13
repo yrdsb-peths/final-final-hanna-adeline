@@ -1,35 +1,36 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Level2SlimeBlue here.
+ * Write a description of class Level3Monster here.
  * 
  * @author Adeline
  * @version December 2025
  */
-public class Level2SlimeBlue extends Actor
+public class Level3Monster extends Actor
 {
-    //Idle images of SlimeRed
-    GreenfootImage[] walkRightImage = new GreenfootImage[7];
-    GreenfootImage[] attackRightImage = new GreenfootImage[5];
-    GreenfootImage[] walkLeftImage = new GreenfootImage[7];
-    GreenfootImage[] attackLeftImage = new GreenfootImage[5];
-    GreenfootImage[] deadImage = new GreenfootImage[3];
+    //Idle images of Monster
+    GreenfootImage[] walkRightImage = new GreenfootImage[12];
+    GreenfootImage[] attackRightImage = new GreenfootImage[12];
+    GreenfootImage[] walkLeftImage = new GreenfootImage[12];
+    GreenfootImage[] attackLeftImage = new GreenfootImage[12];
+    GreenfootImage[] deadRightImage = new GreenfootImage[15];
+    GreenfootImage[] deadLeftImage = new GreenfootImage[15];
     
-    //Sounds for SlimeRed
-    GreenfootSound slimeAttackSound = new GreenfootSound("slimeAttackSound.mp3");
-    GreenfootSound slimeDeadSound = new GreenfootSound("slimeDeadSound.mp3");
+    //Sounds for Monster
+    GreenfootSound monsterAttackSound = new GreenfootSound("slimeAttackSound.mp3");
+    GreenfootSound monsterDeadSound = new GreenfootSound("slimeDeadSound.mp3");
     
-    //Direction SlimeRed is facing
+    //Direction Monster is facing
     String direction = "left";
     
-    //Direction SlimeRed needs to travel
+    //Direction Monster needs to travel
     Boolean moveRight = false;
     Boolean moveLeft = false;
     
     //Variable for attacks
     boolean isAttacking = false;
     
-    //Boolean for whether SlimeRed is alive
+    //Boolean for whether Monster is alive
     boolean isAlive = true;
     
     //SimpleTimer variables
@@ -37,68 +38,75 @@ public class Level2SlimeBlue extends Actor
     SimpleTimer walkTimer = new SimpleTimer();
     SimpleTimer deadTimer = new SimpleTimer();
     
-    public static int level2SlimeBlueDamage = 0;
+    public static int level3MonsterDamage = 0;
     
-    // Image idles of hpbar of SlimeRed
-    public GreenfootImage[] level2SlimeHP = new GreenfootImage[6];
-    public HPBar slime2BlueHPBar;
-    private int slime2CurrentHP = 5;
-    private int slime2MaxHP = 5;
+    // Image idles of hpbar of Monster
+    public GreenfootImage[] level3MonsterHP = new GreenfootImage[6];
+    public HPBar monster3HPBar;
+    private int monster3CurrentHP = 5;
+    private int monster3MaxHP = 5;
     private int invincibleTimer = 0;
     
-    public Level2SlimeBlue()
+    public Level3Monster()
     {
-        //Set idle image for walk of SlimeRed
+        //Set idle image for walk of Monster
         
         for(int i=0; i<walkRightImage.length; i++)
         {
-            walkRightImage[i] = new GreenfootImage("images/Monsters/Level2/Level2SlimeBlue/walkRight/walkRight"+ i + ".png");
-            walkRightImage[i].scale(58, 30);
+            walkRightImage[i] = new GreenfootImage("images/Monsters/Level3/Level3Monster/walkRight/walkRight"+ i + ".png");
+            walkRightImage[i].scale(150, 150);
         }
         
         for(int i=0; i<walkLeftImage.length; i++)
         {
-            walkLeftImage[i] = new GreenfootImage("images/Monsters/Level2/Level2SlimeBlue/walkLeft/walkLeft"+ i + ".png");
-            walkLeftImage[i].scale(58, 30);
+            walkLeftImage[i] = new GreenfootImage("images/Monsters/Level3/Level3Monster/walkLeft/walkLeft"+ i + ".png");
+            walkLeftImage[i].scale(150, 150);
         }
         
-        //Set idle image for attack of SlimeRed
+        //Set idle image for attack of Monster
         for(int i=0; i<attackRightImage.length; i++)
         {
-            attackRightImage[i] = new GreenfootImage("images/Monsters/Level2/Level2SlimeBlue/attackRight/attackRight"+ i + ".png");
-            attackRightImage[i].scale(59,45);
+            attackRightImage[i] = new GreenfootImage("images/Monsters/Level3/Level3Monster/attackRight/attackRight"+ i + ".png");
+            attackRightImage[i].scale(150,150);
         }
         
         for(int i=0; i<attackLeftImage.length; i++)
         {
-            attackLeftImage[i] = new GreenfootImage("images/Monsters/Level2/Level2SlimeBlue/attackLeft/attackLeft"+ i + ".png");
-            attackLeftImage[i].scale(59,45);
+            attackLeftImage[i] = new GreenfootImage("images/Monsters/Level3/Level3Monster/attackLeft/attackLeft"+ i + ".png");
+            attackLeftImage[i].scale(150,150);
         }
         
-        //Set idle image for death of SlimeRed
-        for(int i=0; i<deadImage.length; i++)
+        //Set idle image for death of Monster
+        for(int i=0; i<deadLeftImage.length; i++)
         {
-            deadImage[i] = new GreenfootImage("images/Monsters/Level2/Level2SlimeBlue/dead/dead"+ i + ".png");
-            deadImage[i].scale(59, 30);
+            deadLeftImage[i] = new GreenfootImage("images/Monsters/Level3/Level3Monster/deadLeft/deadLeft"+ i + ".png");
+            deadLeftImage[i].scale(150, 150);
+        }
+        
+        //Set idle image for death of Monster
+        for(int i=0; i<deadRightImage.length; i++)
+        {
+            deadRightImage[i] = new GreenfootImage("images/Monsters/Level3/Level3Monster/deadRight/deadRight"+ i + ".png");
+            deadRightImage[i].scale(150, 150);
         }
         
         walkTimer.mark();
         
-        //Initial SlimeRed image
+        //Initial Golem image
         setImage(walkLeftImage[0]);
         
-        // Set image for hp of Slime1Red
-        for(int i = 0; i < level2SlimeHP.length; i++)
+        // Set image for hp of Golem
+        for(int i = 0; i < level3MonsterHP.length; i++)
         {
-            level2SlimeHP[i] = new GreenfootImage("hp_bar/monster1_hp/monster1_hp_" + i + ".png");
-            level2SlimeHP[i].scale(70, 30);
+            level3MonsterHP[i] = new GreenfootImage("hp_bar/monster1_hp/monster1_hp_" + i + ".png");
+            level3MonsterHP[i].scale(70, 30);
         }
-        slime2CurrentHP = 5;
+        monster3CurrentHP = 5;
     }
     
     int attackImageIndex = 0;
     /**
-     * Animate attack of the SlimeRed
+     * Animate attack of the Monster
      */
     
     public void animateAttack()
@@ -122,28 +130,37 @@ public class Level2SlimeBlue extends Actor
         }
     }
     
-    //Animate death of SlimeRed
+    //Animate death of Monster
     int deadImageIndex = 0;
     public void animateDeath()
     {
-        if(deadTimer.millisElapsed() < 425)
+        if(deadTimer.millisElapsed() < 100)
         {
             return;
         }
         
         deadTimer.mark();
-        
-        setImage(deadImage[deadImageIndex]);
-        deadImageIndex = (deadImageIndex+1);
-        slimeDeadSound.play();
-        if(deadImageIndex == 3)
+        if(direction.equals("right"))
         {
-            getWorld().removeObject(slime2BlueHPBar);
+          setImage(deadLeftImage[deadImageIndex]);
+            deadImageIndex = (deadImageIndex+1);
+            monsterDeadSound.play();  
+        }
+        else
+        {
+          setImage(deadRightImage[deadImageIndex]);
+            deadImageIndex = (deadImageIndex+1);
+            monsterDeadSound.play();  
+        }
+        
+        if(deadImageIndex == 14)
+        {
+            getWorld().removeObject(monster3HPBar);
             getWorld().removeObject(this);
         }
     }
     
-    //Animate walk of SlimeRed
+    //Animate walk of Golem
     int walkImageIndex = 0;
     public void animateWalk()
     {
@@ -194,8 +211,8 @@ public class Level2SlimeBlue extends Actor
     public int attack()
     {
         animateAttack();
-        level2SlimeBlueDamage += 1;
-        return level2SlimeBlueDamage;
+        level3MonsterDamage += 1;
+        return level3MonsterDamage;
     }
     
     // Damage to change hp method
@@ -205,14 +222,14 @@ public class Level2SlimeBlue extends Actor
         {
             return;
         }
-        slime2CurrentHP -= damage;
+        monster3CurrentHP -= damage;
         
-        if(slime2CurrentHP < 0)
+        if(monster3CurrentHP < 0)
         {
-            slime2CurrentHP = 0;
+            monster3CurrentHP = 0;
         }
         
-        slime2BlueHPBar.setHP(slime2CurrentHP);
+        monster3HPBar.setHP(monster3CurrentHP);
         invincibleTimer = 70;
     }
     
@@ -220,17 +237,17 @@ public class Level2SlimeBlue extends Actor
     public void addedToWorld(World w)
     {   
         // HPBar
-        slime2BlueHPBar = new HPBar(slime2CurrentHP, level2SlimeHP);
-        w.addObject(slime2BlueHPBar, getX(), getY() - 45);
+        monster3HPBar = new HPBar(monster3CurrentHP, level3MonsterHP);
+        w.addObject(monster3HPBar, getX(), getY() - 45);
     }
     
     /**
-     * Act - do whatever the Level2SlimeBlue wants to do. This method is called whenever
+     * Act - do whatever the Level3Monster wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act()
     {
-        if(slime2CurrentHP<=0)
+        if(monster3CurrentHP<=0)
         {
           isAlive = false;
           animateDeath();
@@ -251,15 +268,15 @@ public class Level2SlimeBlue extends Actor
           
           if(isAttacking)
           {
-              slimeAttackSound.play();
+              monsterAttackSound.play();
               attack();
           }
         }
 
         // Move the HPBar with the witch
-        if(isAlive && level2SlimeHP != null)
+        if(isAlive && level3MonsterHP != null)
         {
-          slime2BlueHPBar.setLocation(getX(), getY() - 45);
+          monster3HPBar.setLocation(getX(), getY() - 45);
         }
           
         //invicibleTimer decrease
