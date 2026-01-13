@@ -21,6 +21,8 @@ public class MyWorld extends World {
      * Sound played when the potion spawns.
      */
     public static GreenfootSound potionSpawnedSound = new GreenfootSound("potionBubblingSound.mp3");
+    
+    public static boolean healingPotionSpawned = false;
     /**
      * Constructor for objects of class MyWorld.
      * 
@@ -50,6 +52,9 @@ public class MyWorld extends World {
         // Create the label of stage 1
         Label level1Label = new Label("Level 1", 40);
         addObject(level1Label, 300, 35);
+        
+        // Restart the healing potion spawn at start of the level
+        healingPotionSpawned = false;
     }
     
     /**
@@ -59,18 +64,15 @@ public class MyWorld extends World {
      */
     private void spawnPotion1() {
         Potion1 potion1 = new Potion1();
-        addObject(potion1, 500, 300);
+        addObject(potion1, 500, 290);
         potionSpawnedSound.playLoop();
     }
-    
     
     private void spawnHealingPotion()
     {
         HealingPotion healingPotion = new HealingPotion();
-        HealingPotion.healingPotionCollected = false;
-        //addObject(healingPotion);
+        addObject(healingPotion, 450, 90); 
         potionSpawnedSound.play();
-        
     }
     
     /**
@@ -81,9 +83,6 @@ public class MyWorld extends World {
     public void gameOver() {
         removeObjects(getObjects(null));
         Greenfoot.setWorld(new GameOver());
-        if(potionSpawnedSound.isPlaying()) {
-            potionSpawnedSound.stop();
-        }
     }
     
     /**
@@ -95,7 +94,7 @@ public class MyWorld extends World {
     {
         level1Complete = false;
         potion1Collected = false;
-        HealingPotion.healingPotionCollected = false;
+        healingPotionSpawned = false;
     }
     
     /**
@@ -116,16 +115,20 @@ public class MyWorld extends World {
      * 
      * Checks level completion and spawns the potion when appropriate.
      */
-    public void act() {
+    public void act() 
+    {
         checkLevelComplete();
         
         if(level1Complete && !potion1Collected && getObjects(Potion1.class).isEmpty())
         {
             spawnPotion1();
         }
-        if(potion1Collected && potionSpawnedSound.isPlaying()) 
+        
+        Witch witch = getObjects(Witch.class).get(0);
+        if (witch.getHP() <= 2 && getObjects(HealingPotion.class).isEmpty() && !healingPotionSpawned)
         {
-            potionSpawnedSound.stop();
+            spawnHealingPotion();
+            healingPotionSpawned = true; // make sure it only spawns once
         }
     }
 }

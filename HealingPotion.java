@@ -40,16 +40,6 @@ public class HealingPotion extends Actor
         imageIndex = (imageIndex + 1) % potionImage.length;
     }
     
-    // Potion disappears after it's collected by the user
-    public boolean healingPotionCollected()
-    {
-        getWorld().removeObject(this);
-        MyWorld.potionSpawnedSound.stop();
-        potionCollectSound.play();
-        healingPotionCollected = true;
-        return healingPotionCollected();
-    }
-    
     /**
      * Act - do whatever the HealingPotion wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -57,10 +47,16 @@ public class HealingPotion extends Actor
     public void act()
     {
         animatePotion();
-        if(isTouching(HurtBox.class))
+
+        // Potion disappears after it's collected by the user
+        HurtBox hb = (HurtBox)getOneIntersectingObject(HurtBox.class);
+        if (hb != null)
         {
-            healingPotionCollected();
-            healingPotionCollected = true;
+            Witch witch = hb.getWitch();
+            witch.heal(2);
+    
+            potionCollectSound.play();
+            getWorld().removeObject(this);
         }
     }
 }
