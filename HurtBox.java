@@ -28,20 +28,42 @@ public class HurtBox extends Actor
     
     public void checkDamageWitch()
     {
-        if(this.isTouching(Level1SlimeRed.class) || this.isTouching(Level2SlimeBlue.class) || this.isTouching(Level2Golem.class) || this.isTouching(Level3Reaper.class) || this.isTouching(Level3Skeleton.class))
+        if(invincibleTimer > 0) 
         {
-            if(invincibleTimer > 0)
-            {
-                return;
-            }
-            hitCountWitch++;
-            if(hitCountWitch >= 7)
-            {
-                ((Witch)owner).takeDamage(1);
-                hitCountWitch = 0;
-            }
-            invincibleTimer = 20;
+           return; 
         }
+
+        // Slime Red
+        if(isTouching(Level1SlimeRed.class) || isTouching(Level2SlimeBlue.class))
+        {
+            dealDamage();
+            return;
+        }
+    
+        // Golem (only if alive)
+        Level2Golem golem = (Level2Golem) getOneIntersectingObject(Level2Golem.class);
+        if(golem != null && golem.isAlive())
+        {
+            dealDamage();
+            return;
+        }
+    
+        // Reaper
+        if(isTouching(Level3Reaper.class) || isTouching(Level3Skeleton.class))
+        {
+            dealDamage();
+        }
+    }
+    
+    private void dealDamage()
+    {
+        hitCountWitch++;
+        if(hitCountWitch >= 7)
+        {
+            ((Witch) owner).takeDamage(1);
+            hitCountWitch = 0;
+        }
+        invincibleTimer = 20;
     }
     
     /**

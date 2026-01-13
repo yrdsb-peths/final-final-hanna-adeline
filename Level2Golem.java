@@ -31,7 +31,7 @@ public class Level2Golem extends Actor
     boolean isAttacking = false;
     
     //Boolean for whether Golem is alive
-    boolean isAlive = true;
+    public boolean isAlive = true;
     
     //SimpleTimer variables
     SimpleTimer attackTimer = new SimpleTimer();
@@ -160,6 +160,12 @@ public class Level2Golem extends Actor
         }
     }
     
+    // Getter method to check if the Golem is alive
+    public boolean isAlive()
+    {   
+        return isAlive;
+    }
+
     //Animate walk of Golem
     int walkImageIndex = 0;
     public void animateWalk()

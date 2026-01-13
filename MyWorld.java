@@ -70,7 +70,6 @@ public class MyWorld extends World {
         HealingPotion.healingPotionCollected = false;
         //addObject(healingPotion);
         potionSpawnedSound.play();
-        
     }
     
     /**
