@@ -10,7 +10,7 @@ public class MyWorld2 extends World
 {
     public static boolean level2Complete = false;
     public static boolean potion2Collected = false;
-    private boolean golemSpawned = false;
+    public static boolean golemSpawned = false;
     
     public static GreenfootSound potionSpawnedSound = new GreenfootSound("potionBubblingSound.mp3");
 
@@ -80,6 +80,7 @@ public class MyWorld2 extends World
     {
         level2Complete = false;
         potion2Collected = false;
+        golemSpawned = false;
     }
     
     // Method to check if the level is complete

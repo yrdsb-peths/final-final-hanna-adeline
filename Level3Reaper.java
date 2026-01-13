@@ -33,6 +33,8 @@ public class Level3Reaper extends Actor
     //Variable for attacks
     boolean isAttacking = false;
     private String attackType = "";
+    boolean attackChosen = false;
+    boolean attackSoundIsPlaying = false;
     
     //Boolean for whether Reaper is alive
     boolean isAlive = true;
@@ -59,40 +61,53 @@ public class Level3Reaper extends Actor
         
         for(int i=0; i<walkRightImage.length; i++)
         {
-            walkRightImage[i] = new GreenfootImage("images/Monsters/Level3/Level3Reaper/Reaper/walkRight/walkRight"+ i + ".png");
+            walkRightImage[i] = new GreenfootImage("images/Monsters/Level3/Level3GrimReaper/Reaper/walkRight/walkRight"+ i + ".png");
             walkRightImage[i].scale(150, 150);
         }
         
         for(int i=0; i<walkLeftImage.length; i++)
         {
-            walkLeftImage[i] = new GreenfootImage("images/Monsters/Level3/Level3Reaper/Reaper/walkLeft/walkLeft"+ i + ".png");
+            walkLeftImage[i] = new GreenfootImage("images/Monsters/Level3/Level3GrimReaper/Reaper/walkLeft/walkLeft"+ i + ".png");
             walkLeftImage[i].scale(150, 150);
         }
         
         //Set idle image for slash attack of Reaper
         for(int i=0; i<slashRightImage.length; i++)
         {
-            slashRightImage[i] = new GreenfootImage("images/Monsters/Level3/Level3Reaper/Reaper/slashRight/slashRight"+ i + ".png");
+            slashRightImage[i] = new GreenfootImage("images/Monsters/Level3/Level3GrimReaper/Reaper/slashRight/slashRight"+ i + ".png");
             slashRightImage[i].scale(150,150);
         }
         
         for(int i=0; i<slashLeftImage.length; i++)
         {
-            slashLeftImage[i] = new GreenfootImage("images/Monsters/Level3/Level3Reaper/Reaper/slashLeft/slashLeft"+ i + ".png");
+            slashLeftImage[i] = new GreenfootImage("images/Monsters/Level3/Level3GrimReaper/Reaper/slashLeft/slashLeft"+ i + ".png");
             slashLeftImage[i].scale(150,150);
+        }
+        
+        //Set idle image for kick attack of Reaper
+        for(int i=0; i<kickRightImage.length; i++)
+        {
+            kickRightImage[i] = new GreenfootImage("images/Monsters/Level3/Level3GrimReaper/Reaper/kickRight/kickRight"+ i + ".png");
+            kickRightImage[i].scale(150,150);
+        }
+        
+        for(int i=0; i<kickLeftImage.length; i++)
+        {
+            kickLeftImage[i] = new GreenfootImage("images/Monsters/Level3/Level3GrimReaper/Reaper/kickLeft/kickLeft"+ i + ".png");
+            kickLeftImage[i].scale(150,150);
         }
         
         //Set idle image for death of Reaper
         for(int i=0; i<deadLeftImage.length; i++)
         {
-            deadLeftImage[i] = new GreenfootImage("images/Monsters/Level3/Level3Reaper/Reaper/deadLeft/deadLeft"+ i + ".png");
+            deadLeftImage[i] = new GreenfootImage("images/Monsters/Level3/Level3GrimReaper/Reaper/deadLeft/deadLeft"+ i + ".png");
             deadLeftImage[i].scale(150, 150);
         }
         
         //Set idle image for death of Reaper
         for(int i=0; i<deadRightImage.length; i++)
         {
-            deadRightImage[i] = new GreenfootImage("images/Monsters/Level3/Level3Reaper/Reaper/deadRight/deadRight"+ i + ".png");
+            deadRightImage[i] = new GreenfootImage("images/Monsters/Level3/Level3GrimReaper/Reaper/deadRight/deadRight"+ i + ".png");
             deadRightImage[i].scale(150, 150);
         }
         
@@ -104,7 +119,7 @@ public class Level3Reaper extends Actor
         // Set image for hp of Reaper
         for(int i = 0; i < level3ReaperHP.length; i++)
         {
-            level3ReaperHP[i] = new GreenfootImage("hp_bar/reaper3/reaper3_hp_" + i + ".png");
+            level3ReaperHP[i] = new GreenfootImage("hp_bar/monster1_hp/monster1_hp_" + i + ".png");
             level3ReaperHP[i].scale(70, 30);
         }
         reaper3CurrentHP = 5;
@@ -117,7 +132,7 @@ public class Level3Reaper extends Actor
     
     public void animateSlashAttack()
     {
-        if(slashTimer.millisElapsed() < 100)
+        if(slashTimer.millisElapsed() < 75)
         {
             return;
         }
@@ -127,12 +142,19 @@ public class Level3Reaper extends Actor
         if(direction.equals("right"))
         {
             setImage(slashRightImage[slashImageIndex]);
-            slashImageIndex = (slashImageIndex+1) % slashRightImage.length;
+            slashImageIndex = (slashImageIndex+1);
         }
         else
         {
             setImage(slashLeftImage[slashImageIndex]);
-            slashImageIndex = (slashImageIndex+1) % slashLeftImage.length;
+            slashImageIndex = (slashImageIndex+1);
+        }
+        if(slashImageIndex >= slashRightImage.length)
+        {
+            slashImageIndex = 0;
+            attackChosen = false;
+            isAttacking = false;
+            attackType = "";
         }
     }
     
@@ -144,7 +166,7 @@ public class Level3Reaper extends Actor
     
     public void animateKickAttack()
     {
-        if(slashTimer.millisElapsed() < 100)
+        if(kickTimer.millisElapsed() < 75)
         {
             return;
         }
@@ -154,12 +176,20 @@ public class Level3Reaper extends Actor
         if(direction.equals("right"))
         {
             setImage(kickRightImage[kickImageIndex]);
-            kickImageIndex = (kickImageIndex+1) % kickRightImage.length;
+            kickImageIndex = (kickImageIndex+1);
         }
         else
         {
-            setImage(kickLeftImage[slashImageIndex]);
-            kickImageIndex = (kickImageIndex+1) % kickLeftImage.length;
+            setImage(kickLeftImage[kickImageIndex]);
+            kickImageIndex = (kickImageIndex+1);
+        }
+        
+         if(kickImageIndex >= kickRightImage.length)
+        {
+            kickImageIndex = 0;
+            attackChosen = false;
+            isAttacking = false;
+            attackType = "";
         }
     }
     
@@ -243,17 +273,41 @@ public class Level3Reaper extends Actor
     
     public int attack()
     {
-        if(Greenfoot.getRandomNumber(2) == 0)
+        if(!attackChosen)
         {
-            attackType = "slash";
+            int attackNumber = Greenfoot.getRandomNumber(2);
+            if(attackNumber == 0)
+            {
+                attackType = "slash";
+                slashImageIndex = 0;
+                slashTimer.mark();
+            }
+            else if(attackNumber == 1)
+            {
+                attackType = "kick";
+                kickImageIndex = 0;
+                kickTimer.mark();
+                
+            }
+            attackSoundIsPlaying = false;
+            attackChosen = true;
+        }
+        if(attackType.equals("slash"))
+        {
             animateSlashAttack();
+            if(slashImageIndex==6)
+            {
+                level3ReaperDamage += 2;
+            }
         }
-        else
+        else if(attackType.equals("kick"))
         {
-            attackType = "kick";
             animateKickAttack();
+            if(kickImageIndex==6)
+            {
+                level3ReaperDamage += 2;
+            }
         }
-        level3ReaperDamage += 1;
         return level3ReaperDamage;
     }
     
@@ -310,15 +364,17 @@ public class Level3Reaper extends Actor
           
           if(isAttacking)
           {
-              if(attackType == "slash")
-              {
-                  reaperSlashAttackSound.play();
-              }
-              else
-              {
-                  reaperKickAttackSound.play();
-              }
-              attack();
+            if(!attackSoundIsPlaying)
+                if(attackType.equals("slash"))
+                {
+                    reaperSlashAttackSound.play();
+                }
+                else
+                {
+                    reaperKickAttackSound.play();
+                }
+                attackSoundIsPlaying = true;
+            attack();
           }
         }
 

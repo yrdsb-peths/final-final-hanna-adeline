@@ -10,6 +10,7 @@ public class MyWorld3 extends World
 {
     public static boolean level3Complete = false;
     public static boolean potion3Collected = false;
+    public static boolean reaperSpawned = false;
     
     public static GreenfootSound potionSpawnedSound = new GreenfootSound("potionBubblingSound.mp3");
 
@@ -35,11 +36,22 @@ public class MyWorld3 extends World
         Witch witch = new Witch();
         addObject(witch, 120, 250);
         
+        //  Create the skeleton object
+        Level3Skeleton skeleton = new Level3Skeleton();
+        addObject(skeleton, 500, 300);
+        
         // Create the label of stage 3
         Label level3Label = new Label("Level 3", 40);
         addObject(level3Label, 300, 35);
     }
 
+    private void spawnReaper()
+    {
+        Level3Reaper reaper = new Level3Reaper();
+        addObject(reaper, 500, 300);
+        reaperSpawned = true;
+    }
+    
     private void spawnHealingPotion()
     {
         HealingPotion healingPotion = new HealingPotion();
@@ -66,12 +78,27 @@ public class MyWorld3 extends World
     {
         level3Complete = false;
         potion3Collected = false;
+        reaperSpawned = false;
+    }
+    
+    // Method to check if the level is complete
+    public void checkLevelComplete()
+    {
+        if(getObjects(Level1SlimeRed.class).isEmpty() && getObjects(Level2SlimeBlue.class).isEmpty() && getObjects(Level2Golem.class).isEmpty() && MyWorld2.golemSpawned && getObjects(Level3Skeleton.class).isEmpty() && getObjects(Level3Reaper.class).isEmpty() && reaperSpawned)
+        {
+            level3Complete = true;
+        }
     }
     
     public void act() {
+        checkLevelComplete();
         if(level3Complete && !potion3Collected && getObjects(Potion3.class).isEmpty())
         {
             spawnPotion3();
+        }
+        if(getObjects(Level3Skeleton.class).isEmpty() && !reaperSpawned)
+        {
+            spawnReaper();
         }
     }
 }
