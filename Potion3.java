@@ -56,5 +56,9 @@ public class Potion3 extends Actor
     public void act()
     {
         animatePotion();
+        if(isTouching(HurtBox.class))
+            {
+                potion3Collected();
+            }
     }
 }

@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Level3Skeleton extends Actor
 {
-    //Idle images of Reaper
+    //Idle images of Skeleton
     GreenfootImage[] walkRightImage = new GreenfootImage[12];
     GreenfootImage[] walkLeftImage = new GreenfootImage[12];
     GreenfootImage[] slashRightImage = new GreenfootImage[12];
@@ -18,98 +18,97 @@ public class Level3Skeleton extends Actor
     GreenfootImage[] deadRightImage = new GreenfootImage[15];
     GreenfootImage[] deadLeftImage = new GreenfootImage[15];
     
-    //Sounds for Reaper
-    GreenfootSound reaperAttackSound = new GreenfootSound("slimeAttackSound.mp3");
-    GreenfootSound reaperDeadSound = new GreenfootSound("slimeDeadSound.mp3");
+    //Sounds for Skeleton
+    GreenfootSound skeletonAttackSound = new GreenfootSound("slimeAttackSound.mp3");
+    GreenfootSound skeletonDeadSound = new GreenfootSound("slimeDeadSound.mp3");
     
-    //Direction Reaper is facing
+    //Direction Skeleton is facing
     String direction = "left";
     
-    //Direction Reaper needs to travel
+    //Direction Skeleton needs to travel
     Boolean moveRight = false;
     Boolean moveLeft = false;
     
     //Variable for attacks
     boolean isAttacking = false;
     
-    //Boolean for whether Reaper is alive
+    //Boolean for whether Skeleton is alive
     boolean isAlive = true;
     
     //SimpleTimer variables
     SimpleTimer slashTimer = new SimpleTimer();
-    SimpleTimer kickTimer = new SimpleTimer();
     SimpleTimer walkTimer = new SimpleTimer();
     SimpleTimer deadTimer = new SimpleTimer();
     
-    public static int level3ReaperDamage = 0;
+    public static int level3SkeletonDamage = 0;
     
-    // Image idles of hpbar of Reaper
-    public GreenfootImage[] level3ReaperHP = new GreenfootImage[6];
-    public HPBar reaper3HPBar;
-    private int reaper3CurrentHP = 5;
-    private int reaper3MaxHP = 5;
+    // Image idles of hpbar of Skeleton
+    public GreenfootImage[] level3SkeletonHP = new GreenfootImage[6];
+    public HPBar skeleton3HPBar;
+    private int skeleton3CurrentHP = 5;
+    private int skeleton3MaxHP = 5;
     private int invincibleTimer = 0;
     
     public Level3Skeleton()
     {
-        //Set idle image for walk of Reaper
+        //Set idle image for walk of Skeleton
         
         for(int i=0; i<walkRightImage.length; i++)
         {
-            walkRightImage[i] = new GreenfootImage("images/Monsters/Level3/Level3Reaper/Reaper/walkRight/walkRight"+ i + ".png");
+            walkRightImage[i] = new GreenfootImage("images/Monsters/Level3/Level3Skeleton/walkRight/walkRight"+ i + ".png");
             walkRightImage[i].scale(150, 150);
         }
         
         for(int i=0; i<walkLeftImage.length; i++)
         {
-            walkLeftImage[i] = new GreenfootImage("images/Monsters/Level3/Level3Reaper/Reaper/walkLeft/walkLeft"+ i + ".png");
+            walkLeftImage[i] = new GreenfootImage("images/Monsters/Level3/Level3Skeleton/walkLeft/walkLeft"+ i + ".png");
             walkLeftImage[i].scale(150, 150);
         }
         
-        //Set idle image for slash attack of Reaper
+        //Set idle image for slash attack of Skeleton
         for(int i=0; i<slashRightImage.length; i++)
         {
-            slashRightImage[i] = new GreenfootImage("images/Monsters/Level3/Level3Reaper/Reaper/slashRight/slashRight"+ i + ".png");
+            slashRightImage[i] = new GreenfootImage("images/Monsters/Level3/Level3Skeleton/slashRight/slashRight"+ i + ".png");
             slashRightImage[i].scale(150,150);
         }
         
         for(int i=0; i<slashLeftImage.length; i++)
         {
-            slashLeftImage[i] = new GreenfootImage("images/Monsters/Level3/Level3Reaper/Reaper/slashLeft/slashLeft"+ i + ".png");
+            slashLeftImage[i] = new GreenfootImage("images/Monsters/Level3/Level3Skeleton/slashLeft/slashLeft"+ i + ".png");
             slashLeftImage[i].scale(150,150);
         }
         
-        //Set idle image for death of Reaper
+        //Set idle image for death of Skeleton
         for(int i=0; i<deadLeftImage.length; i++)
         {
-            deadLeftImage[i] = new GreenfootImage("images/Monsters/Level3/Level3Reaper/Reaper/deadLeft/deadLeft"+ i + ".png");
+            deadLeftImage[i] = new GreenfootImage("images/Monsters/Level3/Level3Skeleton/deadLeft/deadLeft"+ i + ".png");
             deadLeftImage[i].scale(150, 150);
         }
         
-        //Set idle image for death of Reaper
+        //Set idle image for death of Skeleton
         for(int i=0; i<deadRightImage.length; i++)
         {
-            deadRightImage[i] = new GreenfootImage("images/Monsters/Level3/Level3Reaper/Reaper/deadRight/deadRight"+ i + ".png");
+            deadRightImage[i] = new GreenfootImage("images/Monsters/Level3/Level3Skeleton/deadRight/deadRight"+ i + ".png");
             deadRightImage[i].scale(150, 150);
         }
         
         walkTimer.mark();
         
-        //Initial Reaper image
+        //Initial Skeleton image
         setImage(walkLeftImage[0]);
         
-        // Set image for hp of Reaper
-        for(int i = 0; i < level3ReaperHP.length; i++)
+        // Set image for hp of Skeleton
+        for(int i = 0; i < level3SkeletonHP.length; i++)
         {
-            level3ReaperHP[i] = new GreenfootImage("hp_bar/reaper3/reaper3_hp_" + i + ".png");
-            level3ReaperHP[i].scale(70, 30);
+            level3SkeletonHP[i] = new GreenfootImage("hp_bar/monster1_hp/monster1_hp_" + i + ".png");
+            level3SkeletonHP[i].scale(70, 30);
         }
-        reaper3CurrentHP = 5;
+        skeleton3CurrentHP = 5;
     }
     
     int slashImageIndex = 0;
     /**
-     * Animate slash attack of Reaper
+     * Animate slash attack of Skeleton
      */
     
     public void animateSlashAttack()
@@ -133,34 +132,7 @@ public class Level3Skeleton extends Actor
         }
     }
     
-    int kickImageIndex = 0;
-    
-    /**
-     * Animate kick attack of Reaper
-     */
-    
-    public void animateKickAttack()
-    {
-        if(slashTimer.millisElapsed() < 100)
-        {
-            return;
-        }
-        
-        kickTimer.mark();
-        
-        if(direction.equals("right"))
-        {
-            setImage(kickRightImage[kickImageIndex]);
-            kickImageIndex = (kickImageIndex+1) % kickRightImage.length;
-        }
-        else
-        {
-            setImage(kickLeftImage[slashImageIndex]);
-            kickImageIndex = (kickImageIndex+1) % kickLeftImage.length;
-        }
-    }
-    
-    //Animate death of Reaper
+    //Animate death of Skeleton
     int deadImageIndex = 0;
     public void animateDeath()
     {
@@ -174,23 +146,23 @@ public class Level3Skeleton extends Actor
         {
           setImage(deadLeftImage[deadImageIndex]);
             deadImageIndex = (deadImageIndex+1);
-            reaperDeadSound.play();  
+            skeletonDeadSound.play();  
         }
         else
         {
           setImage(deadRightImage[deadImageIndex]);
             deadImageIndex = (deadImageIndex+1);
-            reaperDeadSound.play();  
+            skeletonDeadSound.play();  
         }
         
         if(deadImageIndex == 14)
         {
-            getWorld().removeObject(reaper3HPBar);
+            getWorld().removeObject(skeleton3HPBar);
             getWorld().removeObject(this);
         }
     }
     
-    //Animate walk of Reaper
+    //Animate walk of Skeleton
     int walkImageIndex = 0;
     public void animateWalk()
     {
@@ -242,8 +214,8 @@ public class Level3Skeleton extends Actor
     {
         
         animateSlashAttack();
-        level3ReaperDamage += 1;
-        return level3ReaperDamage;
+        level3SkeletonDamage += 1;
+        return level3SkeletonDamage;
     }
     
     // Damage to change hp method
@@ -253,14 +225,14 @@ public class Level3Skeleton extends Actor
         {
             return;
         }
-        reaper3CurrentHP -= damage;
+        skeleton3CurrentHP -= damage;
         
-        if(reaper3CurrentHP < 0)
+        if(skeleton3CurrentHP < 0)
         {
-            reaper3CurrentHP = 0;
+            skeleton3CurrentHP = 0;
         }
         
-        reaper3HPBar.setHP(reaper3CurrentHP);
+        skeleton3HPBar.setHP(skeleton3CurrentHP);
         invincibleTimer = 70;
     }
     
@@ -268,8 +240,8 @@ public class Level3Skeleton extends Actor
     public void addedToWorld(World w)
     {   
         // HPBar
-        reaper3HPBar = new HPBar(reaper3CurrentHP, level3ReaperHP);
-        w.addObject(reaper3HPBar, getX(), getY() - 45);
+        skeleton3HPBar = new HPBar(skeleton3CurrentHP, level3SkeletonHP);
+        w.addObject(skeleton3HPBar, getX(), getY() - 45);
     }
     
     /**
@@ -278,7 +250,7 @@ public class Level3Skeleton extends Actor
      */
     public void act()
     {
-        if(reaper3CurrentHP<=0)
+        if(skeleton3CurrentHP<=0)
         {
           isAlive = false;
           animateDeath();
@@ -299,15 +271,15 @@ public class Level3Skeleton extends Actor
           
           if(isAttacking)
           {
-              reaperAttackSound.play();
+              skeletonAttackSound.play();
               attack();
           }
         }
 
         // Move the HPBar with the witch
-        if(isAlive && level3ReaperHP != null)
+        if(isAlive && level3SkeletonHP != null)
         {
-          reaper3HPBar.setLocation(getX(), getY() - 45);
+          skeleton3HPBar.setLocation(getX(), getY() - 45);
         }
           
         //invicibleTimer decrease
