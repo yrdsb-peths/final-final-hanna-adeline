@@ -35,7 +35,7 @@ public class HurtBox extends Actor
                 return;
             }
             hitCountWitch++;
-            if(hitCountWitch >= 5)
+            if(hitCountWitch >= 7)
             {
                 ((Witch)owner).takeDamage(1);
                 hitCountWitch = 0;

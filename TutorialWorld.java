@@ -1,20 +1,39 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class TutorialWorld here.
+ * The TutorialWorld displays the tutorial of the game.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * This world teaches the player basic controls such as movement,
+ * flying, and attacks through step-by-step instructions displayed
+ * using a speech bubble.
+ * 
+ * @author Hanna & Adeline
+ * @version January 2025
  */
 public class TutorialWorld extends World
 {
+    /**
+     * The player-controlled witch character.
+     */
     private Witch witch;
+    /** 
+     * Speech bubble used to display tutorial instructions. 
+     */
     private SpeechBubble bubble;
+    /** 
+     * Tracks the current step of the tutorial.
+     */
     private int step = 0;
+    /**
+     * Tracks whether the space key has been released.
+     * (Reserved for preventing repeated input if needed.)
+     */
     private boolean spaceReleased = false;
     /**
      * Constructor for objects of class TutorialWorld.
      * 
+     * Initializes the background, TutorialWorld-characters, 
+     * speech bubble, and tutorial title.
      */
     public TutorialWorld()
     {    
@@ -47,6 +66,13 @@ public class TutorialWorld extends World
         addObject(tip, 300, 380);
     }
     
+    /**
+     * Displays the instruction text for the current tutorial step.
+     * 
+     * Each step introduces a new control or mechanic.
+     * When all steps are completed, the game transitions
+     * to the main world.
+     */
     private void showStep()
     {
         if (step == 0)
@@ -77,6 +103,12 @@ public class TutorialWorld extends World
         }
     }
 
+    /**
+     * Executes the main loop of the TutorialWorld.
+     * 
+     * Advances the tutorial when the player performs
+     * the required action for each step.
+     */
     public void act()
     {
         if(Greenfoot.isKeyDown("enter"))

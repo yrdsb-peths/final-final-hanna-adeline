@@ -1,18 +1,30 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class StoryWorld here.
+ * The Storyworld class represents the story world of the game.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * This world is used to present story dialogue and visuals
+ * before gameplay begins. It displays characters, speech
+ * bubbles, manages dialogue progression and transitions to level 1 game.
+ * 
+ * @author Hanna & Adeline
+ * version January 2025
  */
 public class StoryWorld extends World
 {
+    /**
+     * Speech bubble displayed on the left side of the screen.
+     */
     public SpeechBubble leftBubble;
+    /**
+     * Speech bubble displayed on the right side of the screen.
+     */
     public SpeechBubble rightBubble;
     /**
      * Constructor for objects of class StoryWorld.
      * 
+     * Initializes the background, characters, title images,
+     * speech bubbles, and dialogue manager.
      */
     public StoryWorld()
     {    
@@ -59,6 +71,12 @@ public class StoryWorld extends World
         addObject(tip, 300, 380);
     }
     
+    /**
+     * Executes the main loop for the story world.
+     * 
+     * Dialogue updates and story interactions are handled
+     * by the DialogueManager.
+     */
     public void act()
     {
         // Add text
