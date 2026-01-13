@@ -45,10 +45,16 @@ public class AttackBox extends Actor
             golem.takeDamage(damage);
         }
         
-        Level3Monster monster = (Level3Monster) getOneIntersectingObject(Level3Monster.class);
-        if(monster != null)
+        Level3Reaper reaper = (Level3Reaper) getOneIntersectingObject(Level3Reaper.class);
+        if(reaper != null)
         {
-            monster.takeDamage(damage);
+            reaper.takeDamage(damage);
+        }
+        
+        Level3Skeleton skeleton = (Level3Skeleton) getOneIntersectingObject(Level3Skeleton.class);
+        if(skeleton != null)
+        {
+            skeleton.takeDamage(damage);
         }
     }
 }
