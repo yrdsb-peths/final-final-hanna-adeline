@@ -1,38 +1,22 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * The second MyWorld class represents Level 2 of the game.
+ * Write a description of class MyWorld2 here.
  * 
- * This world manages enemy spawning, level completion logic,
- * potion spawning, and transitions to the game over screen and next level.
- * 
- * @author Adeline & Hanna
- * version January 2025
+ * @author (your name) 
+ * @version (a version number or a date)
  */
 public class MyWorld2 extends World
 {
-    /**
-     * Track whether Level 2 have been completed.
-     */
     public static boolean level2Complete = false;
-    /**
-     * Tracks whether the potion2 have been collected.
-     */
     public static boolean potion2Collected = false;
-    /**
-     * Indicates whether the Level 2 golem has already been spawned.
-     */
     private boolean golemSpawned = false;
-    /**
-     * Sound played when the potion spawns.
-     */
+    
     public static GreenfootSound potionSpawnedSound = new GreenfootSound("potionBubblingSound.mp3");
 
     /**
      * Constructor for objects of class MyWorld2.
      * 
-     * Initializes the background, player character, enemies,
-     * labels, and resets level state variables.
      */
     public MyWorld2()
     {    
@@ -59,55 +43,46 @@ public class MyWorld2 extends World
         // Create the slime 2 object
         Level2SlimeBlue slimered1 = new Level2SlimeBlue();
         addObject(slimered1, 500, 300);
+        
     }
     
-    /**
-     * Spawns the potion after the enemy is defeated.
-     * 
-     * Plays a looping sound effect when the potion appears.
-     */
     private void spawnPotion2() {
         Potion2 potion2 = new Potion2();
         addObject(potion2, 500, 300);
         potionSpawnedSound.playLoop();
     }
     
-    /**
-     * Spawns the Level 2 golem after the blue slime is defeated.
-     */
+    private void spawnHealingPotion()
+    {
+        HealingPotion healingPotion = new HealingPotion();
+        HealingPotion.healingPotionCollected = false;
+        //addObject(healingPotion);
+        potionSpawnedSound.play();
+        
+    }
+    
+    //Spawn Golem after SlimeBlue is defeated
     private void spawnGolem()
     {
         Level2Golem golem2 = new Level2Golem();
-        addObject(golem2, 500, 250);
+        addObject(golem2, 500, 300);
         golemSpawned = true;
     }
     
-    /**
-     * Ends the game and switches to the GameOver screen.
-     * 
-     * Removes all objects from the world before transitioning.
-     */
+    //Removes all monsters, hp boxes and the witch when the game is over
     public void gameOver() {
         removeObjects(getObjects(null));
         Greenfoot.setWorld(new GameOver());
     }
     
-    /**
-     * Resets Level 2 progress variables.
-     * 
-     * Called when starting a new game.
-     */
+    // Reset the variable when starting a new game
     public static void resetGame()
     {
         level2Complete = false;
         potion2Collected = false;
     }
     
-    /**
-     * Checks whether all enemies in Level 2 have been defeated.
-     * 
-     * If no enemies remain, the level is marked as complete.
-     */
+    // Method to check if the level is complete
     public void checkLevelComplete()
     {
         if(getObjects(Level1SlimeRed.class).isEmpty() && getObjects(Level2SlimeBlue.class).isEmpty() && getObjects(Level2Golem.class).isEmpty() && golemSpawned)
@@ -116,11 +91,6 @@ public class MyWorld2 extends World
         }
     }
     
-    /**
-     * Main game loop for Level 2.
-     * 
-     * Checks level completion and spawns the potion when appropriate.
-     */
     public void act() {
         checkLevelComplete();
         

@@ -28,7 +28,7 @@ public class HurtBox extends Actor
     
     public void checkDamageWitch()
     {
-        if(this.isTouching(Level1SlimeRed.class) || this.isTouching(Level2SlimeBlue.class) || this.isTouching(Level2Golem.class) || this.isTouching(Level3Monster.class))
+        if(this.isTouching(Level1SlimeRed.class) || this.isTouching(Level2SlimeBlue.class) || this.isTouching(Level2Golem.class) || this.isTouching(Level3Reaper.class) || this.isTouching(Level3Skeleton.class))
         {
             if(invincibleTimer > 0)
             {
