@@ -12,8 +12,8 @@ public class MyWorld2 extends World
     public static boolean potion2Collected = false;
     public static boolean golemSpawned = false;
     
-    public static GreenfootSound potionSpawnedSound = new GreenfootSound("potionBubblingSound.mp3");
-    public static GreenfootSound level2Sound = new GreenfootSound("level2Sound.mp3");
+    public static GreenfootSound potionSpawnedSound = new GreenfootSound("potionBubblingSound.wav");
+    public static GreenfootSound level2Sound = new GreenfootSound("level2Sound.wav");
     
     public static boolean healingPotionSpawned = false;
     /**

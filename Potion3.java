@@ -67,6 +67,7 @@ public class Potion3 extends Actor
         MyWorld3.potionSpawnedSound.stop();
         Potion1.potionCollectSound.play();
         ((MyWorld3)getWorld()).potion3Collected = true;
+        ((MyWorld3)getWorld()).level3Complete = true;
         return ((MyWorld3)getWorld()).potion3Collected;
     }
     
