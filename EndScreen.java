@@ -12,6 +12,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class EndScreen extends World
 {
+    public static GreenfootSound endingSound = new GreenfootSound("endingSound.wav");
+    private boolean finalPotionSpawned = false;
+    private SimpleTimer finalPotionTimer = new SimpleTimer();
+    
     /**
      * Constructor for objects of class StoryWorld.
      * 
@@ -26,5 +30,37 @@ public class EndScreen extends World
         GreenfootImage bg = new GreenfootImage("images/background/Win.png");
         bg.scale(getWidth(), getHeight());
         setBackground(bg);
+        
+        // Create the witch object
+        Witch witch = new Witch();
+        addObject(witch, 120, 250);
+        
+        MyWorld3.level3Sound.stop();
+        StoryWorld.introSound.stop();
+        endingSound.play();
+        
+        finalPotionTimer.mark();
+    }
+    
+    private void spawnPotionFinal()
+    {
+        if (!finalPotionSpawned && finalPotionTimer.millisElapsed() >= 8000)
+        {    
+            PotionFinal finalPotion = new PotionFinal();
+            addObject(finalPotion, 491, 244);
+            finalPotionSpawned = true;
+        }
+    }
+    /**
+     * Act method for EndScreen.
+     * Spawns one final potion after 10 seconds and dialogue.
+     */
+    public void act()
+    {
+        spawnPotionFinal();
+        if(MyWorld3.level3Complete && MyWorld3.potion3Collected)
+        {
+            spawnPotionFinal();
+        }
     }
 }

@@ -12,8 +12,8 @@ public class MyWorld2 extends World
     public static boolean potion2Collected = false;
     public static boolean golemSpawned = false;
     
-    public static GreenfootSound potionSpawnedSound = new GreenfootSound("potionBubblingSound.mp3");
-    public static GreenfootSound level2Sound = new GreenfootSound("level2Sound.mp3");
+    public static GreenfootSound potionSpawnedSound = new GreenfootSound("potionBubblingSound.wav");
+    public static GreenfootSound level2Sound = new GreenfootSound("level2Sound.wav");
     
     public static boolean healingPotionSpawned = false;
     /**
@@ -98,7 +98,7 @@ public class MyWorld2 extends World
     // Method to check if the level is complete
     public void checkLevelComplete()
     {
-        if(getObjects(Level1SlimeRed.class).isEmpty() && getObjects(Level2SlimeBlue.class).isEmpty() && getObjects(Level2Golem.class).isEmpty() && golemSpawned)
+        if(getObjects(Level2SlimeBlue.class).isEmpty() && getObjects(Level2Golem.class).isEmpty() && golemSpawned)
         {
             level2Complete = true;
         }

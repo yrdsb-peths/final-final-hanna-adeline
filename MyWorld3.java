@@ -12,8 +12,8 @@ public class MyWorld3 extends World
     public static boolean potion3Collected = false;
     public static boolean reaperSpawned = false;
     
-    public static GreenfootSound potionSpawnedSound = new GreenfootSound("potionBubblingSound.mp3");
-    public static GreenfootSound level3Sound = new GreenfootSound("level3Sound.mp3");
+    public static GreenfootSound potionSpawnedSound = new GreenfootSound("potionBubblingSound.wav");
+    public static GreenfootSound level3Sound = new GreenfootSound("level3Sound.wav");
     
     public static boolean healingPotionSpawned = false;
     /**
@@ -48,8 +48,11 @@ public class MyWorld3 extends World
         addObject(level3Label, 300, 35);
         
         //Play background music
-        level3Sound.playLoop();
-        level3Sound.setVolume(80);
+        if(!level3Complete && MyWorld2.potion2Collected && MyWorld.potion1Collected)
+        {
+            level3Sound.playLoop();
+            level3Sound.setVolume(100);
+        }
         
         // Restart the healing potion spawn at start of the level
         healingPotionSpawned = false;
@@ -99,7 +102,7 @@ public class MyWorld3 extends World
     // Method to check if the level is complete
     public void checkLevelComplete()
     {
-        if(getObjects(Level1SlimeRed.class).isEmpty() && getObjects(Level2SlimeBlue.class).isEmpty() && getObjects(Level2Golem.class).isEmpty() && MyWorld2.golemSpawned && getObjects(Level3Skeleton.class).isEmpty() && getObjects(Level3Reaper.class).isEmpty() && reaperSpawned)
+        if(getObjects(Level3Skeleton.class).isEmpty() && getObjects(Level3Reaper.class).isEmpty() && reaperSpawned)
         {
             level3Complete = true;
         }
@@ -109,16 +112,16 @@ public class MyWorld3 extends World
         checkLevelComplete();
         if(level3Complete && !potion3Collected && getObjects(Potion3.class).isEmpty())
         {
-            level3Sound.stop();
             spawnPotion3();
         }
         if(getObjects(Level3Skeleton.class).isEmpty() && !reaperSpawned)
         {
             spawnReaper();
         }
-        if(potion3Collected && potionSpawnedSound.isPlaying())
+        if(potion3Collected)
         {
             potionSpawnedSound.stop();
+            Greenfoot.setWorld(new EndScreen());
         }
         // Spawn healing potion if Witch HP is low
         if(!healingPotionSpawned) 

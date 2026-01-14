@@ -4,8 +4,8 @@ public class MyWorld extends World {
     public static boolean level1Complete = false;
     public static boolean potion1Collected = false;
     
-    public static GreenfootSound potionSpawnedSound = new GreenfootSound("potionBubblingSound.mp3");
-    public static GreenfootSound level1Sound = new GreenfootSound("level1Sound.mp3");
+    public static GreenfootSound potionSpawnedSound = new GreenfootSound("potionBubblingSound.wav");
+    public static GreenfootSound level1Sound = new GreenfootSound("level1Sound.wav");
     public static boolean healingPotionSpawned = false;
     public MyWorld() {
         super(600, 400, 1);
@@ -33,6 +33,8 @@ public class MyWorld extends World {
         
         //Play background music
         GameOver.gameOverSound.stop();
+        StoryWorld.introSound.stop();
+        EndScreen.endingSound.stop();
         level1Sound.playLoop();
         
         // Restart the healing potion spawn at start of the level
@@ -80,11 +82,13 @@ public class MyWorld extends World {
     
     public void act() {
         checkLevelComplete();
-        
         if(level1Complete && !potion1Collected && getObjects(Potion1.class).isEmpty())
         {
-            level1Sound.stop();
             spawnPotion1();
+        }
+        if(level1Complete)
+        {
+            level1Sound.stop();
         }
         if(potion1Collected && potionSpawnedSound.isPlaying()) 
         {
