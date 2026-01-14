@@ -170,7 +170,7 @@ public class Level2Golem extends Actor
             golemDeadSound.play();  
         }
         
-        if(deadImageIndex == 0)
+        if (deadImageIndex >= deadLeftImage.length) 
         {
             getWorld().removeObject(golem2HPBar);
             getWorld().removeObject(this);

@@ -163,7 +163,7 @@ public class Level3Skeleton extends Actor
             skeletonDeadSound.play();  
         }
         
-        if(deadImageIndex == 14)
+        if(deadImageIndex >= deadLeftImage.length)
         {
             getWorld().removeObject(skeleton3HPBar);
             getWorld().removeObject(this);
