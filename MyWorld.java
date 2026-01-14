@@ -6,7 +6,7 @@ public class MyWorld extends World {
     
     public static GreenfootSound potionSpawnedSound = new GreenfootSound("potionBubblingSound.mp3");
     public static GreenfootSound level1Sound = new GreenfootSound("level1Sound.mp3");
-    
+    public static boolean healingPotionSpawned = false;
     public MyWorld() {
         super(600, 400, 1);
         
@@ -33,6 +33,9 @@ public class MyWorld extends World {
         
         //Play background music
         level1Sound.playLoop();
+        
+        // Restart the healing potion spawn at start of the level
+        healingPotionSpawned = false;
     }
     
     // Method to spawn the potion when the monster is dead
@@ -45,10 +48,8 @@ public class MyWorld extends World {
     private void spawnHealingPotion()
     {
         HealingPotion healingPotion = new HealingPotion();
-        HealingPotion.healingPotionCollected = false;
-        //addObject(healingPotion);
+        addObject(healingPotion, 450, 90); 
         potionSpawnedSound.play();
-        
     }
     // Removes all monsters, hp boxes and the witch when the game is over
     public void gameOver() {
@@ -64,7 +65,7 @@ public class MyWorld extends World {
     {
         level1Complete = false;
         potion1Collected = false;
-        HealingPotion.healingPotionCollected = false;
+        healingPotionSpawned = false;
     }
     
     // Method to check if the level is complete
@@ -87,6 +88,12 @@ public class MyWorld extends World {
         if(potion1Collected && potionSpawnedSound.isPlaying()) 
         {
             potionSpawnedSound.stop();
+        }
+        Witch witch = getObjects(Witch.class).get(0);
+        if (witch.getHP() <= 2 && getObjects(HealingPotion.class).isEmpty() && !healingPotionSpawned)
+        {
+            spawnHealingPotion();
+            healingPotionSpawned = true; // make sure it only spawns once
         }
     }
 }

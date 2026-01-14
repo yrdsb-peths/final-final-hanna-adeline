@@ -15,6 +15,7 @@ public class MyWorld3 extends World
     public static GreenfootSound potionSpawnedSound = new GreenfootSound("potionBubblingSound.mp3");
     public static GreenfootSound level3Sound = new GreenfootSound("level3Sound.mp3");
     
+    public static boolean healingPotionSpawned = false;
     /**
      * Constructor for objects of class MyWorld3.
      * 
@@ -48,7 +49,10 @@ public class MyWorld3 extends World
         
         //Play background music
         level3Sound.playLoop();
-        }
+        
+        // Restart the healing potion spawn at start of the level
+        healingPotionSpawned = false;
+    }
 
     private void spawnReaper()
     {
@@ -60,10 +64,9 @@ public class MyWorld3 extends World
     private void spawnHealingPotion()
     {
         HealingPotion healingPotion = new HealingPotion();
-        HealingPotion.healingPotionCollected = false;
-        //addObject(healingPotion);
+        addObject(healingPotion, 100, 100); 
         potionSpawnedSound.play();
-        
+        healingPotionSpawned = true;
     }
     
     private void spawnPotion3() {
@@ -84,6 +87,7 @@ public class MyWorld3 extends World
         level3Complete = false;
         potion3Collected = false;
         reaperSpawned = false;
+        healingPotionSpawned = false;
         if(potionSpawnedSound.isPlaying())
         {
             potionSpawnedSound.stop();
@@ -114,6 +118,15 @@ public class MyWorld3 extends World
         if(potion3Collected && potionSpawnedSound.isPlaying())
         {
             potionSpawnedSound.stop();
+        }
+        // Spawn healing potion if Witch HP is low
+        if(!healingPotionSpawned) 
+        {
+            Witch witch = getObjects(Witch.class).get(0);
+            if(witch.getHP() <= 2 && getObjects(HealingPotion.class).isEmpty()) 
+            {
+                spawnHealingPotion();
+            }
         }
     }
 }

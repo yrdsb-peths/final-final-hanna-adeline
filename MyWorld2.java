@@ -15,6 +15,7 @@ public class MyWorld2 extends World
     public static GreenfootSound potionSpawnedSound = new GreenfootSound("potionBubblingSound.mp3");
     public static GreenfootSound level2Sound = new GreenfootSound("level2Sound.mp3");
     
+    public static boolean healingPotionSpawned = false;
     /**
      * Constructor for objects of class MyWorld2.
      * 
@@ -50,6 +51,8 @@ public class MyWorld2 extends World
         //Play background  music
         level2Sound.playLoop();
         
+        // Restart the healing potion spawn at start of the level
+        healingPotionSpawned = false;
     }
     
     private void spawnPotion2() {
@@ -61,17 +64,16 @@ public class MyWorld2 extends World
     private void spawnHealingPotion()
     {
         HealingPotion healingPotion = new HealingPotion();
-        HealingPotion.healingPotionCollected = false;
-        //addObject(healingPotion);
+        addObject(healingPotion, 280, 90); 
         potionSpawnedSound.play();
-        
+        healingPotionSpawned = true;
     }
     
     //Spawn Golem after SlimeBlue is defeated
     private void spawnGolem()
     {
         Level2Golem golem2 = new Level2Golem();
-        addObject(golem2, 500, 300);
+        addObject(golem2, 500, 275);
         golemSpawned = true;
     }
     
@@ -119,6 +121,15 @@ public class MyWorld2 extends World
         {
             potionSpawnedSound.stop();
         }
-
+        
+        // Spawn healing potion if Witch HP is low
+        if(!healingPotionSpawned) 
+        {
+            Witch witch = getObjects(Witch.class).get(0);
+            if(witch.getHP() <= 2 && getObjects(HealingPotion.class).isEmpty()) 
+            {
+                spawnHealingPotion();
+            }
+        }
     }
 }
