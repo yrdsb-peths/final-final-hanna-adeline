@@ -11,6 +11,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class TitleScreen extends World
 {
+    public static GreenfootSound titleScreenSound;
+    public static boolean firstPlayDone = false;
     /**
      * Constructor for objects of class TitleScreen.
      * 
@@ -35,8 +37,17 @@ public class TitleScreen extends World
         GreenfootImage img = new GreenfootImage("images/background/Startgame_Title.png");
         TitleImage title = new TitleImage(img, 470, 45);
         addObject(title, 300, 125);
+        
+        //Play background music for beginning title screen
+        if(titleScreenSound != null && titleScreenSound.isPlaying())
+        {
+            titleScreenSound.stop();
+        }
+        titleScreenSound = new GreenfootSound("titleScreenSound.mp3");
+        titleScreenSound.play();
+        firstPlayDone = false;
     }
-
+    
     /**
      * Executes the main loop of the TitleScreen.
      * 
@@ -45,11 +56,19 @@ public class TitleScreen extends World
      */
     public void act()
     {
+        //Loops through titleScreenSound once first play is done
+        if(!firstPlayDone && !titleScreenSound.isPlaying())
+        {
+            firstPlayDone = true;
+            titleScreenSound.playLoop();
+        }
+        
         // Begin the Story if the user presses the space bar
         if(Greenfoot.isKeyDown("space"))
         {
             StoryWorld storyWorld = new StoryWorld();
             Greenfoot.setWorld(storyWorld);
+            titleScreenSound.stop();
         }
     }
 }
