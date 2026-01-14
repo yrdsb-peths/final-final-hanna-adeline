@@ -1,9 +1,14 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * The Witch, our main character.
+ * The Witch class represents the main playable character.
+ * The witch can move, fly, attack enemies using two attack types,
+ * take damage, heal, and display cooldown and health bars.
  * 
- * @author Hanna & Adeline 
+ * This class controls animations, combat logic, cooldown systems,
+ * flying mechanics, and game-over behavior.
+ * 
+ * @author Hanna & Adeline
  * @version December 2025
  */
 public class Witch extends Actor
@@ -32,7 +37,7 @@ public class Witch extends Actor
     private int witchMaxHP = 5;
     private int invincibleTimer = 0;
     
-    // Boolean for whether witch is alive (game still running)
+    /** HP bar displayed above the witch */
     public static boolean witchAlive;
     
     // Image idles of witch
@@ -80,7 +85,7 @@ public class Witch extends Actor
     private Actor attack1CooldownIcon;
     private Actor attack2CooldownIcon;
     
-    // -- Flying System --
+    // Flying System
     private boolean isFlying = false;
     
     // Flying cooldown icon sprite images
@@ -105,7 +110,9 @@ public class Witch extends Actor
     private int deathTimer = 0;
     
     /**
-     * Constructor - the code that gets run one time when the object is created.
+     * Constructs the Witch object.
+     * Initializes animations, sounds, health, cooldown bars,
+     * and sets default states.
      */
     public Witch()
     {
@@ -184,10 +191,11 @@ public class Witch extends Actor
         }
     }
     
-    /**
-     * Animate the witch at default state
-     */
     int imageIndex = 0;
+    /**
+     * Animates the witch's default idle animation
+     * based on the direction she is facing.
+     */
     public void animateWitch()
     {
         if(defaultTimer.millisElapsed() < 50)
@@ -208,10 +216,11 @@ public class Witch extends Actor
         }
     }
     
-    /**
-     * Animate the level 1 attack of witch
-     */
     int attackIndex1 = 0;
+    /**
+     * Animates the witch's level 1 attack.
+     * Plays sound at the start of the attack.
+     */
     public void animateAttackOne()
     {
         if(attackTimer1.millisElapsed() < 50)
@@ -234,11 +243,12 @@ public class Witch extends Actor
             attackIndex1 = attackIndex1 + 1;
         }
     }
-    
-    /**
-     * Animate the level 2 attack of witch
-     */    
+      
     int attackIndex2 = 0;
+    /**
+     * Animates the witch's level 2 attack.
+     * Plays sound at the start of the attack.
+     */
     public void animateAttackTwo()
     {
         if(attackTimer2.millisElapsed() < 50)
@@ -262,7 +272,12 @@ public class Witch extends Actor
         }
     }
     
-    // HurtBox and HPBar addedToWorld method
+    /**
+     * Adds the witch's HurtBox, HP bar, and cooldown bars
+     * when the witch is added to the world.
+     * 
+     * @param w the world the witch is added to
+     */
     public void addedToWorld(World w)
     {
         // HurtBox
@@ -292,7 +307,12 @@ public class Witch extends Actor
         w.addObject(flyCooldownIcon, getX() - 25, getY() - 60);
     }
     
-    // Damage to change hp method
+    /**
+     * Applies damage to the witch.
+     * Damage is ignored if invincibility or death is active.
+     * 
+     * @param damage the amount of damage taken
+     */
     public void takeDamage(int damage)
     {
         if(invincibleTimer > 0 || isDying)
@@ -311,7 +331,12 @@ public class Witch extends Actor
         invincibleTimer = 30;
     }
     
-    // Healing hp method
+    /**
+     * Heals the witch by the specified amount.
+     * Healing is capped at maximum HP.
+     * 
+     * @param amount the amount of HP restored
+     */
     public void heal(int amount)
     {
         if (witchCurrentHP <= 0) 
@@ -328,13 +353,20 @@ public class Witch extends Actor
         witchHPBar.setHP(witchCurrentHP);
     }
     
-    // Getter method for hp for healing potion spawn
+    /**
+     * Getter method that returns the witch's current HP.
+     * 
+     * @return current HP value
+     */
     public int getHP()
     {
         return witchCurrentHP;
     }
     
-    // Act method
+    /**
+     * Main act method which handles movement, flying, attacks, cooldowns,
+     * animations, collision boxes, and game-over logic.
+     */
     public void act()
     {
         if(Greenfoot.isKeyDown("left"))

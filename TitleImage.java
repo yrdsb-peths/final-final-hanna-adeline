@@ -1,15 +1,26 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class TitleImage here.
+ * The TitleImage class represents a static image used
+ * for titles, screens, or UI elements in the game.
+ * The image can be scaled to a specified size.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Hanna
+ * @version January 2026
  */
 public class TitleImage extends Actor
 {
+    /** The image displayed by this TitleImage */
     GreenfootImage img;
     
+    /**
+     * Constructs a TitleImage object with a specified image
+     * and scales it to the given width and height.
+     *
+     * @param img the image to be displayed
+     * @param x the width to scale the image to
+     * @param y the height to scale the image to
+     */
     public TitleImage(GreenfootImage img, int x, int y)
     {
         img.scale(x, y);
