@@ -18,7 +18,6 @@ public class StoryWorld extends World
     public SpeechBubble rightBubble;
     // Background for the story world
     public static GreenfootSound introSound = new GreenfootSound("introSound.wav");
-    public static boolean introPlaying = false;
     
     /**
      * Constructor for objects of class StoryWorld.
@@ -71,17 +70,25 @@ public class StoryWorld extends World
         addObject(tip, 300, 380);
         
         //Play sound
-        if (!introSound.isPlaying()) 
-        {
-            introSound.stop();
-        }
-        introSound.playLoop();
+        playIntroSound();
         if(EndScreen.endingSound.isPlaying())
         {
             EndScreen.endingSound.stop();
         }
     }
     
+    public static void playIntroSound()
+    {
+        if(!introSound.isPlaying())
+        {   
+            introSound.play();
+        }
+        if(introSound.isPlaying())
+        {
+            return;
+        }
+    }
+        
     /**
      * Executes the main loop for the story world.
      * 
