@@ -5,7 +5,7 @@ import greenfoot.*;
  * This world manages enemy spawning, level completion logic,
  * potion spawning, and transitions to the game over screen and next level.
  * 
- * @author Hanna & Adeline
+ * @author Adeline & Hanna
  * version January 2026
  */
 public class MyWorld extends World {
