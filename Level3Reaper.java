@@ -129,7 +129,6 @@ public class Level3Reaper extends Actor
     /**
      * Animate slash attack of Reaper
      */
-    
     public void animateSlashAttack()
     {
         if(slashTimer.millisElapsed() < 75)
