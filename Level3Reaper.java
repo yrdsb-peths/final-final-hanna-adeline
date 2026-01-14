@@ -37,7 +37,7 @@ public class Level3Reaper extends Actor
     boolean attackSoundIsPlaying = false;
     
     //Boolean for whether Reaper is alive
-    boolean isAlive = true;
+    public boolean isAlive = true;
     
     //SimpleTimer variables
     SimpleTimer slashTimer = new SimpleTimer();
@@ -231,6 +231,17 @@ public class Level3Reaper extends Actor
             getWorld().removeObject(reaper3HPBar);
             getWorld().removeObject(this);
         }
+    }
+    
+    // Getter method to check if the Reaper is alive
+    /**
+     * Returns whether the reaper is alive.
+     * 
+     * @return true if alive, false otherwise
+     */
+    public boolean isAlive()
+    {   
+        return isAlive;
     }
     
     //Animate walk of Reaper

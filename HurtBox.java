@@ -73,10 +73,20 @@ public class HurtBox extends Actor
             return;
         }
     
-        // Reaper
-        if(isTouching(Level3Reaper.class) || isTouching(Level3Skeleton.class))
+        // Reaper (only if alive)
+        Level3Reaper reaper = (Level3Reaper) getOneIntersectingObject(Level3Reaper.class);
+        if(reaper != null && reaper.isAlive())
         {
             dealDamage();
+            return;
+        }
+        
+        // Skeleton (only if alive)
+        Level3Skeleton skeleton = (Level3Skeleton) getOneIntersectingObject(Level3Skeleton.class);
+        if(skeleton != null && skeleton.isAlive())
+        {
+            dealDamage();
+            return;
         }
     }
     

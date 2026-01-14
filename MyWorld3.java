@@ -41,7 +41,7 @@ public class MyWorld3 extends World
         
         //  Create the skeleton object
         Level3Skeleton skeleton = new Level3Skeleton();
-        addObject(skeleton, 500, 300);
+        addObject(skeleton, 500, 270);
         
         // Create the label of stage 3
         Label level3Label = new Label("Level 3", 40);
@@ -57,7 +57,7 @@ public class MyWorld3 extends World
     private void spawnReaper()
     {
         Level3Reaper reaper = new Level3Reaper();
-        addObject(reaper, 500, 300);
+        addObject(reaper, 500, 270);
         reaperSpawned = true;
     }
     
