@@ -5,6 +5,7 @@ public class MyWorld extends World {
     public static boolean potion1Collected = false;
     
     public static GreenfootSound potionSpawnedSound = new GreenfootSound("potionBubblingSound.mp3");
+    private GreenfootSound level1Sound = new GreenfootSound("level1Sound.mp3");
     
     public MyWorld() {
         super(600, 400, 1);
@@ -29,6 +30,9 @@ public class MyWorld extends World {
         // Create the label of stage 1
         Label level1Label = new Label("Level 1", 40);
         addObject(level1Label, 300, 35);
+        
+        //Play background music
+        level1Sound.playLoop();
     }
     
     // Method to spawn the potion when the monster is dead
@@ -77,6 +81,7 @@ public class MyWorld extends World {
         
         if(level1Complete && !potion1Collected && getObjects(Potion1.class).isEmpty())
         {
+            level1Sound.stop();
             spawnPotion1();
         }
         if(potion1Collected && potionSpawnedSound.isPlaying()) 

@@ -13,7 +13,8 @@ public class MyWorld2 extends World
     public static boolean golemSpawned = false;
     
     public static GreenfootSound potionSpawnedSound = new GreenfootSound("potionBubblingSound.mp3");
-
+    private GreenfootSound level2Sound = new GreenfootSound("level2Sound.mp3");
+    
     /**
      * Constructor for objects of class MyWorld2.
      * 
@@ -26,6 +27,8 @@ public class MyWorld2 extends World
         //Set booleans
         level2Complete = false;
         potion2Collected = false;
+        golemSpawned = false;
+
         
         // Set background
         GreenfootImage bg = new GreenfootImage("images/background/Battleground3.png");
@@ -43,6 +46,9 @@ public class MyWorld2 extends World
         // Create the slime 2 object
         Level2SlimeBlue slimered1 = new Level2SlimeBlue();
         addObject(slimered1, 500, 300);
+        
+        //Play background  music
+        level2Sound.playLoop();
         
     }
     
@@ -97,10 +103,12 @@ public class MyWorld2 extends World
     }
     
     public void act() {
+        
         checkLevelComplete();
         
         if(level2Complete && !potion2Collected && getObjects(Potion2.class).isEmpty())
         {
+            level2Sound.stop();
             spawnPotion2();
         }
         if(getObjects(Level2SlimeBlue.class).isEmpty() && !golemSpawned)

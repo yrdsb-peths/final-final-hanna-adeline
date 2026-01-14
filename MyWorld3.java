@@ -13,7 +13,8 @@ public class MyWorld3 extends World
     public static boolean reaperSpawned = false;
     
     public static GreenfootSound potionSpawnedSound = new GreenfootSound("potionBubblingSound.mp3");
-
+    private GreenfootSound level3Sound = new GreenfootSound("level3Sound.mp3");
+    
     /**
      * Constructor for objects of class MyWorld3.
      * 
@@ -26,6 +27,7 @@ public class MyWorld3 extends World
         // Set booleans
         level3Complete = false;
         potion3Collected = false;
+        reaperSpawned = false; 
         
         // Set background
         GreenfootImage bg = new GreenfootImage("images/background/Battleground4.png");
@@ -43,7 +45,10 @@ public class MyWorld3 extends World
         // Create the label of stage 3
         Label level3Label = new Label("Level 3", 40);
         addObject(level3Label, 300, 35);
-    }
+        
+        //Play background music
+        level3Sound.playLoop();
+        }
 
     private void spawnReaper()
     {
@@ -83,6 +88,7 @@ public class MyWorld3 extends World
         {
             potionSpawnedSound.stop();
         }
+        Greenfoot.setWorld(new MyWorld3());
     }
     
     // Method to check if the level is complete
@@ -98,6 +104,7 @@ public class MyWorld3 extends World
         checkLevelComplete();
         if(level3Complete && !potion3Collected && getObjects(Potion3.class).isEmpty())
         {
+            level3Sound.stop();
             spawnPotion3();
         }
         if(getObjects(Level3Skeleton.class).isEmpty() && !reaperSpawned)
