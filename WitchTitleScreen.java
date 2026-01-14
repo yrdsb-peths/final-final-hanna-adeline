@@ -1,10 +1,15 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class WitchTitleScreen here.
+ * The WitchTitleScreen class represents the animated witch
+ * that appears on the title screen. 
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * It displays the witch in her default idle animation and loops 
+ * the animation continuously while on the titlescreen and storyworld.
+ * 
+ * 
+ * @author Hanna
+ * @version January 2026
  */
 public class WitchTitleScreen extends Actor
 {
@@ -14,6 +19,11 @@ public class WitchTitleScreen extends Actor
     // SimplerTimer variables
     SimpleTimer defaultTimer = new SimpleTimer();
     
+    /** 
+     * Constructs the WitchTitleScreen object.
+     * Loads and scales the witch's idle animation images
+     * and sets the initial image. 
+     */
     public WitchTitleScreen()
     {
         // Set idle image for default witch
@@ -27,10 +37,11 @@ public class WitchTitleScreen extends Actor
         setImage(defaultIdleRight[0]);
     }
     
-    /**
-     * Animate the witch at default state
-     */
     int imageIndex = 0;
+    /**
+     * Animates the witch's idle animation.
+     * Loops through the defaultIdleRight images at a consistent speed.
+     */
     public void animateWitch()
     {
         if(defaultTimer.millisElapsed() < 50)
@@ -44,6 +55,10 @@ public class WitchTitleScreen extends Actor
         imageIndex = (imageIndex + 1) % defaultIdleRight.length;
     }
     
+    /**
+     * Act method called by Greenfoot on every frame.
+     * Continuously animates the witch by calling animateWitch().
+     */
     /**
      * Act - do whatever the WitchTitleScreen wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
