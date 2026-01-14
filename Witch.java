@@ -94,8 +94,8 @@ public class Witch extends Actor
     // Fly cooldown bar state
     private int flyCooldownLevel = 4;
     private int flyCooldownTimer = 0;
-    private int flyCooldownSpeed = 40;
-    private int flyBarCooldownSpeed = 70;
+    private int flyCooldownSpeed = 30;
+    private int flyBarCooldownSpeed = 50;
 
     // Fly cooldown icon
     private Actor flyCooldownIcon;
