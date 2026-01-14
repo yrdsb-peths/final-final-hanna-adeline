@@ -1,15 +1,24 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class SpeechBubble here.
+ * The SpeechBubble class displays a speech bubble image
+ * that can show or hide text during gameplay.
+ * It supports resizing and multi-line text rendering.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Hanna
+ * @version December 2025
  */
 public class SpeechBubble extends Actor
 {
+    /** Base image used as the speech bubble background */
     private GreenfootImage baseImage;
     
+    /**
+     * Constructs a SpeechBubble object using the given image path.
+     * The speech bubble starts hidden with a transparent image.
+     *
+     * @param imagePath the file path of the speech bubble image
+     */
     public SpeechBubble(String imagePath)
     {
         baseImage = new GreenfootImage(imagePath);
@@ -20,11 +29,23 @@ public class SpeechBubble extends Actor
         setImage(transparent);
     }
 
+    /**
+     * Resizes the speech bubble image.
+     *
+     * @param width the new width of the speech bubble
+     * @param height the new height of the speech bubble
+     */
     public void resize(int width, int height)
     {
         baseImage.scale(width, height); // scale the original image
     }
 
+    /**
+     * Displays the speech bubble with the specified text.
+     * Supports multi-line text separated by newline characters.
+     *
+     * @param text the text to display inside the speech bubble
+     */
     public void show(String text)
     {
         GreenfootImage img = new GreenfootImage(baseImage);
@@ -43,6 +64,10 @@ public class SpeechBubble extends Actor
         setImage(img);
     }
 
+    /**
+     * Hides the speech bubble by replacing it
+     * with a fully transparent image.
+     */
     public void hide()
     {
         GreenfootImage transparent = new GreenfootImage(baseImage.getWidth(), baseImage.getHeight());

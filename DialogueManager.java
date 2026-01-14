@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * The player can advance the dialogue using the space key or skip the
  * dialogue entirely using the enter key.
  * 
- * @author Hanna & Adeline 
+ * @author Hanna
  * @version January 2026
  */
 public class DialogueManager extends Actor

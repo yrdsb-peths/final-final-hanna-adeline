@@ -40,18 +40,12 @@ public class Level1SlimeRed extends Actor
     SimpleTimer walkTimer = new SimpleTimer();
     SimpleTimer deadTimer = new SimpleTimer();
     
-    /**
-     * Tracks total damage dealt by the slime.
-     */
+    // Tracks total damage dealt by the slime.
     public static int level1SlimeRedDamage = 0;
     
-    /**
-     * Health bar images for the slime.
-     */
+    // Health bar images for the slime.
     public GreenfootImage[] level1SlimeHP = new GreenfootImage[6];
-    /**
-     * Health bar displayed above the slime.
-     */
+    // Health bar displayed above the slime.
     public HPBar slime1RedHPBar;
     // Instances for slime hp modifying
     private int slime1CurrentHP = 5;

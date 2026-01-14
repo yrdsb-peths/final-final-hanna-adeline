@@ -12,9 +12,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class AttackBox extends Actor
 {
-    /** 
-     * The amount of damage this attack box inflicts on enemies. 
-     */
+    // The amount of damage this attack box inflicts on enemies.
     private int damage;
     
     /**

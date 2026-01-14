@@ -1,10 +1,15 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class TutorialTarget here.
+ * The TutorialTarget class represents a stationary enemy used
+ * for tutorial or practice purposes. It allows the player to
+ * learn combat mechanics such as attacking and dealing damage.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * The target has health, a health bar, damage invincibility frames,
+ * and a death animation.
+ * 
+ * @author Hanna
+ * @version December 2025
  */
 public class TutorialTarget extends Actor
 {
@@ -43,6 +48,10 @@ public class TutorialTarget extends Actor
     private int slime1MaxHP = 5;
     private int invincibleTimer = 0;
     
+    /**
+     * Constructs a TutorialTarget and initializes its animations,
+     * health values, and default image.
+     */
     public TutorialTarget()
     {
         //Set idle image for walk of SlimeRed
@@ -79,6 +88,10 @@ public class TutorialTarget extends Actor
     
     //Animate death of SlimeRed
     int deadImageIndex = 0;
+    /**
+     * Plays the death animation and removes the target
+     * and its HP bar from the world once complete.
+     */
     public void animateDeath()
     {
         if(deadTimer.millisElapsed() < 425)
@@ -98,7 +111,12 @@ public class TutorialTarget extends Actor
         }
     }
     
-    // Damage to change hp method
+    /**
+     * Reduces the target's health when damaged.
+     * Damage is ignored if the invincibility timer is active.
+     *
+     * @param damage the amount of damage taken
+     */
     public void takeDamage(int damage)
     {
         if(invincibleTimer > 0)
@@ -116,7 +134,12 @@ public class TutorialTarget extends Actor
         invincibleTimer = 70;
     }
     
-    // HPBar addedToWorld method
+    /**
+     * Adds the HP bar to the world when the target
+     * is added to the game world.
+     *
+     * @param w the world the target is added to
+     */
     public void addedToWorld(World w)
     {   
         // HPBar
@@ -125,8 +148,8 @@ public class TutorialTarget extends Actor
     }
     
     /**
-     * Act - do whatever the Level1SlimeRed wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
+     * Act method called each game cycle.
+     * Handles death, HP bar positioning, and invincibility timing.
      */
     public void act()
     {
