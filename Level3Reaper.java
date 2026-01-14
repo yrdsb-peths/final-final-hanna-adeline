@@ -34,7 +34,6 @@ public class Level3Reaper extends Actor
     boolean isAttacking = false;
     private String attackType = "";
     boolean attackChosen = false;
-    boolean attackSoundIsPlaying = false;
     
     //Boolean for whether Reaper is alive
     boolean isAlive = true;
@@ -207,6 +206,9 @@ public class Level3Reaper extends Actor
     int deadImageIndex = 0;
     public void animateDeath()
     {
+        reaperSlashAttackSound.stop();
+        reaperKickAttackSound.stop();
+
         if(deadTimer.millisElapsed() < 100)
         {
             return;
@@ -299,7 +301,6 @@ public class Level3Reaper extends Actor
                 kickTimer.mark();
                 
             }
-            attackSoundIsPlaying = false;
             attackChosen = true;
         }
         if(attackType.equals("slash"))
@@ -374,16 +375,6 @@ public class Level3Reaper extends Actor
           
           if(isAttacking)
           {
-            if(!attackSoundIsPlaying)
-                if(attackType.equals("slash"))
-                {
-                    reaperSlashAttackSound.play();
-                }
-                else
-                {
-                    reaperKickAttackSound.play();
-                }
-                attackSoundIsPlaying = true;
             attack();
           }
         }
