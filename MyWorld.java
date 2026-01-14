@@ -1,5 +1,14 @@
 import greenfoot.*;
 
+/**
+ * The first MyWorld class represents Level 1 of the game.
+ * 
+ * This world manages enemy spawning, level completion logic,
+ * potion spawning, and transitions to the game over screen and next level.
+ * 
+ * @author Hanna & Adeline
+ * version November 2025
+ */
 public class MyWorld extends World {
     public static boolean level1Complete = false;
     public static boolean potion1Collected = false;
@@ -7,6 +16,13 @@ public class MyWorld extends World {
     public static GreenfootSound potionSpawnedSound = new GreenfootSound("potionBubblingSound.mp3");
     public static GreenfootSound level1Sound = new GreenfootSound("level1Sound.mp3");
     public static boolean healingPotionSpawned = false;
+    
+    /**
+     * Constructor for objects of class MyWorld.
+     * 
+     * Initializes the background, player character, enemy, labels,
+     * and resets level state variables.
+     */
     public MyWorld() {
         super(600, 400, 1);
         
@@ -39,20 +55,33 @@ public class MyWorld extends World {
         healingPotionSpawned = false;
     }
     
-    // Method to spawn the potion when the monster is dead
+    /**
+     * Spawns the potion after the enemy is defeated.
+     * 
+     * Plays a looping sound effect when the potion appears.
+     */
     private void spawnPotion1() {
         Potion1 potion1 = new Potion1();
         addObject(potion1, 500, 300);
         potionSpawnedSound.playLoop();
     }
     
+    /** 
+     * Spawns the healing potion and plays the sound when
+     * the potion appears.
+     */
     private void spawnHealingPotion()
     {
         HealingPotion healingPotion = new HealingPotion();
         addObject(healingPotion, 450, 90); 
         potionSpawnedSound.play();
     }
-    // Removes all monsters, hp boxes and the witch when the game is over
+    
+    /**
+     * Ends the game and switches to the GameOver screen.
+     * 
+     * Removes all objects from the world before transitioning.
+     */
     public void gameOver() {
         removeObjects(getObjects(null));
         Greenfoot.setWorld(new GameOver());
@@ -61,7 +90,11 @@ public class MyWorld extends World {
         }
     }
     
-    // Reset the variable when starting a new game
+    /**
+     * Resets Level 1 progress variables.
+     * 
+     * Called when starting a new game.
+     */
     public static void resetGame()
     {
         level1Complete = false;
@@ -69,7 +102,11 @@ public class MyWorld extends World {
         healingPotionSpawned = false;
     }
     
-    // Method to check if the level is complete
+    /**
+     * Checks whether all enemies in Level 1 have been defeated.
+     * 
+     * If no enemies remain, the level is marked as complete.
+     */
     public void checkLevelComplete()
     {
         if(getObjects(Level1SlimeRed.class).isEmpty())
@@ -78,6 +115,11 @@ public class MyWorld extends World {
         }
     }
     
+    /**
+     * Main game loop for Level 1.
+     * 
+     * Checks level completion and spawns the potion when appropriate.
+     */
     public void act() {
         checkLevelComplete();
         
