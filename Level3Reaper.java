@@ -19,8 +19,8 @@ public class Level3Reaper extends Actor
     GreenfootImage[] deadLeftImage = new GreenfootImage[15];
     
     //Sounds for Reaper
-    GreenfootSound reaperSlashAttackSound = new GreenfootSound("slimeAttackSound.mp3");
-    GreenfootSound reaperKickAttackSound = new GreenfootSound("slimeAttackSound.mp3");
+    GreenfootSound reaperSlashAttackSound = new GreenfootSound("slashSound.mp3");
+    GreenfootSound reaperKickAttackSound = new GreenfootSound("kickSound.mp3");
     GreenfootSound reaperDeadSound = new GreenfootSound("slimeDeadSound.mp3");
     
     //Direction Reaper is facing
@@ -139,6 +139,11 @@ public class Level3Reaper extends Actor
         
         slashTimer.mark();
         
+        if(slashImageIndex == 1)
+        {
+            reaperSlashAttackSound.play();
+        }
+        
         if(direction.equals("right"))
         {
             setImage(slashRightImage[slashImageIndex]);
@@ -172,6 +177,11 @@ public class Level3Reaper extends Actor
         }
         
         kickTimer.mark();
+        
+        if(kickImageIndex == 1)
+        {
+            reaperKickAttackSound.play();
+        }
         
         if(direction.equals("right"))
         {

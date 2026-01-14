@@ -19,7 +19,7 @@ public class Level3Skeleton extends Actor
     GreenfootImage[] deadLeftImage = new GreenfootImage[15];
     
     //Sounds for Skeleton
-    GreenfootSound skeletonAttackSound = new GreenfootSound("slimeAttackSound.mp3");
+    GreenfootSound skeletonAttackSound = new GreenfootSound("swordSound.mp3");
     GreenfootSound skeletonDeadSound = new GreenfootSound("slimeDeadSound.mp3");
     
     //Direction Skeleton is facing
@@ -119,6 +119,10 @@ public class Level3Skeleton extends Actor
         }
         
         slashTimer.mark();
+        if(slashImageIndex == 1)
+        {
+            skeletonAttackSound.play();
+        }
         
         if(direction.equals("right"))
         {
@@ -129,6 +133,10 @@ public class Level3Skeleton extends Actor
         {
             setImage(slashLeftImage[slashImageIndex]);
             slashImageIndex = (slashImageIndex+1) % slashLeftImage.length;
+        }
+        if(slashImageIndex == 11)
+        {
+            skeletonAttackSound.play();
         }
     }
     
@@ -271,7 +279,6 @@ public class Level3Skeleton extends Actor
           
           if(isAttacking)
           {
-              skeletonAttackSound.play();
               attack();
           }
         }

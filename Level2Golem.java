@@ -21,7 +21,7 @@ public class Level2Golem extends Actor
     GreenfootImage[] deadLeftImage = new GreenfootImage[15];
     
     //Sounds for Golem
-    GreenfootSound golemAttackSound = new GreenfootSound("slimeAttackSound.mp3");
+    GreenfootSound golemAttackSound = new GreenfootSound("whackSound.mp3");
     GreenfootSound golemDeadSound = new GreenfootSound("slimeDeadSound.mp3");
     
     //Direction Golem is facing
@@ -135,6 +135,11 @@ public class Level2Golem extends Actor
         
         attackTimer.mark();
         
+        if(attackImageIndex == 1)
+        {
+            golemAttackSound.play();
+        }
+        
         if(direction.equals("right"))
         {
             setImage(attackRightImage[attackImageIndex]);
@@ -173,7 +178,7 @@ public class Level2Golem extends Actor
             golemDeadSound.play();  
         }
         
-        if(deadImageIndex == 14)
+        if(deadImageIndex == 0)
         {
             getWorld().removeObject(golem2HPBar);
             getWorld().removeObject(this);
@@ -315,7 +320,6 @@ public class Level2Golem extends Actor
           
           if(isAttacking)
           {
-              golemAttackSound.play();
               attack();
           }
         }

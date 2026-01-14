@@ -18,6 +18,8 @@ public class GameOver extends World
      */
     Label replayLabel;
     
+    GreenfootSound gameOverSound = new GreenfootSound("gameOverSound.mp3");
+    
     /**
      * Constructs the Game Over world.
      * 
@@ -38,6 +40,10 @@ public class GameOver extends World
         GreenfootImage img = new GreenfootImage("images/Fonts/GameOverTitle.png");
         TitleImage gameOver = new TitleImage(img, 450, 35);
         addObject(gameOver, 300, 330);
+        
+        // Play background music
+        gameOverSound.playLoop();
+
     }
     
     /**
@@ -51,6 +57,7 @@ public class GameOver extends World
         //Start the game if the user presses the space bar
         if(Greenfoot.isKeyDown("space"))
         {
+            gameOverSound.stop();
             MyWorld.resetGame();
             MyWorld2.resetGame();
             MyWorld3.resetGame();
