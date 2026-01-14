@@ -69,7 +69,7 @@ public class HurtBox extends Actor
         Level2Golem golem = (Level2Golem) getOneIntersectingObject(Level2Golem.class);
         if(golem != null && golem.isAlive())
         {
-            dealDamage();
+            golemDamage();
             return;
         }
     
@@ -85,7 +85,7 @@ public class HurtBox extends Actor
         Level3Skeleton skeleton = (Level3Skeleton) getOneIntersectingObject(Level3Skeleton.class);
         if(skeleton != null && skeleton.isAlive())
         {
-            dealDamage();
+            skeletonDamage();
             return;
         }
     }
@@ -107,10 +107,38 @@ public class HurtBox extends Actor
     /**
      * Applies damage to the witch and activates invincibility frames.
      */
-    private void reaperDamage()
+    private void golemDamage()
+    {
+        hitCountWitch++;
+        if(hitCountWitch >= 5)
+        {
+            witch.takeDamage(1);
+            hitCountWitch = 0;
+        }
+        invincibleTimer = 20;
+    }
+    
+    /**
+     * Applies damage to the witch and activates invincibility frames.
+     */
+    private void skeletonDamage()
     {
         hitCountWitch++;
         if(hitCountWitch >= 4)
+        {
+            witch.takeDamage(1);
+            hitCountWitch = 0;
+        }
+        invincibleTimer = 20;
+    }
+    
+    /**
+     * Applies damage to the witch and activates invincibility frames.
+     */
+    private void reaperDamage()
+    {
+        hitCountWitch++;
+        if(hitCountWitch >= 3)
         {
             witch.takeDamage(1);
             hitCountWitch = 0;
