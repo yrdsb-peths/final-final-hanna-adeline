@@ -57,7 +57,6 @@ public class EndScreen extends World
      */
     public void act()
     {
-        spawnPotionFinal();
         if(MyWorld3.level3Complete && MyWorld3.potion3Collected)
         {
             spawnPotionFinal();

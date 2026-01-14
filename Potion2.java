@@ -65,7 +65,7 @@ public class Potion2 extends Actor
     {
         getWorld().removeObject(this);
         MyWorld2.potionSpawnedSound.stop();
-        Potion1.potionCollectSound.play();
+        potionCollectSound.play();
         ((MyWorld2)getWorld()).potion2Collected = true;
         return ((MyWorld2)getWorld()).potion2Collected;
     }
