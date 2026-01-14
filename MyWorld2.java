@@ -91,7 +91,7 @@ public class MyWorld2 extends World
         golemSpawned = false;
         if(potionSpawnedSound.isPlaying())
         {
-        potionSpawnedSound.stop();
+            potionSpawnedSound.stop();
         }
     }
     

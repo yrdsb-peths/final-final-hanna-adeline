@@ -587,7 +587,7 @@ public class Witch extends Actor
         {
             deathTimer++;
             
-            if(deathTimer >= 60)
+            if(deathTimer >= 30)
             {
                 witchDeadSound.play();
                 World w = getWorld();
