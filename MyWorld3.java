@@ -13,7 +13,7 @@ public class MyWorld3 extends World
     public static boolean reaperSpawned = false;
     
     public static GreenfootSound potionSpawnedSound = new GreenfootSound("potionBubblingSound.mp3");
-    private GreenfootSound level3Sound = new GreenfootSound("level3Sound.mp3");
+    public static GreenfootSound level3Sound = new GreenfootSound("level3Sound.mp3");
     
     /**
      * Constructor for objects of class MyWorld3.

@@ -226,7 +226,7 @@ public class Level3Reaper extends Actor
             reaperDeadSound.play();  
         }
         
-        if(deadImageIndex == 14)
+        if(deadImageIndex >= deadLeftImage.length)
         {
             getWorld().removeObject(reaper3HPBar);
             getWorld().removeObject(this);

@@ -5,7 +5,7 @@ public class MyWorld extends World {
     public static boolean potion1Collected = false;
     
     public static GreenfootSound potionSpawnedSound = new GreenfootSound("potionBubblingSound.mp3");
-    private GreenfootSound level1Sound = new GreenfootSound("level1Sound.mp3");
+    public static GreenfootSound level1Sound = new GreenfootSound("level1Sound.mp3");
     
     public MyWorld() {
         super(600, 400, 1);

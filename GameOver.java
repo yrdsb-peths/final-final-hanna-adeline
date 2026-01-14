@@ -61,5 +61,17 @@ public class GameOver extends World
         {
             MyWorld3.potionSpawnedSound.stop();
         }
+        if(MyWorld.level1Sound.isPlaying())
+        {
+            MyWorld.level1Sound.stop();
+        }
+        if(MyWorld2.level2Sound.isPlaying())
+        {
+            MyWorld2.level2Sound.stop();
+        }
+        if(MyWorld3.level3Sound.isPlaying())
+        {
+            MyWorld3.level3Sound.stop();
+        }
     }
 }
