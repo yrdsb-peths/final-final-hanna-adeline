@@ -23,6 +23,7 @@ public class TutorialWorld extends World
     
     // Tracks whether the space key has been released
     private boolean spaceReleased = false;
+
     /**
      * Constructor for objects of class TutorialWorld.
      * 
@@ -49,8 +50,8 @@ public class TutorialWorld extends World
         
         // Tutorial bubble
         bubble = new SpeechBubble("images/speechbubble/speech_bubble_right.png");
-        bubble.resize(220, 100);
-        addObject(bubble, 450, 150);
+        bubble.resize(225, 100);
+        addObject(bubble, 440, 150);
     
         showStep();
 
@@ -68,7 +69,7 @@ public class TutorialWorld extends World
      * to the main world.
      */
     private void showStep()
-    {
+    {   
         if (step == 0)
         {
             bubble.show("Use LEFT and RIGHT\narrows to move.");
@@ -86,6 +87,10 @@ public class TutorialWorld extends World
             bubble.show("GREEN bar = Attack 2\nPress SPACE to \nattack me.");
         }
         else if (step == 4)
+        {
+            bubble.show("A HEALING potions will \nappear if hp is low.\n- Press N to continue");
+        }
+        else if (step == 5)
         {
             bubble.show("Press E to end\nthe tutorial ");
         }
@@ -144,6 +149,14 @@ public class TutorialWorld extends World
             }
         }
         else if(step == 4)
+        {
+            if(Greenfoot.isKeyDown("N"))
+            {
+                step++;
+                showStep();
+            }
+        }
+        else if(step == 5)
         {
             if(Greenfoot.isKeyDown("E"))
             {
