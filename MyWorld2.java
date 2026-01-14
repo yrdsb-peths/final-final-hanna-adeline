@@ -98,7 +98,7 @@ public class MyWorld2 extends World
     // Method to check if the level is complete
     public void checkLevelComplete()
     {
-        if(getObjects(Level1SlimeRed.class).isEmpty() && getObjects(Level2SlimeBlue.class).isEmpty() && getObjects(Level2Golem.class).isEmpty() && golemSpawned)
+        if(getObjects(Level2SlimeBlue.class).isEmpty() && getObjects(Level2Golem.class).isEmpty() && golemSpawned)
         {
             level2Complete = true;
         }

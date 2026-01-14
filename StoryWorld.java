@@ -17,6 +17,7 @@ public class StoryWorld extends World
     /** Speech bubble displayed on the right side of the screen */
     public SpeechBubble rightBubble;
     
+    public static GreenfootSound introSound = new GreenfootSound("introSound.wav");
     /**
      * Constructor for objects of class StoryWorld.
      * 
@@ -66,6 +67,10 @@ public class StoryWorld extends World
         GreenfootImage img = new GreenfootImage("images/Fonts/Story.png");
         TitleImage tip = new TitleImage(img, 500, 27);
         addObject(tip, 300, 380);
+        
+        //Play sound
+        introSound.playLoop();
+        EndScreen.endingSound.stop();
     }
     
     /**
@@ -76,6 +81,6 @@ public class StoryWorld extends World
      */
     public void act()
     {
-        // Add text
+        //
     }
 }

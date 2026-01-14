@@ -16,6 +16,9 @@ public class PotionFinal extends Actor
     /** Timer used to control animation speed */
     SimpleTimer animationTimer = new SimpleTimer();
     
+    /** Sound played when the potion is collected*/
+    public static GreenfootSound potionCollectSound = new GreenfootSound("potionCollectSound.mp3");
+    
     /**
      * Constructs a PotionFinal object.
      * Loads, scales, and initializes all animation frames.
@@ -52,6 +55,12 @@ public class PotionFinal extends Actor
         imageIndex = (imageIndex + 1) % potionImage.length;
     }
     
+    public void potionFinalCollected()
+    {
+        getWorld().removeObject(this);
+        potionCollectSound.play();
+    }
+    
     /**
      * Act method for PotionFinal.
      * Continuously animates the potion each frame.
@@ -59,5 +68,9 @@ public class PotionFinal extends Actor
     public void act()
     {
         animatePotion();
+        if(isTouching(HurtBox.class))
+            {
+                potionFinalCollected();
+            }
     }
 }

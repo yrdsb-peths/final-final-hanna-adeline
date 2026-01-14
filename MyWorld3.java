@@ -102,7 +102,7 @@ public class MyWorld3 extends World
     // Method to check if the level is complete
     public void checkLevelComplete()
     {
-        if(getObjects(Level1SlimeRed.class).isEmpty() && getObjects(Level2SlimeBlue.class).isEmpty() && getObjects(Level2Golem.class).isEmpty() && MyWorld2.golemSpawned && getObjects(Level3Skeleton.class).isEmpty() && getObjects(Level3Reaper.class).isEmpty() && reaperSpawned)
+        if(getObjects(Level3Skeleton.class).isEmpty() && getObjects(Level3Reaper.class).isEmpty() && reaperSpawned)
         {
             level3Complete = true;
         }
@@ -118,9 +118,10 @@ public class MyWorld3 extends World
         {
             spawnReaper();
         }
-        if(potion3Collected && potionSpawnedSound.isPlaying())
+        if(potion3Collected)
         {
             potionSpawnedSound.stop();
+            Greenfoot.setWorld(new EndScreen());
         }
         // Spawn healing potion if Witch HP is low
         if(!healingPotionSpawned) 
