@@ -1,10 +1,13 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class MyWorld2 here.
+ * The second MyWorld class represents Level 2 of the game.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * This world manages enemy spawning, level completion logic,
+ * potion spawning, and transitions to the game over screen and next level.
+ * 
+ * @author Hanna & Adeline
+ * version November 2025
  */
 public class MyWorld2 extends World
 {
@@ -19,6 +22,8 @@ public class MyWorld2 extends World
     /**
      * Constructor for objects of class MyWorld2.
      * 
+     * Initializes the background, player character, enemy, labels,
+     * and resets level state variables.
      */
     public MyWorld2()
     {    
@@ -55,12 +60,20 @@ public class MyWorld2 extends World
         healingPotionSpawned = false;
     }
     
+    /**
+     * Spawns the potion after the enemy is defeated.
+     * 
+     * Plays a looping sound effect when the potion appears.
+     */
     private void spawnPotion2() {
         Potion2 potion2 = new Potion2();
         addObject(potion2, 500, 300);
         potionSpawnedSound.playLoop();
     }
     
+    /** 
+     * Spawns the healing potion and plays the sound.
+     */
     private void spawnHealingPotion()
     {
         HealingPotion healingPotion = new HealingPotion();
@@ -77,13 +90,22 @@ public class MyWorld2 extends World
         golemSpawned = true;
     }
     
-    //Removes all monsters, hp boxes and the witch when the game is over
-    public void gameOver() {
+    /**
+     * Ends the game and switches to the GameOver screen.
+     * 
+     * Removes all objects from the world before transitioning.
+     */
+    public void gameOver() 
+    {
         removeObjects(getObjects(null));
         Greenfoot.setWorld(new GameOver());
     }
     
-    // Reset the variable when starting a new game
+    /**
+     * Resets Level 2 progress variables.
+     * 
+     * Called when starting a new game.
+     */
     public static void resetGame()
     {
         level2Complete = false;
@@ -95,7 +117,11 @@ public class MyWorld2 extends World
         }
     }
     
-    // Method to check if the level is complete
+    /**
+     * Checks whether all enemies in Level 2 have been defeated.
+     * 
+     * If no enemies remain, the level is marked as complete.
+     */
     public void checkLevelComplete()
     {
         if(getObjects(Level1SlimeRed.class).isEmpty() && getObjects(Level2SlimeBlue.class).isEmpty() && getObjects(Level2Golem.class).isEmpty() && golemSpawned)
@@ -104,8 +130,14 @@ public class MyWorld2 extends World
         }
     }
     
-    public void act() {
-        
+    /**
+     * Main game loop for Level 2.
+     * 
+     * Checks level completion and spawns the potion when appropriate.
+     */
+    public void act() 
+    {
+        // Determines whether to spawn the potion
         checkLevelComplete();
         
         if(level2Complete && !potion2Collected && getObjects(Potion2.class).isEmpty())

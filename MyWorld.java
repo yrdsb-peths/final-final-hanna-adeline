@@ -67,8 +67,7 @@ public class MyWorld extends World {
     }
     
     /** 
-     * Spawns the healing potion and plays the sound when
-     * the potion appears.
+     * Spawns the healing potion and plays the sound.
      */
     private void spawnHealingPotion()
     {
@@ -82,7 +81,8 @@ public class MyWorld extends World {
      * 
      * Removes all objects from the world before transitioning.
      */
-    public void gameOver() {
+    public void gameOver() 
+    {
         removeObjects(getObjects(null));
         Greenfoot.setWorld(new GameOver());
         if(potionSpawnedSound.isPlaying()) {
@@ -120,7 +120,9 @@ public class MyWorld extends World {
      * 
      * Checks level completion and spawns the potion when appropriate.
      */
-    public void act() {
+    public void act() 
+    {
+        // Determines whether to spawn the potion
         checkLevelComplete();
         
         if(level1Complete && !potion1Collected && getObjects(Potion1.class).isEmpty())
@@ -132,6 +134,8 @@ public class MyWorld extends World {
         {
             potionSpawnedSound.stop();
         }
+        
+        // Spawn healing potion if Witch HP is low
         Witch witch = getObjects(Witch.class).get(0);
         if (witch.getHP() <= 2 && getObjects(HealingPotion.class).isEmpty() && !healingPotionSpawned)
         {
