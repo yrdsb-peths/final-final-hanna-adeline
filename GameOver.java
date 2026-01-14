@@ -14,7 +14,7 @@ public class GameOver extends World
     /** Label prompting the player to replay the game */
     Label replayLabel;
     
-    GreenfootSound gameOverSound = new GreenfootSound("gameOverSound.mp3");
+    public static GreenfootSound gameOverSound = new GreenfootSound("gameOverSound.mp3");
     
     /**
      * Constructs the Game Over world.
@@ -38,7 +38,15 @@ public class GameOver extends World
         addObject(gameOver, 300, 330);
         
         // Play background music
+        MyWorld.level1Sound.stop();
+        MyWorld2.level2Sound.stop();
+        MyWorld3.level3Sound.stop();
+        MyWorld.potionSpawnedSound.stop();
+        MyWorld2.potionSpawnedSound.stop();
+        MyWorld3.potionSpawnedSound.stop();
+
         gameOverSound.playLoop();
+        
 
     }
     
@@ -58,30 +66,6 @@ public class GameOver extends World
             MyWorld2.resetGame();
             MyWorld3.resetGame();
             Greenfoot.setWorld(new MyWorld());
-        }
-        if(MyWorld.potionSpawnedSound.isPlaying())
-        {
-            MyWorld.potionSpawnedSound.stop();
-        }
-        if(MyWorld2.potionSpawnedSound.isPlaying())
-        { 
-            MyWorld2.potionSpawnedSound.stop();
-        }
-        if(MyWorld3.potionSpawnedSound.isPlaying())
-        {
-            MyWorld3.potionSpawnedSound.stop();
-        }
-        if(MyWorld.level1Sound.isPlaying())
-        {
-            MyWorld.level1Sound.stop();
-        }
-        if(MyWorld2.level2Sound.isPlaying())
-        {
-            MyWorld2.level2Sound.stop();
-        }
-        if(MyWorld3.level3Sound.isPlaying())
-        {
-            MyWorld3.level3Sound.stop();
         }
     }
 }

@@ -32,6 +32,7 @@ public class MyWorld extends World {
         addObject(level1Label, 300, 35);
         
         //Play background music
+        GameOver.gameOverSound.stop();
         level1Sound.playLoop();
         
         // Restart the healing potion spawn at start of the level
