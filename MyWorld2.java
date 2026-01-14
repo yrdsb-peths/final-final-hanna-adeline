@@ -19,6 +19,7 @@ public class MyWorld2 extends World
     public static GreenfootSound level2Sound = new GreenfootSound("level2Sound.wav");
     
     public static boolean healingPotionSpawned = false;
+    
     /**
      * Constructor for objects of class MyWorld2.
      * 
@@ -82,7 +83,9 @@ public class MyWorld2 extends World
         healingPotionSpawned = true;
     }
     
-    //Spawn Golem after SlimeBlue is defeated
+    /** 
+     * Spawns the Golem when the slime is defeated.
+     */
     private void spawnGolem()
     {
         Level2Golem golem2 = new Level2Golem();

@@ -19,6 +19,7 @@ public class MyWorld3 extends World
     public static GreenfootSound level3Sound = new GreenfootSound("level3Sound.wav");
     
     public static boolean healingPotionSpawned = false;
+    
     /**
      * Constructor for objects of class MyWorld3.
      * 
@@ -63,6 +64,9 @@ public class MyWorld3 extends World
         healingPotionSpawned = false;
     }
     
+    /**
+     * Spawn the reaper when the skeleton is defeated.
+     */
     private void spawnReaper()
     {
         Level3Reaper reaper = new Level3Reaper();

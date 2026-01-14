@@ -12,11 +12,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class StoryWorld extends World
 {
-    /** Speech bubble displayed on the left side of the screen */
+    // Speech bubble displayed on the left side of the screen
     public SpeechBubble leftBubble;
-    /** Speech bubble displayed on the right side of the screen */
+    // Speech bubble displayed on the right side of the screen
     public SpeechBubble rightBubble;
-    
+    // Background for the story world
     public static GreenfootSound introSound = new GreenfootSound("introSound.wav");
     /**
      * Constructor for objects of class StoryWorld.

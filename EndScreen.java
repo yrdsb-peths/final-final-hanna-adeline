@@ -12,7 +12,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class EndScreen extends World
 {
+    // Sound for the ending screen
     public static GreenfootSound endingSound = new GreenfootSound("endingSound.wav");
+    // Tracks if the final potion is spawned
     private boolean finalPotionSpawned = false;
     private SimpleTimer finalPotionTimer = new SimpleTimer();
     
@@ -42,6 +44,9 @@ public class EndScreen extends World
         finalPotionTimer.mark();
     }
     
+    /**
+     * Spawns the potion after all level is completed.
+     */
     private void spawnPotionFinal()
     {
         if (!finalPotionSpawned && finalPotionTimer.millisElapsed() >= 8000)
@@ -51,6 +56,7 @@ public class EndScreen extends World
             finalPotionSpawned = true;
         }
     }
+    
     /**
      * Act method for EndScreen.
      * Spawns one final potion after 10 seconds and dialogue.

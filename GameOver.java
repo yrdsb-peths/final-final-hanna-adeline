@@ -9,11 +9,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class GameOver extends World
 {
-    /** Label displaying the "Game Over" title */
+    // Label displaying the "Game Over" title
     Label gameOverLabel;
-    /** Label prompting the player to replay the game */
+    // Label prompting the player to replay the game
     Label replayLabel;
-    
+    // Sound for gameover
     public static GreenfootSound gameOverSound = new GreenfootSound("gameOverSound.mp3");
     
     /**

@@ -12,19 +12,16 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class TutorialWorld extends World
 {
-    /** The player-controlled witch character */
+    // The player-controlled witch character
     private Witch witch;
     
-    /** Speech bubble used to display tutorial instructions */
+    // Speech bubble used to display tutorial instructions
     private SpeechBubble bubble;
     
-    /** Tracks the current step of the tutorial */
+    // Tracks the current step of the tutorial
     private int step = 0;
     
-    /**
-     * Tracks whether the space key has been released.
-     * (Reserved for preventing repeated input if needed.)
-     */
+    // Tracks whether the space key has been released
     private boolean spaceReleased = false;
     /**
      * Constructor for objects of class TutorialWorld.
