@@ -1,10 +1,16 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class DialogueManager here.
+ * The DialogueManager controls the display and progression of story dialogue.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * It manages a sequence of dialogue lines, determines which character is
+ * speaking, and displays the dialogue in the appropriate speech bubble.
+ * 
+ * The player can advance the dialogue using the space key or skip the
+ * dialogue entirely using the enter key.
+ * 
+ * @author Hanna & Adeline 
+ * @version January 2026
  */
 public class DialogueManager extends Actor
 {
@@ -29,6 +35,13 @@ public class DialogueManager extends Actor
     private SpeechBubble left;
     private SpeechBubble right;
     
+    /**
+     * The constructor which constructs a DialogueManager and 
+     * initializes the dialogue display.
+     * 
+     * @param left The speech bubble used for left-side characters
+     * @param right The speech bubble used for right-side characters
+     */
     public DialogueManager(SpeechBubble left, SpeechBubble right)
     {
         this.left = left;
@@ -36,6 +49,10 @@ public class DialogueManager extends Actor
         showLine();
     }
     
+    /**
+     * Displays the current dialogue line in the appropriate speech bubble
+     * based on the speaking character.
+     */
     private void showLine()
     {
         Line line = dialogue[index];
@@ -54,8 +71,11 @@ public class DialogueManager extends Actor
     }
     
     /**
-     * Act - do whatever the DialogueManager wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
+     * Handles player input to progress or skip the dialogue.
+     * 
+     * Pressing the space key advances to the next dialogue line.
+     * Pressing the enter key skips the dialogue and transitions
+     * directly to the tutorial world.
      */
     public void act()
     {

@@ -1,18 +1,38 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class HealingPotion here.
+ * The HealingPotion class displays a healing potion that animates 
+ * and restores health when collected by the player.
  * 
- * @author Adeline
+ * The potion cycles through animation frames and disappears after
+ * healing the witch.
+ * 
+ * @author Hanna & Adeline
  * @version December 2025
  */
 public class HealingPotion extends Actor
 {
+    /**
+     * Animation frames for the healing potion.
+     */
     GreenfootImage[] potionImage = new GreenfootImage[8];
+    /**
+     * Timer used to control the animation speed.
+     */
     SimpleTimer animationTimer = new SimpleTimer();
+    /**
+     * Sound effect played when the potion is collected.
+     */
     public static GreenfootSound potionCollectSound = new GreenfootSound("potionCollectSound.mp3");
+    /**
+     * Indicates whether a healing potion has been collected.
+     */
     public static boolean healingPotionCollected = false;
     
+    /**
+     * Constructs a HealingPotion object, loads animation images,
+     * and initializes the animation timer.
+     */
     public HealingPotion()
     {
         for(int i=0; i<potionImage.length; i++)
@@ -28,6 +48,9 @@ public class HealingPotion extends Actor
     }
     
     int imageIndex = 0;
+    /**
+     * Animates the potion by cycling through images at a fixed interval.
+     */
     public void animatePotion()
     {
         if(animationTimer.millisElapsed() < 100)
@@ -41,8 +64,11 @@ public class HealingPotion extends Actor
     }
     
     /**
-     * Act - do whatever the HealingPotion wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
+     * The act method updates the potion each frame.
+     * 
+     * Animates the potion and checks for collision with the player's
+     * hurt box. If collected, heals the witch, plays a sound effect,
+     * and removes the potion from the world.
      */
     public void act()
     {

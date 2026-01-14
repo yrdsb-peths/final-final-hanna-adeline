@@ -1,9 +1,12 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Level2SlimeBlue here.
+ * The Level2SlimeBlue class displays a Level 2 blue slime enemy.
  * 
- * @author Adeline
+ * The slime automatically moves toward the witch, attacks on contact,
+ * plays animations and sounds, and displays a health bar above itself.
+ * 
+ * @author Adeline & Hanna
  * @version December 2025
  */
 public class Level2SlimeBlue extends Actor
@@ -37,15 +40,28 @@ public class Level2SlimeBlue extends Actor
     SimpleTimer walkTimer = new SimpleTimer();
     SimpleTimer deadTimer = new SimpleTimer();
     
+    /**
+     * Tracks total damage dealt by the slime.
+     */
     public static int level2SlimeBlueDamage = 0;
     
-    // Image idles of hpbar of SlimeRed
+    /**
+     * Health bar images for the slime.
+     */
     public GreenfootImage[] level2SlimeHP = new GreenfootImage[6];
+    /**
+     * Health bar displayed above the slime.
+     */
     public HPBar slime2BlueHPBar;
+    // Instances for slime hp modifying
     private int slime2CurrentHP = 5;
     private int slime2MaxHP = 5;
     private int invincibleTimer = 0;
     
+    /**
+     * The constructor that constructs a Level 2 blue slime 
+     * and initializes animations and health.
+     */
     public Level2SlimeBlue()
     {
         //Set idle image for walk of SlimeRed
@@ -98,9 +114,8 @@ public class Level2SlimeBlue extends Actor
     
     int attackImageIndex = 0;
     /**
-     * Animate attack of the SlimeRed
+     * Animates the slime's attack sequence.
      */
-    
     public void animateAttack()
     {
         if(attackTimer.millisElapsed() < 100)
@@ -124,6 +139,9 @@ public class Level2SlimeBlue extends Actor
     
     //Animate death of SlimeRed
     int deadImageIndex = 0;
+    /**
+     * Animates the slime's death sequence and removes it from the world.
+     */
     public void animateDeath()
     {
         if(deadTimer.millisElapsed() < 425)
@@ -145,6 +163,9 @@ public class Level2SlimeBlue extends Actor
     
     //Animate walk of SlimeRed
     int walkImageIndex = 0;
+    /**
+     * Animates the slime's walking movement.
+     */
     public void animateWalk()
     {
         if(walkTimer.millisElapsed() < 100)
@@ -167,7 +188,7 @@ public class Level2SlimeBlue extends Actor
     }
     
     /**
-     * Moves to the witch's location
+     * Moves the slime toward the witch.
      */
     public void moveToWitch()
     {
@@ -191,6 +212,11 @@ public class Level2SlimeBlue extends Actor
         }
     } 
     
+    /**
+     * Performs an attack and returns the total damage dealt.
+     * 
+     * @return Total damage dealt by the slime
+     */
     public int attack()
     {
         animateAttack();
@@ -198,7 +224,11 @@ public class Level2SlimeBlue extends Actor
         return level2SlimeBlueDamage;
     }
     
-    // Damage to change hp method
+    /**
+     * Applies damage to the slime and updates the health bar.
+     * 
+     * @param damage Amount of damage taken
+     */
     public void takeDamage(int damage)
     {
         if(invincibleTimer > 0)
@@ -216,7 +246,11 @@ public class Level2SlimeBlue extends Actor
         invincibleTimer = 70;
     }
     
-    // HPBar addedToWorld method
+    /**
+     * Adds the slime's health bar when it is added to the world.
+     * 
+     * @param w The World that the object is added to
+     */
     public void addedToWorld(World w)
     {   
         // HPBar
@@ -225,8 +259,8 @@ public class Level2SlimeBlue extends Actor
     }
     
     /**
-     * Act - do whatever the Level2SlimeBlue wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
+     * The act method that updates the slime's movement, attack 
+     * behavior, animations,and health each frame.
      */
     public void act()
     {

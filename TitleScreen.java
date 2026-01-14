@@ -7,7 +7,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * and waits for player input to begin the story.
  * 
  * @author Hanna & Adeline
- * @version January 2025
+ * @version January 2026
  */
 public class TitleScreen extends World
 {

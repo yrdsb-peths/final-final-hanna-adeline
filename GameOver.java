@@ -5,7 +5,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * player-controlled character dies.
  * 
  * @author Hanna & Adeline
- * @version January 2025
+ * @version January 2026
  */
 public class GameOver extends World
 {

@@ -6,7 +6,7 @@ import greenfoot.*;
  * potion spawning, and transitions to the game over screen and next level.
  * 
  * @author Hanna & Adeline
- * version January 2025
+ * version January 2026
  */
 public class MyWorld extends World {
     /**

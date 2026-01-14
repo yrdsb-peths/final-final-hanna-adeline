@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * bubbles, manages dialogue progression and transitions to level 1 game.
  * 
  * @author Hanna & Adeline
- * version January 2025
+ * version January 2026
  */
 public class StoryWorld extends World
 {

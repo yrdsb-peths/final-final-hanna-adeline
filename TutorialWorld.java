@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * using a speech bubble.
  * 
  * @author Hanna & Adeline
- * @version January 2025
+ * @version January 2026
  */
 public class TutorialWorld extends World
 {

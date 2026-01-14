@@ -1,15 +1,33 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class AttackBox here.
+ * An AttackBox represents an invisible hitbox used to deal damage
+ * to enemies when an attack occurs.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * The AttackBox detects collisions with enemy objects and applies
+ * a specified amount of damage to any enemy it intersects.
+ * 
+ * @author Hanna & Adeline
+ * @version January 2026
  */
 public class AttackBox extends Actor
 {
+    /** 
+     * The amount of damage this attack box inflicts on enemies. 
+     */
     private int damage;
     
+    /**
+     * The constuctor which constructs an AttackBox with 
+     * a specified size and damage value.
+     * 
+     * The attack box is created as a transparent image and is used
+     * only for collision detection.
+     * 
+     * @param w The width of the attack box
+     * @param h The height of the attack box
+     * @param damage The amount of damage dealt to enemies
+     */
     public AttackBox(int w, int h, int damage)
     {
         this.damage = damage;
@@ -22,8 +40,8 @@ public class AttackBox extends Actor
     }
     
     /**
-     * Act - do whatever the AttackBox wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
+     * The act method which checks for collisions with enemy objects 
+     * and applies damage to any enemy that intersects with this attack box.
      */
     public void act()
     {

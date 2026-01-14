@@ -1,19 +1,30 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class HurtBox here.
+ * The HurtBox class represents a hurt box attached to the witch character.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * The HurtBox detects collisions with enemies and applies damage
+ * to the witch while managing invincibility frames.
+ * 
+ * @author Hanna & Adeline
+ * @version January 2025
  */
 public class HurtBox extends Actor
 {
-    // access the witch class instance
+    // Access the witch class instance
     private Witch witch;
+    // Instance that counts consecutive enemy hits before damage is applied
     private int hitCountWitch = 0;
+    // Timer used to provide temporary invincibility after taking damage.
     private int invincibleTimer = 0;
     
-    // Constructor - method called once 
+    /**
+     * Constructs a HurtBox linked to a witch with a specified size.
+     * 
+     * @param witch The witch instance this hurt box belongs to
+     * @param w The width of the hurt box
+     * @param h The height of the hurt box
+     */
     public HurtBox(Witch witch, int w, int h)
     {
         // Access the witch object
@@ -26,12 +37,20 @@ public class HurtBox extends Actor
         setImage(img);
     }
     
-    // Getter method for HealingPotion class
+    /**
+     * Returns the witch associated with this hurt box.
+     * 
+     * @return The witch instance
+     */
     public Witch getWitch()
     {
         return witch;
     }
-
+    
+    /**
+     * Checks for collisions with enemies and applies damage
+     * to the witch if invincibility is not active.
+     */
     public void checkDamageWitch()
     {
         if(invincibleTimer > 0) 
@@ -61,6 +80,9 @@ public class HurtBox extends Actor
         }
     }
     
+    /**
+     * Applies damage to the witch and activates invincibility frames.
+     */
     private void dealDamage()
     {
         hitCountWitch++;
@@ -73,8 +95,9 @@ public class HurtBox extends Actor
     }
     
     /**
-     * Act - do whatever the HurtBox wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
+     * The act method updates the hurt box each frame.
+     * 
+     * Handles collision checks and manages the invincibility timer.
      */
     public void act()
     {

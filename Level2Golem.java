@@ -1,9 +1,13 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Level2Golem here.
+ * Represents a Level 2 Golem enemy.
  * 
- * @author Adeline
+ * The golem moves toward the witch, attacks when in contact,
+ * plays animations and sounds, and displays a health bar above itself.
+ * It has higher health and larger animations compared to Level 1 enemies.
+ * 
+ * @author Adeline & Hanna
  * @version December 2025
  */
 public class Level2Golem extends Actor
@@ -30,7 +34,9 @@ public class Level2Golem extends Actor
     //Variable for attacks
     boolean isAttacking = false;
     
-    //Boolean for whether Golem is alive
+    /**
+     * Indicates whether the golem is alive.
+     */
     public boolean isAlive = true;
     
     //SimpleTimer variables
@@ -38,15 +44,27 @@ public class Level2Golem extends Actor
     SimpleTimer walkTimer = new SimpleTimer();
     SimpleTimer deadTimer = new SimpleTimer();
     
+    /**
+     * Tracks total damage dealt by the golem.
+     */
     public static int level2GolemDamage = 0;
     
-    // Image idles of hpbar of Golem
+    /**
+     * Health bar images for the golem.
+     */
     public GreenfootImage[] level2GolemHP = new GreenfootImage[6];
+    /**
+     * Health bar displayed above the golem.
+     */
     public HPBar golem2HPBar;
     private int golem2CurrentHP = 5;
     private int golem2MaxHP = 5;
     private int invincibleTimer = 0;
     
+    /**
+     * The constructor which constructs a Level 2 Golem and 
+     * initializes animations and health.
+     */
     public Level2Golem()
     {
         //Set idle image for walk of SlimeRed
@@ -106,9 +124,8 @@ public class Level2Golem extends Actor
     
     int attackImageIndex = 0;
     /**
-     * Animate attack of the SlimeRed
+     * Animates the golem's attack sequence.
      */
-    
     public void animateAttack()
     {
         if(attackTimer.millisElapsed() < 100)
@@ -132,6 +149,9 @@ public class Level2Golem extends Actor
     
     //Animate death of Golem
     int deadImageIndex = 0;
+    /**
+     * Animates the golem's death sequence and removes it from the world.
+     */
     public void animateDeath()
     {
         if(deadTimer.millisElapsed() < 100)
@@ -161,6 +181,11 @@ public class Level2Golem extends Actor
     }
     
     // Getter method to check if the Golem is alive
+    /**
+     * Returns whether the golem is alive.
+     * 
+     * @return true if alive, false otherwise
+     */
     public boolean isAlive()
     {   
         return isAlive;
@@ -168,6 +193,9 @@ public class Level2Golem extends Actor
 
     //Animate walk of Golem
     int walkImageIndex = 0;
+    /**
+     * Animates the golem's walking movement.
+     */
     public void animateWalk()
     {
         if(walkTimer.millisElapsed() < 100)
@@ -190,7 +218,7 @@ public class Level2Golem extends Actor
     }
     
     /**
-     * Moves to the witch's location
+     * Moves the golem toward the witch.
      */
     public void moveToWitch()
     {
@@ -214,6 +242,11 @@ public class Level2Golem extends Actor
         }
     } 
     
+    /**
+     * Performs an attack and returns the total damage dealt.
+     * 
+     * @return Total damage dealt by the golem
+     */
     public int attack()
     {
         animateAttack();
@@ -221,7 +254,11 @@ public class Level2Golem extends Actor
         return level2GolemDamage;
     }
     
-    // Damage to change hp method
+    /**
+     * Applies damage to the golem and updates the health bar.
+     * 
+     * @param damage Amount of damage taken
+     */
     public void takeDamage(int damage)
     {
         if(invincibleTimer > 0)
@@ -239,7 +276,11 @@ public class Level2Golem extends Actor
         invincibleTimer = 70;
     }
     
-    // HPBar addedToWorld method
+    /**
+     * Adds the golem's health bar when it is added to the world.
+     * 
+     * @param w World that the golem hp bar is added to
+     */
     public void addedToWorld(World w)
     {   
         // HPBar
@@ -248,8 +289,8 @@ public class Level2Golem extends Actor
     }
     
     /**
-     * Act - do whatever the Level2Golem wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
+     * The act method that updates the golem's movement, attack 
+     * behavior, animations,and health each frame.
      */
     public void act()
     {
