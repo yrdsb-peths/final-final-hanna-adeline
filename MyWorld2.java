@@ -11,24 +11,21 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class MyWorld2 extends World
 {
-    /**
-     * Track whether Level 2 have been completed.
-     */
+    /** Track whether Level 2 have been completed */
     public static boolean level2Complete = false;
-    /**
-     * Tracks whether the potion2 have been collected.
-     */
+    
+    /** Tracks whether the potion2 have been collected */
     public static boolean potion2Collected = false;
-    /**
-     * Indicates whether the Level 2 golem has already been spawned.
-     */
+    
+    /** Indicates whether the Level 2 golem has already been spawned */
     private boolean golemSpawned = false;
-    /**
-     * Sound played when the potion spawns.
-     */
+    
+    /** Sound played when the potion spawns */
     public static GreenfootSound potionSpawnedSound = new GreenfootSound("potionBubblingSound.mp3");
     
+    /** Track if the healing potion have been spawned */
     public static boolean healingPotionSpawned = false;
+    
     /**
      * Constructor for objects of class MyWorld2.
      * 

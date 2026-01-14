@@ -11,19 +11,16 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class MyWorld3 extends World
 {
-    /**
-     * Track whether Level 3 have been completed.
-     */
+    /** Track whether Level 3 have been completed */
     public static boolean level3Complete = false;
-    /**
-     * Tracks whether the potion3 have been collected.
-     */
+    
+    /** Tracks whether the potion3 have been collected */
     public static boolean potion3Collected = false;
-    /**
-     * Sound played when the potion spawns.
-     */
+    
+    /** Sound played when the potion spawns */
     public static GreenfootSound potionSpawnedSound = new GreenfootSound("potionBubblingSound.mp3");
     
+    /** Track if the healing potion have been spawned */
     public static boolean healingPotionSpawned = false;
     /**
      * Constructor for objects of class MyWorld3.

@@ -34,9 +34,7 @@ public class Level2Golem extends Actor
     //Variable for attacks
     boolean isAttacking = false;
     
-    /**
-     * Indicates whether the golem is alive.
-     */
+    // Indicates whether the golem is alive.
     public boolean isAlive = true;
     
     //SimpleTimer variables
@@ -44,18 +42,12 @@ public class Level2Golem extends Actor
     SimpleTimer walkTimer = new SimpleTimer();
     SimpleTimer deadTimer = new SimpleTimer();
     
-    /**
-     * Tracks total damage dealt by the golem.
-     */
+    // Tracks total damage dealt by the golem.
     public static int level2GolemDamage = 0;
     
-    /**
-     * Health bar images for the golem.
-     */
+    // Health bar images for the golem.
     public GreenfootImage[] level2GolemHP = new GreenfootImage[6];
-    /**
-     * Health bar displayed above the golem.
-     */
+    // Health bar displayed above the golem.
     public HPBar golem2HPBar;
     private int golem2CurrentHP = 5;
     private int golem2MaxHP = 5;

@@ -37,7 +37,7 @@ public class Witch extends Actor
     private int witchMaxHP = 5;
     private int invincibleTimer = 0;
     
-    /** HP bar displayed above the witch */
+    // HP bar displayed above the witch
     public static boolean witchAlive;
     
     // Image idles of witch

@@ -9,20 +9,18 @@ import greenfoot.*;
  * version January 2026
  */
 public class MyWorld extends World {
-    /**
-     * Track whether Level 1 have been completed.
-     */
+    /** Track whether Level 1 have been completed */
     public static boolean level1Complete = false;
-    /**
-     * Tracks whether the potion1 have been collected.
-     */
+    
+    /** Tracks whether the potion1 have been collected */
     public static boolean potion1Collected = false;
-    /**
-     * Sound played when the potion spawns.
-     */
+    
+    /** Sound played when the potion spawns */
     public static GreenfootSound potionSpawnedSound = new GreenfootSound("potionBubblingSound.mp3");
     
+    /** Track if the healing potion have been spawned */
     public static boolean healingPotionSpawned = false;
+    
     /**
      * Constructor for objects of class MyWorld.
      * 

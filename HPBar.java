@@ -12,19 +12,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class HPBar extends Actor
 {
-    /**
-     * The maximum health value of the character.
-     */
+    // The maximum health value of the character.
     private int maxHP;
-    /**
-     * The current health value of the character.
-     */
+    
+    // The current health value of the character.
     private int currentHP;
     
-    /**
-     * An array of images representing each health level.
-     * The index of the array corresponds to the HP value.
-     */
+    // An array of images representing each health level.
     public GreenfootImage[] hpImages;
     
     /**

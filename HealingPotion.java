@@ -12,21 +12,16 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class HealingPotion extends Actor
 {
-    /**
-     * Animation frames for the healing potion.
-     */
+    // Animation frames for the healing potion.
     GreenfootImage[] potionImage = new GreenfootImage[8];
-    /**
-     * Timer used to control the animation speed.
-     */
+    
+    // Timer used to control the animation speed.
     SimpleTimer animationTimer = new SimpleTimer();
-    /**
-     * Sound effect played when the potion is collected.
-     */
+    
+    // Sound effect played when the potion is collected.
     public static GreenfootSound potionCollectSound = new GreenfootSound("potionCollectSound.mp3");
-    /**
-     * Indicates whether a healing potion has been collected.
-     */
+    
+    // Indicates whether a healing potion has been collected.
     public static boolean healingPotionCollected = false;
     
     /**

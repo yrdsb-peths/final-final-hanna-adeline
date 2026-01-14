@@ -11,13 +11,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Line extends Actor
 {
-    /** 
-     * The name of the character speaking the line 
-     */
+    /** The name of the character speaking the line. */
     public String speaker;
-    /** 
-     * The dialogue text spoken by the character 
-     */
+    /** The dialogue text spoken by the character */
     public String text;
     
     /**
