@@ -68,6 +68,9 @@ public class MyWorld extends World {
         potionSpawnedSound.playLoop();
     }
     
+    /**
+     * Spawns the healing potion for the witch to increase hp.
+     */
     private void spawnHealingPotion()
     {
         HealingPotion healingPotion = new HealingPotion();
@@ -124,6 +127,7 @@ public class MyWorld extends World {
             spawnPotion1();
         }
         
+        // Spawn the healing potion when the hp of witch is <=2
         Witch witch = getObjects(Witch.class).get(0);
         if (witch.getHP() <= 2 && getObjects(HealingPotion.class).isEmpty() && !healingPotionSpawned)
         {

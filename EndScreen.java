@@ -1,17 +1,22 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class EndScreen here.
+ * The EndScreen class displays the win screen of the game.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * This world is used to present the win screen if the
+ * player-controlled witch defeats all the monsters and collect
+ * all the potions.
+ * 
+ * @author Hanna & Adeline
+ * version January 2025
  */
 public class EndScreen extends World
 {
 
     /**
-     * Constructor for objects of class EndScreen.
+     * Constructor for objects of class StoryWorld.
      * 
+     * Initializes the background and title images.
      */
     public EndScreen()
     {    

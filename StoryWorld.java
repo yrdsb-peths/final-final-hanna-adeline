@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * The Storyworld class represents the story world of the game.
+ * The StoryWorld class represents the story world of the game.
  * 
  * This world is used to present story dialogue and visuals
  * before gameplay begins. It displays characters, speech
