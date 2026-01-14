@@ -355,7 +355,7 @@ public class Level3Reaper extends Actor
     {   
         // HPBar
         reaper3HPBar = new HPBar(reaper3CurrentHP, level3ReaperHP);
-        w.addObject(reaper3HPBar, getX(), getY() - 45);
+        w.addObject(reaper3HPBar, getX(), getY() - 60);
     }
     
     /**
@@ -392,7 +392,7 @@ public class Level3Reaper extends Actor
         // Move the HPBar with the witch
         if(isAlive && level3ReaperHP != null)
         {
-          reaper3HPBar.setLocation(getX(), getY() - 45);
+          reaper3HPBar.setLocation(getX(), getY() - 60);
         }
           
         //invicibleTimer decrease

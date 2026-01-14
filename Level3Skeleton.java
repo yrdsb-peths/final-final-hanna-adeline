@@ -100,7 +100,7 @@ public class Level3Skeleton extends Actor
         // Set image for hp of Skeleton
         for(int i = 0; i < level3SkeletonHP.length; i++)
         {
-            level3SkeletonHP[i] = new GreenfootImage("hp_bar/monster1_hp/monster1_hp_" + i + ".png");
+            level3SkeletonHP[i] = new GreenfootImage("hp_bar/monster2_hp/monster2_hp_" + i + ".png");
             level3SkeletonHP[i].scale(70, 30);
         }
         skeleton3CurrentHP = 5;
@@ -231,7 +231,6 @@ public class Level3Skeleton extends Actor
     
     public int attack()
     {
-        
         animateSlashAttack();
         level3SkeletonDamage += 1;
         return level3SkeletonDamage;
@@ -260,7 +259,7 @@ public class Level3Skeleton extends Actor
     {   
         // HPBar
         skeleton3HPBar = new HPBar(skeleton3CurrentHP, level3SkeletonHP);
-        w.addObject(skeleton3HPBar, getX(), getY() - 45);
+        w.addObject(skeleton3HPBar, getX(), getY() - 60);
     }
     
     /**
@@ -297,7 +296,7 @@ public class Level3Skeleton extends Actor
         // Move the HPBar with the witch
         if(isAlive && level3SkeletonHP != null)
         {
-          skeleton3HPBar.setLocation(getX(), getY() - 45);
+          skeleton3HPBar.setLocation(getX(), getY() - 60);
         }
           
         //invicibleTimer decrease

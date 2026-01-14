@@ -68,14 +68,29 @@ public class HealingPotion extends Actor
     public void act()
     {
         animatePotion();
-
-        // Potion disappears after it's collected by the user
+        
         HurtBox hb = (HurtBox)getOneIntersectingObject(HurtBox.class);
+        
+        // Potion disappears after it's collected by the user
         if (hb != null)
         {
             Witch witch = hb.getWitch();
             witch.heal(2);
-    
+            
+            // Stop the healing potion spawn sound when collected
+            if (getWorld() instanceof MyWorld)
+            {
+                MyWorld.potionSpawnedSound.stop();
+            }
+            else if (getWorld() instanceof MyWorld2)
+            {
+                MyWorld2.potionSpawnedSound.stop();
+            }
+            else if (getWorld() instanceof MyWorld3)
+            {
+                MyWorld3.potionSpawnedSound.stop();
+            }
+            
             potionCollectSound.play();
             getWorld().removeObject(this);
         }

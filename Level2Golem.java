@@ -108,7 +108,7 @@ public class Level2Golem extends Actor
         // Set image for hp of Golem
         for(int i = 0; i < level2GolemHP.length; i++)
         {
-            level2GolemHP[i] = new GreenfootImage("hp_bar/monster1_hp/monster1_hp_" + i + ".png");
+            level2GolemHP[i] = new GreenfootImage("hp_bar/monster2_hp/monster2_hp_" + i + ".png");
             level2GolemHP[i].scale(70, 30);
         }
         golem2CurrentHP = 5;
@@ -282,7 +282,7 @@ public class Level2Golem extends Actor
     {   
         // HPBar
         golem2HPBar = new HPBar(golem2CurrentHP, level2GolemHP);
-        w.addObject(golem2HPBar, getX(), getY() - 45);
+        w.addObject(golem2HPBar, getX(), getY() - 60);
     }
     
     /**
@@ -319,7 +319,7 @@ public class Level2Golem extends Actor
         // Move the HPBar with the witch
         if(isAlive && level2GolemHP != null)
         {
-          golem2HPBar.setLocation(getX(), getY() - 45);
+          golem2HPBar.setLocation(getX(), getY() - 60);
         }
           
         //invicibleTimer decrease
