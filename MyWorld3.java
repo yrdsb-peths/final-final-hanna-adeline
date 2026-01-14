@@ -49,6 +49,7 @@ public class MyWorld3 extends World
         
         //Play background music
         level3Sound.playLoop();
+        level3Sound.setVolume(80);
         
         // Restart the healing potion spawn at start of the level
         healingPotionSpawned = false;
