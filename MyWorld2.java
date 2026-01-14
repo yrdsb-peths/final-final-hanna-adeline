@@ -89,9 +89,29 @@ public class MyWorld2 extends World
         level2Complete = false;
         potion2Collected = false;
         golemSpawned = false;
-        if(potionSpawnedSound.isPlaying())
+        if(StoryWorld.introSound.isPlaying())
         {
-            potionSpawnedSound.stop();
+            StoryWorld.introSound.stop();
+        }
+        if(MyWorld.level1Sound.isPlaying())
+        {
+            MyWorld.level1Sound.stop();
+        }
+        if(MyWorld2.level2Sound.isPlaying())
+        {
+            MyWorld2.level2Sound.stop();
+        }
+        if(MyWorld3.level3Sound.isPlaying())
+        {
+            MyWorld3.level3Sound.stop();
+        }
+        if (MyWorld3.potionSpawnedSound.isPlaying())
+        {
+            MyWorld3.potionSpawnedSound.stop();
+        }
+        if (EndScreen.endingSound.isPlaying())
+        {
+             EndScreen.endingSound.stop();
         }
     }
     

@@ -69,6 +69,30 @@ public class MyWorld extends World {
         level1Complete = false;
         potion1Collected = false;
         healingPotionSpawned = false;
+        if(StoryWorld.introSound.isPlaying())
+        {
+            StoryWorld.introSound.stop();
+        }
+        if(MyWorld.level1Sound.isPlaying())
+        {
+            MyWorld.level1Sound.stop();
+        }
+        if(MyWorld2.level2Sound.isPlaying())
+        {
+            MyWorld2.level2Sound.stop();
+        }
+        if(MyWorld3.level3Sound.isPlaying())
+        {
+            MyWorld3.level3Sound.stop();
+        }
+        if (MyWorld3.potionSpawnedSound.isPlaying())
+        {
+            MyWorld3.potionSpawnedSound.stop();
+        }
+        if (EndScreen.endingSound.isPlaying())
+        {
+             EndScreen.endingSound.stop();
+        }
     }
     
     // Method to check if the level is complete
