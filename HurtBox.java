@@ -73,10 +73,20 @@ public class HurtBox extends Actor
             return;
         }
     
-        // Reaper
-        if(isTouching(Level3Reaper.class) || isTouching(Level3Skeleton.class))
+        // Reaper (only if alive)
+        Level3Reaper reaper = (Level3Reaper) getOneIntersectingObject(Level3Reaper.class);
+        if(reaper != null && reaper.isAlive())
+        {
+            reaperDamage();
+            return;
+        }
+        
+        // Skeleton (only if alive)
+        Level3Skeleton skeleton = (Level3Skeleton) getOneIntersectingObject(Level3Skeleton.class);
+        if(skeleton != null && skeleton.isAlive())
         {
             dealDamage();
+            return;
         }
     }
     
@@ -87,6 +97,20 @@ public class HurtBox extends Actor
     {
         hitCountWitch++;
         if(hitCountWitch >= 6)
+        {
+            witch.takeDamage(1);
+            hitCountWitch = 0;
+        }
+        invincibleTimer = 20;
+    }
+    
+    /**
+     * Applies damage to the witch and activates invincibility frames.
+     */
+    private void reaperDamage()
+    {
+        hitCountWitch++;
+        if(hitCountWitch >= 4)
         {
             witch.takeDamage(1);
             hitCountWitch = 0;

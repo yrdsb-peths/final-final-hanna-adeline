@@ -33,7 +33,7 @@ public class Level3Skeleton extends Actor
     boolean isAttacking = false;
     
     //Boolean for whether Skeleton is alive
-    boolean isAlive = true;
+    public boolean isAlive = true;
     
     //SimpleTimer variables
     SimpleTimer slashTimer = new SimpleTimer();
@@ -168,6 +168,17 @@ public class Level3Skeleton extends Actor
             getWorld().removeObject(skeleton3HPBar);
             getWorld().removeObject(this);
         }
+    }
+    
+    // Getter method to check if the Skeleton is alive
+    /**
+     * Returns whether the skeleton is alive.
+     * 
+     * @return true if alive, false otherwise
+     */
+    public boolean isAlive()
+    {   
+        return isAlive;
     }
     
     //Animate walk of Skeleton

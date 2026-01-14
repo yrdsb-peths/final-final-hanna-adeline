@@ -80,8 +80,9 @@ public class Potion3 extends Actor
     {
         animatePotion();
         if(isTouching(HurtBox.class))
-            {
-                potion3Collected();
-            }
+        {
+            potion3Collected();
+            Greenfoot.setWorld(new EndScreen());
+        }
     }
 }

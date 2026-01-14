@@ -73,7 +73,7 @@ public class MyWorld2 extends World
     private void spawnGolem()
     {
         Level2Golem golem2 = new Level2Golem();
-        addObject(golem2, 500, 275);
+        addObject(golem2, 500, 270);
         golemSpawned = true;
     }
     
@@ -91,7 +91,7 @@ public class MyWorld2 extends World
         golemSpawned = false;
         if(potionSpawnedSound.isPlaying())
         {
-        potionSpawnedSound.stop();
+            potionSpawnedSound.stop();
         }
     }
     
