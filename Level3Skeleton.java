@@ -1,7 +1,14 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Level3Skeleton here.
+ * The Level3Skeleton class represents a skeleton enemy in Level 3.
+ * 
+ * The skeleton moves toward the witch, performs slash attacks,
+ * takes damage, displays a health bar, and plays a death animation
+ * when defeated.
+ * 
+ * This class manages movement, animation, sound effects,
+ * combat behavior, and HP tracking.
  * 
  * @author Adeline
  * @version December 2025
@@ -49,6 +56,11 @@ public class Level3Skeleton extends Actor
     private int skeleton3MaxHP = 5;
     private int invincibleTimer = 0;
     
+    /**
+     * Constructs a Level3Skeleton object.
+     * Loads animation images, initializes health,
+     * and sets the starting image.
+     */
     public Level3Skeleton()
     {
         //Set idle image for walk of Skeleton
@@ -110,7 +122,6 @@ public class Level3Skeleton extends Actor
     /**
      * Animate slash attack of Skeleton
      */
-    
     public void animateSlashAttack()
     {
         if(slashTimer.millisElapsed() < 100)
@@ -140,8 +151,11 @@ public class Level3Skeleton extends Actor
         }
     }
     
-    //Animate death of Skeleton
     int deadImageIndex = 0;
+     /**
+     * Animates the skeleton's death sequence
+     * and removes it from the world.
+     */
     public void animateDeath()
     {
         if(deadTimer.millisElapsed() < 100)
@@ -170,7 +184,11 @@ public class Level3Skeleton extends Actor
         }
     }
     
-    // Getter method to check if the Skeleton is alive
+    /**
+     * Returns whether the skeleton is alive.
+     * 
+     * @return true if alive, false otherwise
+     */
     /**
      * Returns whether the skeleton is alive.
      * 
@@ -181,8 +199,10 @@ public class Level3Skeleton extends Actor
         return isAlive;
     }
     
-    //Animate walk of Skeleton
     int walkImageIndex = 0;
+    /**
+     * Animates the skeleton walking.
+     */
     public void animateWalk()
     {
         if(walkTimer.millisElapsed() < 100)
@@ -229,6 +249,11 @@ public class Level3Skeleton extends Actor
         }
     } 
     
+    /**
+     * Performs a slash attack.
+     * 
+     * @return damage dealt by the skeleton
+     */
     public int attack()
     {
         animateSlashAttack();
@@ -236,7 +261,11 @@ public class Level3Skeleton extends Actor
         return level3SkeletonDamage;
     }
     
-    // Damage to change hp method
+    /**
+     * Reduces the skeleton's HP when damaged.
+     * 
+     * @param damage amount of damage taken
+     */
     public void takeDamage(int damage)
     {
         if(invincibleTimer > 0)
@@ -254,7 +283,11 @@ public class Level3Skeleton extends Actor
         invincibleTimer = 70;
     }
     
-    // HPBar addedToWorld method
+    /**
+     * Adds the HP bar when the skeleton is added to the world.
+     * 
+     * @param w the world the skeleton is added to
+     */
     public void addedToWorld(World w)
     {   
         // HPBar
@@ -263,8 +296,9 @@ public class Level3Skeleton extends Actor
     }
     
     /**
-     * Act - do whatever the Level3Skeleton wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
+     * Act method called every frame.
+     * Handles movement, attacking, death,
+     * HP bar updates, and invincibility timing.
      */
     public void act()
     {

@@ -7,7 +7,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * to the witch while managing invincibility frames.
  * 
  * @author Hanna & Adeline
- * @version January 2025
+ * @version December 2025
  */
 public class HurtBox extends Actor
 {

@@ -1,7 +1,14 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Level3Reaper here.
+ * The Level3Reaper class represents a Level 3 enemy monster.
+ * 
+ * The Reaper can walk toward the witch, perform slash or kick attacks,
+ * take damage, display a health bar, and play a death animation
+ * when defeated.
+ * 
+ * This class controls animation, movement, attacking behavior,
+ * sound effects, and HP management.
  * 
  * @author Adeline
  * @version December 2025
@@ -53,7 +60,11 @@ public class Level3Reaper extends Actor
     private int reaper3MaxHP = 5;
     private int invincibleTimer = 0;
     
-    
+    /**
+     * Constructs a Level3Reaper object.
+     * Loads and scales animation images,
+     * initializes health, and sets the starting image.
+     */    
     public Level3Reaper()
     {
         //Set idle image for walk of Reaper
@@ -164,9 +175,8 @@ public class Level3Reaper extends Actor
     int kickImageIndex = 0;
     
     /**
-     * Animate kick attack of Reaper
+     * Animate kick attack of Reaper.
      */
-    
     public void animateKickAttack()
     {
         if(kickTimer.millisElapsed() < 75)
@@ -203,6 +213,9 @@ public class Level3Reaper extends Actor
     
     //Animate death of Reaper
     int deadImageIndex = 0;
+    /**
+     * Animates the reaper's death sequence and removes it from the world.
+     */
     public void animateDeath()
     {
         reaperSlashAttackSound.stop();
@@ -247,6 +260,9 @@ public class Level3Reaper extends Actor
     
     //Animate walk of Reaper
     int walkImageIndex = 0;
+    /**
+     * Animates the reaper's walking movement.
+     */
     public void animateWalk()
     {
         if(walkTimer.millisElapsed() < 100)
@@ -293,6 +309,11 @@ public class Level3Reaper extends Actor
         }
     } 
     
+    /**
+     * Chooses and performs an attack.
+     * 
+     * @return damage dealt by the attack
+     */
     public int attack()
     {
         if(!attackChosen)
@@ -332,7 +353,11 @@ public class Level3Reaper extends Actor
         return level3ReaperDamage;
     }
     
-    // Damage to change hp method
+    /**
+     * Reduces the reaper's HP when damaged.
+     * 
+     * @param damage amount of damage taken
+     */
     public void takeDamage(int damage)
     {
         if(invincibleTimer > 0)
@@ -350,7 +375,11 @@ public class Level3Reaper extends Actor
         invincibleTimer = 70;
     }
     
-    // HPBar addedToWorld method
+    /**
+     * Adds the HP bar when the reaper is added to the world.
+     * 
+     * @param w the world the reaper is added to
+     */
     public void addedToWorld(World w)
     {   
         // HPBar
@@ -359,8 +388,8 @@ public class Level3Reaper extends Actor
     }
     
     /**
-     * Act - do whatever the Level3Reaper wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
+     * Act method called every frame.
+     * Handles movement, attacking, death, and HP bar updates.
      */
     public void act()
     {

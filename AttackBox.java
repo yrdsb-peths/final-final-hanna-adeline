@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * a specified amount of damage to any enemy it intersects.
  * 
  * @author Hanna & Adeline
- * @version January 2026
+ * @version December 2025
  */
 public class AttackBox extends Actor
 {

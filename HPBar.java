@@ -7,8 +7,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * where each image corresponds to a specific HP value and the HP bar 
  * updates automatically when the health value changes.
  * 
- * @author Hanna & Adeline 
- * @version January 2026
+ * @author Hanna
+ * @version December 2022
  */
 public class HPBar extends Actor
 {

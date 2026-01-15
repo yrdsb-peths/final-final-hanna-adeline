@@ -55,6 +55,9 @@ public class PotionFinal extends Actor
         imageIndex = (imageIndex + 1) % potionImage.length;
     }
     
+    /**
+     * Remove the potion when collected.
+     */
     public void potionFinalCollected()
     { 
         getWorld().removeObject(this);
