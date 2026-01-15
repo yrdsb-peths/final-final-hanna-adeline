@@ -173,7 +173,6 @@ public class Level3Reaper extends Actor
     }
     
     int kickImageIndex = 0;
-    
     /**
      * Animate kick attack of Reaper.
      */
@@ -211,7 +210,6 @@ public class Level3Reaper extends Actor
         }
     }
     
-    //Animate death of Reaper
     int deadImageIndex = 0;
     /**
      * Animates the reaper's death sequence and removes it from the world.
@@ -247,7 +245,6 @@ public class Level3Reaper extends Actor
         }
     }
     
-    // Getter method to check if the Reaper is alive
     /**
      * Returns whether the reaper is alive.
      * 
@@ -258,7 +255,6 @@ public class Level3Reaper extends Actor
         return isAlive;
     }
     
-    //Animate walk of Reaper
     int walkImageIndex = 0;
     /**
      * Animates the reaper's walking movement.

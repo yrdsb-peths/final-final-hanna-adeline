@@ -85,8 +85,7 @@ public class TutorialTarget extends Actor
         }
         slime1CurrentHP = 5;
     }
-    
-    //Animate death of SlimeRed
+
     int deadImageIndex = 0;
     /**
      * Plays the death animation and removes the target
