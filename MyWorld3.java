@@ -92,7 +92,7 @@ public class MyWorld3 extends World
      */
     private void spawnPotion3() {
         Potion3 potion3 = new Potion3();
-        addObject(potion3, 500, 300);
+        addObject(potion3, 500, 290);
         potionSpawnedSound.playLoop(); 
     }
     
