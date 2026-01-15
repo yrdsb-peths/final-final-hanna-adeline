@@ -1,9 +1,14 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * The Witch, our main character.
+ * The Witch class represents the main playable character.
+ * The witch can move, fly, attack enemies using two attack types,
+ * take damage, heal, and display cooldown and health bars.
  * 
- * @author Hanna & Adeline 
+ * This class controls animations, combat logic, cooldown systems,
+ * flying mechanics, and game-over behavior.
+ * 
+ * @author Hanna & Adeline
  * @version December 2025
  */
 public class Witch extends Actor
@@ -21,6 +26,9 @@ public class Witch extends Actor
     int hitOffsetXLeft1 = -40;
     int hitOffsetXRight2 = 40;
     int hitOffsetXLeft2 = -40;
+    // Flying coolDown bar offsets
+    int flyingCoolOffsetXRight = -25;
+    int flyingCoolOffsetXLeft = 30;
     
     // Image idles of hpbar of witch
     public GreenfootImage[] witchHP = new GreenfootImage[6];
@@ -29,7 +37,7 @@ public class Witch extends Actor
     private int witchMaxHP = 5;
     private int invincibleTimer = 0;
     
-    // Boolean for whether witch is alive (game still running)
+    // HP bar displayed above the witch
     public static boolean witchAlive;
     
     // Image idles of witch
@@ -70,15 +78,41 @@ public class Witch extends Actor
     private int attack2CooldownTimer = 0;
     
     // The time it takes to cool one block
-    private int attack1CooldownSpeed = 15;
-    private int attack2CooldownSpeed = 70;
+    private int attack1CooldownSpeed = 18;
+    private int attack2CooldownSpeed = 51;
     
     // Icon for the cooldown Actor
     private Actor attack1CooldownIcon;
     private Actor attack2CooldownIcon;
     
+    // Flying System
+    private boolean isFlying = false;
+    
+    // Flying cooldown icon sprite images
+    GreenfootImage[] flyingCooldownImg = new GreenfootImage[5];
+    
+    // Fly cooldown bar state
+    private int flyCooldownLevel = 4;
+    private int flyCooldownTimer = 0;
+    private int flyCooldownSpeed = 30;
+    private int flyBarCooldownSpeed = 35;
+
+    // Fly cooldown icon
+    private Actor flyCooldownIcon;
+
+    // Gravity
+    private int groundY;
+    private int gravitySpeed = 2;
+    private int flySpeed = 2;   
+    
+    // Time for Game Over at 0 hp
+    private boolean isDying = false;
+    private int deathTimer = 0;
+    
     /**
-     * Constructor - the code that gets run one time when the object is created.
+     * Constructs the Witch object.
+     * Initializes animations, sounds, health, cooldown bars,
+     * and sets default states.
      */
     public Witch()
     {
@@ -136,23 +170,32 @@ public class Witch extends Actor
         }
         witchCurrentHP = 5;
         
-        // Set image for the cooldown bar
+        // Set image for the attack cooldown bar
         for(int i = 0; i < 5; i++)
         {
             // Image idle for attack1
-            attack1CooldownImg[i] = new GreenfootImage("Attack_Cool/coolbar_blue/blue_coolbar" + i + ".png");
+            attack1CooldownImg[i] = new GreenfootImage("cool_bar/coolbar_red/red_coolbar" + i + ".png");
             attack1CooldownImg[i].scale(125, 20);
             
             // Image idle for attack2
-            attack2CooldownImg[i] = new GreenfootImage("Attack_Cool/coolbar_green/green_coolbar" + i + ".png");
+            attack2CooldownImg[i] = new GreenfootImage("cool_bar/coolbar_green/green_coolbar" + i + ".png");
             attack2CooldownImg[i].scale(125, 20);
+        }
+        
+        // Set image for the flying cooldown bar
+        for(int i = 0; i < 5; i++)
+        {
+            // Image idle for flying Cooldown bar
+            flyingCooldownImg[i] = new GreenfootImage("cool_bar/flycoolbar_blue/blue_coolbar" + i + ".png");
+            flyingCooldownImg[i].scale(60, 10);
         }
     }
     
-    /**
-     * Animate the witch at default state
-     */
     int imageIndex = 0;
+    /**
+     * Animates the witch's default idle animation
+     * based on the direction she is facing.
+     */
     public void animateWitch()
     {
         if(defaultTimer.millisElapsed() < 50)
@@ -173,10 +216,11 @@ public class Witch extends Actor
         }
     }
     
-    /**
-     * Animate the level 1 attack of witch
-     */
     int attackIndex1 = 0;
+    /**
+     * Animates the witch's level 1 attack.
+     * Plays sound at the start of the attack.
+     */
     public void animateAttackOne()
     {
         if(attackTimer1.millisElapsed() < 50)
@@ -199,11 +243,12 @@ public class Witch extends Actor
             attackIndex1 = attackIndex1 + 1;
         }
     }
-    
-    /**
-     * Animate the level 2 attack of witch
-     */    
+      
     int attackIndex2 = 0;
+    /**
+     * Animates the witch's level 2 attack.
+     * Plays sound at the start of the attack.
+     */
     public void animateAttackTwo()
     {
         if(attackTimer2.millisElapsed() < 50)
@@ -227,7 +272,12 @@ public class Witch extends Actor
         }
     }
     
-    // HurtBox and HPBar addedToWorld method
+    /**
+     * Adds the witch's HurtBox, HP bar, and cooldown bars
+     * when the witch is added to the world.
+     * 
+     * @param w the world the witch is added to
+     */
     public void addedToWorld(World w)
     {
         // HurtBox
@@ -247,26 +297,76 @@ public class Witch extends Actor
         attack2CooldownIcon = new Actor(){};
         attack2CooldownIcon.setImage(attack2CooldownImg[attack2CooldownLevel]);
         w.addObject(attack2CooldownIcon, 70, 60);
+        
+        // Save ground position
+        groundY = getY();
+        
+        // Fly cooldown bar
+        flyCooldownIcon = new Actor(){};
+        flyCooldownIcon.setImage(flyingCooldownImg[flyCooldownLevel]);
+        w.addObject(flyCooldownIcon, getX() - 25, getY() - 60);
     }
     
-    // Damage to change hp method
+    /**
+     * Applies damage to the witch.
+     * Damage is ignored if invincibility or death is active.
+     * 
+     * @param damage the amount of damage taken
+     */
     public void takeDamage(int damage)
     {
-        if(invincibleTimer > 0)
+        if(invincibleTimer > 0 || isDying)
         {
             return;
         }
         witchCurrentHP -= damage;
-        if(witchCurrentHP < 0)
+        if(witchCurrentHP <= 0)
         {
             witchCurrentHP = 0;
-            witchAlive = false;
+            isDying = true;
+            deathTimer = 0;
+            // witchAlive = false;
         }
         witchHPBar.setHP(witchCurrentHP);
         invincibleTimer = 30;
     }
     
-    // Act method
+    /**
+     * Heals the witch by the specified amount.
+     * Healing is capped at maximum HP.
+     * 
+     * @param amount the amount of HP restored
+     */
+    public void heal(int amount)
+    {
+        if (witchCurrentHP <= 0) 
+        {
+           return; // can't heal the witch if dead
+        } 
+    
+        witchCurrentHP += amount;
+        if (witchCurrentHP > witchMaxHP)
+        {
+            witchCurrentHP = witchMaxHP;
+        }
+    
+        witchHPBar.setHP(witchCurrentHP);
+    }
+    
+    /**
+     * Getter method that returns the witch's current HP.
+     * 
+     * @return current HP value
+     */
+    public int getHP()
+    {
+        return witchCurrentHP;
+    }
+    
+    /**
+     * Main act method which handles movement, flying, attacks, cooldowns,
+     * animations, collision boxes, and game-over logic.
+     */
     public void act()
     {
         if(Greenfoot.isKeyDown("left"))
@@ -280,8 +380,61 @@ public class Witch extends Actor
             facing = "right";
         }
         
+        if(Greenfoot.isKeyDown("up") && flyCooldownLevel == 4 && !isFlying)
+        {
+            isFlying = true;
+        }
+        
+        if(isFlying)
+        {
+            if(Greenfoot.isKeyDown("up"))
+            {
+                setLocation(getX(), getY() - flySpeed);
+            }
+            else if(Greenfoot.isKeyDown("down") && getY() < groundY)
+            {
+                setLocation(getX(), getY() + flySpeed);
+            }
+        }
+        
+        if(isFlying)
+        {
+            flyCooldownTimer++;
+        
+            if(flyCooldownTimer >= flyCooldownSpeed)
+            {
+                flyCooldownLevel--;
+                flyCooldownTimer = 0;
+                flyCooldownIcon.setImage(flyingCooldownImg[flyCooldownLevel]);
+                if(flyCooldownLevel <= 0)
+                {
+                    flyCooldownLevel = 0;
+                    isFlying = false;
+                }
+            }
+        }
+        
+        // Gravity pulls witch back down
+        if(!isFlying && getY() < groundY)
+        {
+            setLocation(getX(), getY() + gravitySpeed);
+        }
+        
+        // Recharge flybar
+        if(!isFlying && getY() >= groundY && flyCooldownLevel < 4)
+        {
+            flyCooldownTimer++;
+        
+            if(flyCooldownTimer >= flyBarCooldownSpeed)
+            {
+                flyCooldownLevel++;
+                flyCooldownTimer = 0;
+                flyCooldownIcon.setImage(flyingCooldownImg[flyCooldownLevel]);
+            }
+        }
+        
         // Start attack 1
-        if(Greenfoot.isKeyDown("shift") && !isAttacking1 && attack1CooldownLevel == 4)
+        if(Greenfoot.isKeyDown("shift") && !isAttacking1 && !isAttacking2 && attack1CooldownLevel == 4)
         {
             isAttacking1 = true;
             attackIndex1 = 0; // restart animation
@@ -289,7 +442,7 @@ public class Witch extends Actor
         }
         
         // Start attack 2
-        if(Greenfoot.isKeyDown("space") && !isAttacking2 && attack2CooldownLevel == 4)
+        if(Greenfoot.isKeyDown("space") && !isAttacking2 && !isAttacking1 && attack2CooldownLevel == 4)
         {
             isAttacking2 = true;
             attackIndex2 = 0; //restart animation
@@ -337,23 +490,27 @@ public class Witch extends Actor
         if(hurtBox != null)
         {
             int offSetX;
+            int flyingSetX;
             int hitBox1;
             int hitBox2;
             
             if(facing.equals("right"))
             {
                 offSetX = hurtOffsetXRight;
+                flyingSetX = flyingCoolOffsetXRight;
                 hitBox1 = hitOffsetXRight1;
                 hitBox2 = hitOffsetXRight2;
             }
             else
             {
                 offSetX = hurtOffsetXLeft;
+                flyingSetX = flyingCoolOffsetXLeft;
                 hitBox1 = hitOffsetXLeft1;
                 hitBox2 = hitOffsetXLeft2;
             }
             
             hurtBox.setLocation(getX() + offSetX, getY() + 6);
+            flyCooldownIcon.setLocation(getX() + flyingSetX, getY() - 60);
             
             // Set attackBox1 add and remove
             if(isAttacking1 && attackIndex1 == 3 && attackBox1 == null)
@@ -426,10 +583,28 @@ public class Witch extends Actor
         }
         
         //check if witch is alive
-        if(witchAlive == false)
+        if(isDying)
         {
-            witchDeadSound.play();
-            ((MyWorld)getWorld()).gameOver();
+            deathTimer++;
+            
+            if(deathTimer >= 30)
+            {
+                witchDeadSound.play();
+                World w = getWorld();
+    
+                if(w instanceof MyWorld)
+                {
+                    ((MyWorld)w).gameOver();
+                }
+                else if(w instanceof MyWorld2)
+                {
+                    ((MyWorld2)w).gameOver();
+                }
+                else if(w instanceof MyWorld3)
+                {
+                    ((MyWorld3)w).gameOver();
+                }
+            }
         }
     }
 }

@@ -1,9 +1,12 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Level1SlimeRed here.
+ * The Level1SlimeRed class displays a Level 1 red slime enemy.
  * 
- * @author Adeline
+ * The slime automatically moves toward the witch, attacks on contact,
+ * plays animations and sounds, and displays a health bar above itself.
+ * 
+ * @author Adeline & Hanna
  * @version December 2025
  */
 public class Level1SlimeRed extends Actor
@@ -37,19 +40,25 @@ public class Level1SlimeRed extends Actor
     SimpleTimer walkTimer = new SimpleTimer();
     SimpleTimer deadTimer = new SimpleTimer();
     
+    // Tracks total damage dealt by the slime.
     public static int level1SlimeRedDamage = 0;
     
-    // Image idles of hpbar of SlimeRed
+    // Health bar images for the slime.
     public GreenfootImage[] level1SlimeHP = new GreenfootImage[6];
+    // Health bar displayed above the slime.
     public HPBar slime1RedHPBar;
+    // Instances for slime hp modifying
     private int slime1CurrentHP = 5;
     private int slime1MaxHP = 5;
     private int invincibleTimer = 0;
     
+    /**
+     * The constructor that constructs a Level 1 red slime 
+     * and initializes animations and health.
+     */
     public Level1SlimeRed()
     {
         //Set idle image for walk of SlimeRed
-        
         for(int i=0; i<walkRightImage.length; i++)
         {
             walkRightImage[i] = new GreenfootImage("images/Monsters/Level1/Level1SlimeRed/walkRight/walkRight"+ i + ".png");
@@ -98,7 +107,7 @@ public class Level1SlimeRed extends Actor
     
     int attackImageIndex = 0;
     /**
-     * Animate attack of the SlimeRed
+     * Animates the slime's attack sequence.
      */
     public void animateAttack()
     {
@@ -127,6 +136,9 @@ public class Level1SlimeRed extends Actor
     
     //Animate death of SlimeRed
     int deadImageIndex = 0;
+    /**
+     * Animates the slime's death sequence and removes it from the world.
+     */
     public void animateDeath()
     {
         if(deadTimer.millisElapsed() < 425)
@@ -148,6 +160,9 @@ public class Level1SlimeRed extends Actor
     
     //Animate walk of SlimeRed
     int walkImageIndex = 0;
+    /**
+     * Animates the slime's walking movement.
+     */
     public void animateWalk()
     {
         if(walkTimer.millisElapsed() < 100)
@@ -170,7 +185,7 @@ public class Level1SlimeRed extends Actor
     }
     
     /**
-     * Moves to the witch's location
+     * Moves the slime toward the witch.
      */
     public void moveToWitch()
     {
@@ -194,6 +209,11 @@ public class Level1SlimeRed extends Actor
         }
     } 
     
+    /**
+     * Performs an attack and returns the total damage dealt.
+     * 
+     * @return Total damage dealt by the slime
+     */
     public int attack()
     {
         animateAttack();
@@ -201,7 +221,11 @@ public class Level1SlimeRed extends Actor
         return level1SlimeRedDamage;
     }
     
-    // Damage to change hp method
+    /**
+     * Applies damage to the slime and updates the health bar.
+     * 
+     * @param damage Amount of damage taken
+     */
     public void takeDamage(int damage)
     {
         if(invincibleTimer > 0)
@@ -216,10 +240,14 @@ public class Level1SlimeRed extends Actor
         }
         
         slime1RedHPBar.setHP(slime1CurrentHP);
-        invincibleTimer = 50;
+        invincibleTimer = 70;
     }
     
-    // HPBar addedToWorld method
+    /**
+     * Adds the slime's health bar when it is added to the world.
+     * 
+     * @param w The World that the object is added to
+     */
     public void addedToWorld(World w)
     {   
         // HPBar
@@ -228,8 +256,8 @@ public class Level1SlimeRed extends Actor
     }
     
     /**
-     * Act - do whatever the Level1SlimeRed wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
+     * The act method that updates the slime's movement, attack 
+     * behavior, animations,and health each frame.
      */
     public void act()
     {
@@ -237,7 +265,6 @@ public class Level1SlimeRed extends Actor
         {
           isAlive = false;
           animateDeath();
-          ((MyWorld)getWorld()).level1Complete = true;
         }
         
         if(isAlive)

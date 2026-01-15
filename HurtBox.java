@@ -1,23 +1,34 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class HurtBox here.
+ * The HurtBox class represents a hurt box attached to the witch character.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * The HurtBox detects collisions with enemies and applies damage
+ * to the witch while managing invincibility frames.
+ * 
+ * @author Hanna & Adeline
+ * @version December 2025
  */
 public class HurtBox extends Actor
 {
-    // access the witch class instance
-    private Actor owner;
+    // Access the witch class instance
+    private Witch witch;
+    // Instance that counts consecutive enemy hits before damage is applied
     private int hitCountWitch = 0;
+    // Timer used to provide temporary invincibility after taking damage.
     private int invincibleTimer = 0;
     
-    // Constructor - method called once 
-    public HurtBox(Actor owner, int w, int h)
+    /**
+     * Constructs a HurtBox linked to a witch with a specified size.
+     * 
+     * @param witch The witch instance this hurt box belongs to
+     * @param w The width of the hurt box
+     * @param h The height of the hurt box
+     */
+    public HurtBox(Witch witch, int w, int h)
     {
         // Access the witch object
-        this.owner = owner;
+        this.witch = witch;
         
         GreenfootImage img = new GreenfootImage(w, h);
         img.setColor(new Color(255, 0, 0, 0));
@@ -26,31 +37,123 @@ public class HurtBox extends Actor
         setImage(img);
     }
     
+    /**
+     * Returns the witch associated with this hurt box.
+     * 
+     * @return The witch instance
+     */
+    public Witch getWitch()
+    {
+        return witch;
+    }
+    
+    /**
+     * Checks for collisions with enemies and applies damage
+     * to the witch if invincibility is not active.
+     */
     public void checkDamageWitch()
     {
-        if(this.isTouching(Level1SlimeRed.class))
+        if(invincibleTimer > 0) 
         {
-            if(invincibleTimer > 0)
-            {
-                return;
-            }
-            hitCountWitch++;
-            if(hitCountWitch >= 5)
-            {
-                ((Witch)owner).takeDamage(1);
-                hitCountWitch = 0;
-            }
-            invincibleTimer = 20;
+           return; 
+        }
+
+        // Slime Red
+        if(isTouching(Level1SlimeRed.class) || isTouching(Level2SlimeBlue.class))
+        {
+            dealDamage();
+            return;
+        }
+    
+        // Golem (only if alive)
+        Level2Golem golem = (Level2Golem) getOneIntersectingObject(Level2Golem.class);
+        if(golem != null && golem.isAlive())
+        {
+            golemDamage();
+            return;
+        }
+    
+        // Reaper (only if alive)
+        Level3Reaper reaper = (Level3Reaper) getOneIntersectingObject(Level3Reaper.class);
+        if(reaper != null && reaper.isAlive())
+        {
+            reaperDamage();
+            return;
+        }
+        
+        // Skeleton (only if alive)
+        Level3Skeleton skeleton = (Level3Skeleton) getOneIntersectingObject(Level3Skeleton.class);
+        if(skeleton != null && skeleton.isAlive())
+        {
+            skeletonDamage();
+            return;
         }
     }
     
     /**
-     * Act - do whatever the HurtBox wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
+     * Applies damage to the witch and activates invincibility frames.
+     */
+    private void dealDamage()
+    {
+        hitCountWitch++;
+        if(hitCountWitch >= 6)
+        {
+            witch.takeDamage(1);
+            hitCountWitch = 0;
+        }
+        invincibleTimer = 20;
+    }
+    
+    /**
+     * Applies damage to the witch and activates invincibility frames.
+     */
+    private void golemDamage()
+    {
+        hitCountWitch++;
+        if(hitCountWitch >= 5)
+        {
+            witch.takeDamage(1);
+            hitCountWitch = 0;
+        }
+        invincibleTimer = 20;
+    }
+    
+    /**
+     * Applies damage to the witch and activates invincibility frames.
+     */
+    private void skeletonDamage()
+    {
+        hitCountWitch++;
+        if(hitCountWitch >= 5)
+        {
+            witch.takeDamage(1);
+            hitCountWitch = 0;
+        }
+        invincibleTimer = 20;
+    }
+    
+    /**
+     * Applies damage to the witch and activates invincibility frames.
+     */
+    private void reaperDamage()
+    {
+        hitCountWitch++;
+        if(hitCountWitch >= 4)
+        {
+            witch.takeDamage(1);
+            hitCountWitch = 0;
+        }
+        invincibleTimer = 20;
+    }
+    
+    /**
+     * The act method updates the hurt box each frame.
+     * 
+     * Handles collision checks and manages the invincibility timer.
      */
     public void act()
     {
-        if(owner instanceof Witch)
+        if(witch instanceof Witch)
         {
             checkDamageWitch();
         }
