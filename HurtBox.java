@@ -124,7 +124,7 @@ public class HurtBox extends Actor
     private void skeletonDamage()
     {
         hitCountWitch++;
-        if(hitCountWitch >= 4)
+        if(hitCountWitch >= 5)
         {
             witch.takeDamage(1);
             hitCountWitch = 0;
@@ -138,7 +138,7 @@ public class HurtBox extends Actor
     private void reaperDamage()
     {
         hitCountWitch++;
-        if(hitCountWitch >= 3)
+        if(hitCountWitch >= 4)
         {
             witch.takeDamage(1);
             hitCountWitch = 0;

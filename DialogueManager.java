@@ -18,10 +18,14 @@ public class DialogueManager extends Actor
     private Line[] dialogue = 
     {
         new Line("witch", "...Where am I?"),
-        new Line("messenger", "You have crossed\ninto the\nforbidden realm."),
-        new Line("witch", "Who are you?"),
-        new Line("messenger", "A guide.\nOr a warning."),
-        new Line("witch", "Then teach me\nhow to survive.")
+        new Line("messenger", "You stand within\nthe forbidden\nrealm."),
+        new Line("messenger", "Your friend,\nLucy, has \nbeen poisoned."),
+        new Line("witch", "Poisoned?!"),
+        new Line("messenger", "Monsters roam \nthese lands. They \nhave cursed her."),
+        new Line("messenger", "Only ancient\npotions can save \nher."),
+        new Line("messenger", "Each lies beyond\na deadly trial. \nIt's up to you."),
+        new Line("witch", "Then I must\nface them all."),
+        new Line("messenger", "Your journey\nbegins.\nLearn to survive!")
     };
     
     // Index of dialogue

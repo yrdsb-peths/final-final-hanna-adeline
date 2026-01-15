@@ -50,7 +50,7 @@ public class TutorialWorld extends World
         
         // Tutorial bubble
         bubble = new SpeechBubble("images/speechbubble/speech_bubble_right.png");
-        bubble.resize(225, 100);
+        bubble.resize(220, 100);
         addObject(bubble, 440, 150);
     
         showStep();
@@ -80,11 +80,11 @@ public class TutorialWorld extends World
         }
         else if (step == 2)
         {
-            bubble.show("RED bar = Attack 1\nPress SHIFT to \nattack me.");
+            bubble.show("RED bar = Attack 1\nPress SHIFT to attack \nme.");
         }
         else if (step == 3)
         {
-            bubble.show("GREEN bar = Attack 2\nPress SPACE to \nattack me.");
+            bubble.show("GREEN bar = Attack 2\nPress SPACE to attack \nme.");
         }
         else if (step == 4)
         {
@@ -92,7 +92,7 @@ public class TutorialWorld extends World
         }
         else if (step == 5)
         {
-            bubble.show("Press E to end\nthe tutorial ");
+            bubble.show("You're ready! \nPress E to end the \ntutorial ");
         }
         else
         {

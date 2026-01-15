@@ -49,7 +49,7 @@ public class SpeechBubble extends Actor
     public void show(String text)
     {
         GreenfootImage img = new GreenfootImage(baseImage);
-        img.setFont(new Font("Courier New", 13));
+        img.setFont(new Font("Courier New", 14));
         img.setColor(Color.BLACK);
 
         String[] lines = text.split("\n");
@@ -57,8 +57,8 @@ public class SpeechBubble extends Actor
         int y = 28;
         for (String line : lines)
         {
-            img.drawString(line, 20, y);
-            y += 12;
+            img.drawString(line, 19, y);
+            y += 14;
         }
 
         setImage(img);
