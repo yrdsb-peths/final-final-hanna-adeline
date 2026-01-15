@@ -72,19 +72,27 @@ public class TutorialWorld extends World
     {   
         if (step == 0)
         {
-            bubble.show("Use LEFT and RIGHT\narrows to move.");
+            bubble.show("Use LEFT and RIGHT\narrows \u2190 \u2192 to move.");
         }
         else if (step == 1)
         {
-            bubble.show("BLUE bar = Flying\nHold UP arrow to fly.");
+            bubble.show("BLUE bar = Flying\nHold UP arrow \u2191 to fly.");
         }
         else if (step == 2)
         {
             bubble.show("RED bar = Attack 1\nPress SHIFT to attack \nme.");
+            // Add image for the Attack1
+            GreenfootImage img1 = new GreenfootImage("images/Fonts/Attack1_Simple.png");
+            TitleImage attack1 = new TitleImage(img1, 50, 18);
+            addObject(attack1, 160, 30);
         }
         else if (step == 3)
         {
             bubble.show("GREEN bar = Attack 2\nPress SPACE to attack \nme.");
+            // Add image for the Attack2
+            GreenfootImage img2 = new GreenfootImage("images/Fonts/Attack2_Simple.png");
+            TitleImage attack2 = new TitleImage(img2, 50, 18);
+            addObject(attack2, 160, 60);
         }
         else if (step == 4)
         {
