@@ -132,11 +132,8 @@ public class EndScreen extends World
             }
         }
         
+        // Spawn last potion
         spawnPotionFinal();
-        //if(MyWorld3.level3Complete && MyWorld3.potion3Collected)
-        //{
-        //    spawnPotionFinal();
-        //}
         
         // Check if player collected the potion
         checkPotionCollected();
