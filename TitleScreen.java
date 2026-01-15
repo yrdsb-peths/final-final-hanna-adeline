@@ -34,9 +34,9 @@ public class TitleScreen extends World
         addObject(witch, 330, 230);
         
         // Add image for the title
-        GreenfootImage img = new GreenfootImage("images/Fonts/Title1.png");
+        GreenfootImage img = new GreenfootImage("images/background/Startgame_Title.png");
         TitleImage title = new TitleImage(img, 480, 45);
-        addObject(title, 300, 125);
+        addObject(title, 300, 130);
         
         //Play background music for beginning title screen
         if(titleScreenSound != null && titleScreenSound.isPlaying())

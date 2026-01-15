@@ -56,7 +56,7 @@ public class PotionFinal extends Actor
     }
     
     public void potionFinalCollected()
-    {
+    { 
         getWorld().removeObject(this);
         potionCollectSound.play();
     }
@@ -69,8 +69,8 @@ public class PotionFinal extends Actor
     {
         animatePotion();
         if(isTouching(HurtBox.class))
-            {
-                potionFinalCollected();
-            }
+        {
+            potionFinalCollected();
+        }
     }
 }
