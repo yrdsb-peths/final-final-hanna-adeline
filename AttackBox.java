@@ -43,6 +43,12 @@ public class AttackBox extends Actor
      */
     public void act()
     {
+        TutorialTarget targetSlime = (TutorialTarget) getOneIntersectingObject(TutorialTarget.class);
+        if(targetSlime != null)
+        {
+            targetSlime.takeDamage(damage);
+        }
+        
         Level1SlimeRed redSlime = (Level1SlimeRed) getOneIntersectingObject(Level1SlimeRed.class);
         if(redSlime != null)
         {
