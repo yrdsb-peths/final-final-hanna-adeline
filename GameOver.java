@@ -46,8 +46,6 @@ public class GameOver extends World
         MyWorld3.potionSpawnedSound.stop();
 
         gameOverSound.playLoop();
-        
-
     }
     
     /**

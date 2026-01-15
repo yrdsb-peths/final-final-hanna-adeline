@@ -77,6 +77,9 @@ public class StoryWorld extends World
         }
     }
     
+    /**
+     * Ensures the the introSound audio is playing.
+     */
     public static void playIntroSound()
     {
         if(!introSound.isPlaying())

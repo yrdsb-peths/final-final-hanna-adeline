@@ -25,6 +25,7 @@ public class EndScreen extends World
     // SimpleTimer for the finalpotion
     private SimpleTimer finalPotionTimer = new SimpleTimer();
     
+    // SpeechBubble 
     private SpeechBubble bubble;
     private SimpleTimer bubbleTimer = new SimpleTimer();
     private int bubbleStep = 0; // Tracks which sentence to show
@@ -79,7 +80,12 @@ public class EndScreen extends World
         }
     }
     
-    // Checks whether the potion have been collected
+    /**
+     * Check whether the final potion is collected.
+     * 
+     * If the final potion is collected, remove all the 
+     * objects and set the title images on the screen.
+     */
     private void checkPotionCollected()
     {
         // Only check if the potion was spawned and not yet collected

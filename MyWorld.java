@@ -7,7 +7,7 @@ import greenfoot.*;
  * potion spawning, and transitions to the game over screen and next level.
  * 
  * @author Hanna & Adeline
- * version November 2025
+ * version December 2025
  */
 public class MyWorld extends World {
     public static boolean level1Complete = false;

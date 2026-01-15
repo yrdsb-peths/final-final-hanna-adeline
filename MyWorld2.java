@@ -7,7 +7,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * potion spawning, and transitions to the game over screen and next level.
  * 
  * @author Hanna & Adeline
- * version November 2025
+ * version December 2025
  */
 public class MyWorld2 extends World
 {
