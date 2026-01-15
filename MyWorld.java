@@ -55,16 +55,6 @@ public class MyWorld extends World {
         
         // Restart the healing potion spawn at start of the level
         healingPotionSpawned = false;
-        
-        // Add image for the Attack1
-        GreenfootImage img1 = new GreenfootImage("images/Fonts/Attack1_Simple.png");
-        TitleImage attack1 = new TitleImage(img1, 50, 18);
-        addObject(attack1, 160, 30);
-        
-        // Add image for the Attack1
-        GreenfootImage img2 = new GreenfootImage("images/Fonts/Attack2_Simple.png");
-        TitleImage attack2 = new TitleImage(img2, 50, 18);
-        addObject(attack2, 160, 60);
     }
     
     /**
