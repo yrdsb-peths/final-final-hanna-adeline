@@ -79,7 +79,7 @@ public class Witch extends Actor
     
     // The time it takes to cool one block
     private int attack1CooldownSpeed = 18;
-    private int attack2CooldownSpeed = 55;
+    private int attack2CooldownSpeed = 51;
     
     // Icon for the cooldown Actor
     private Actor attack1CooldownIcon;
@@ -95,7 +95,7 @@ public class Witch extends Actor
     private int flyCooldownLevel = 4;
     private int flyCooldownTimer = 0;
     private int flyCooldownSpeed = 30;
-    private int flyBarCooldownSpeed = 50;
+    private int flyBarCooldownSpeed = 35;
 
     // Fly cooldown icon
     private Actor flyCooldownIcon;
